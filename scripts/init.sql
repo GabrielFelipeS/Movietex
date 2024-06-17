@@ -40,9 +40,7 @@ BEGIN
 	WITH count_average 
 	AS
 	(
-
 		SELECT (SUM(rating)/COUNT(rating)) as average
-
 		FROM Assessments
 		WHERE id_movie = NEW.id_movie
 	)

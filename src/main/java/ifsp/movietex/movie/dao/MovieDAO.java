@@ -1,6 +1,11 @@
 package ifsp.movietex.movie.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +21,16 @@ import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
 public class MovieDAO {
+
 	private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
 
 	private Connection conn;
 
+
 	public MovieDAO(Connection conn) {
 		this.conn = conn;
 	}
+
 
 	public String insert(DTOMovie dto) {
 		try (PreparedStatement ps = conn.prepareStatement(
@@ -45,6 +53,7 @@ public class MovieDAO {
 			logger.error(e.getMessage());
 			return String.format("Falha ao cadastrar o filme %s", dto.title());
 		}
+
 	}
 
 	public Movie findBy(Integer id) {
@@ -66,6 +75,7 @@ public class MovieDAO {
 
 		return null;
 	}
+
 
 	public Boolean deleteBy(Integer id) {
 		return null;
@@ -271,6 +281,7 @@ public class MovieDAO {
 		
 		return directors;
 	}
+
 
 
 
