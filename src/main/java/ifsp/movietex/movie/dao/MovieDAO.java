@@ -7,9 +7,14 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ifsp.movietex.movie.entity.Movie;
 
 public class MovieDAO {
+	 private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
+	 
 	private Connection conn;
 
 	public MovieDAO(Connection conn) {
@@ -37,7 +42,7 @@ public class MovieDAO {
 				movies.add(movie);
 			}
 		} catch(SQLException e) {
-			
+			logger.error("Falha ao buscar movie", e);
 		}
 		
 		return movies;
