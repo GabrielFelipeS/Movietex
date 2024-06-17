@@ -1,7 +1,9 @@
+
 CREATE TABLE Movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
 	description TEXT NOT NULL,
+
     director VARCHAR(255),
     genre VARCHAR(255),
     year INT,
@@ -38,7 +40,9 @@ BEGIN
 	WITH count_average 
 	AS
 	(
+
 		SELECT (SUM(rating)/COUNT(rating)) as average
+
 		FROM Assessments
 		WHERE id_movie = NEW.id_movie
 	)
@@ -52,6 +56,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_rating_average
 AFTER INSERT ON Assessments
 FOR EACH ROW EXECUTE PROCEDURE update_rating();
+
 
 INSERT INTO Movies (title, description, director, genre, year)
 VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: "inception", a implantação de outra ideia na mente de uma pessoa.', 'Christopher Nolan', 'Ficção Científica', 2010),
@@ -69,6 +74,7 @@ VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltra
        ('O Senhor dos Anéis: As Duas Torres', 'Enquanto Frodo e Sam se aproximam de Mordor com a ajuda do Gollum, a divisão ainda leal da Sociedade faz uma resistência contra Sauron e seus novos aliados, Saruman e seus hordas de Isengard.', 'Peter Jackson', 'Aventura', 2002),
        ('Interestelar', 'Uma equipe de exploradores viaja através de um buraco de minhoca no espaço na tentativa de garantir a sobrevivência da humanidade.', 'Christopher Nolan', 'Aventura', 2014),
        ('Parasita', 'Uma família pobre e desempregada torna-se obcecada por uma família rica e insinua-se em suas vidas.', 'Bong Joon Ho', 'Thriller', 2019);
+
 	   
 INSERT INTO Users (email, password, isAdmin)
 VALUES 	('admin@example.com', 'password2', TRUE),
