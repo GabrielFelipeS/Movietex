@@ -79,6 +79,7 @@ public class MovieDAO {
 	}
 
 
+
 	public Boolean deleteBy(Integer id) {
 		return null;
 	}
@@ -127,6 +128,7 @@ public class MovieDAO {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
 						rs.getDouble("rating_average"));
+
 				movies.add(movie);
 			}
 
@@ -141,6 +143,7 @@ public class MovieDAO {
 
 	private void prepareStatementSelect(PreparedStatement pstmt, String title, String description, String genre,
 			String director, Integer year, Double minRatingAverage, Double maxRatingAverage) throws SQLException {
+
 		int parameterIndex = 1;
 		if (title != null) {
 			pstmt.setString(parameterIndex++, "%" + title + "%");
@@ -162,9 +165,11 @@ public class MovieDAO {
 			pstmt.setInt(parameterIndex++, year);
 		}
 
+
 		if (minRatingAverage != null) {
 			pstmt.setDouble(parameterIndex++, minRatingAverage);
 		}
+
 
 		if (maxRatingAverage != null) {
 			pstmt.setDouble(parameterIndex++, maxRatingAverage);
@@ -175,6 +180,7 @@ public class MovieDAO {
 			Integer year, Double minRatingAverage, Double maxRatingAverage) {
 		StringBuilder builder = new StringBuilder(
 				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1=1");
+
 
 		if (title != null)
 			builder.append(" AND title LIKE ?");

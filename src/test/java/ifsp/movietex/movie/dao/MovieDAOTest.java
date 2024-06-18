@@ -1,9 +1,14 @@
 package ifsp.movietex.movie.dao;
 
+<<<<<<< HEAD
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+=======
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+>>>>>>> ed3c15e (tests: MovieDAOTest findBy)
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,18 +17,23 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed3c15e (tests: MovieDAOTest findBy)
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ifsp.movietex.base.db.PostgresTestContainer;
+import ifsp.movietex.movie.entity.Movie;
 
 import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
 @Testcontainers
 public class MovieDAOTest {
+
 
 	private static final Integer ID_EXISTS = 1;
 	private static final Integer ID_NOT_EXIST = 0;
@@ -40,6 +50,7 @@ public class MovieDAOTest {
 		postgresContainer.start();
 		connection = PostgresTestContainer.createConnection(postgresContainer);
 	}
+
 
 
 	@Test
@@ -72,6 +83,7 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null, null, null, null, null, null);
 
+
 		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
@@ -83,7 +95,9 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterTItleIsInception_thenReturnOneMovie() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy("A Origem", null, null, null, null, null);
+
 
 		int ONE_MOVIE_COUNT = 1;
 		assertTrue(movies.size() == ONE_MOVIE_COUNT);
@@ -110,6 +124,8 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
 
+>>>>>>> ed3c15e (tests: MovieDAOTest findBy)
+
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE genre = 'Thriller'");
 		rs.next();
@@ -123,7 +139,9 @@ public class MovieDAOTest {
 	public void givenFindBy_whenParameterDirectorIsRobertZemeckis_thenReturnAllMoviesWithDirectorRobertZemeckis()
 			throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy(null,  null, null, "Robert Zemeckis", null, null);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE director = 'Robert Zemeckis'");
@@ -138,7 +156,9 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterYearIs1999_thenReturnAllMoviesWithYear1999() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy(null, null, null, null, 1999, null);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE year = 1999");
@@ -153,7 +173,9 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterRatingAverageIs9_thenReturnAllMoviesWithratingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 9.0);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average = 9.0");
@@ -164,10 +186,12 @@ public class MovieDAOTest {
 		assertFalse(movies.isEmpty());
 	}
 
+
 	@Test
 	public void givenFindBy_whenParameterMinRatingAverageIs9_thenReturnAllMoviesWithMinRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 9.0, null);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average >= 9.0");
@@ -181,13 +205,15 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterMaxRatingAverageIs9_thenReturnAllMoviesWithMaxRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy(null, null, null, null, null, null, 9.0);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average <= 9.0");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
-		
+
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
@@ -195,7 +221,9 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterMinRatingAverageIs8AndMaxRatingAverageIs9_thenReturnAllMoviesWithMinRatingAverage8AndMaxRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 8.0, 9.0);
+
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average >= 8.0 AND rating_average <= 9.0");
@@ -209,6 +237,7 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
+
 		List<Movie> movies = dao.findBy("A Origem", 
 				"Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: \\\"inception\\\", a implantação de outra ideia na mente de uma pessoa."
 						,"Christopher Nolan", "Ficção Científica", 2010, 8.3);
@@ -258,6 +287,7 @@ public class MovieDAOTest {
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE description LIKE 'A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.'");
+
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
@@ -395,5 +425,6 @@ public class MovieDAOTest {
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}
+
 
 }
