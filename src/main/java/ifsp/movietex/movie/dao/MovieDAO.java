@@ -28,17 +28,20 @@ public class MovieDAO {
 	public Movie findBy(Integer id) {
 		return null;
 	}
-
+	
 	public List<Movie> findBy(String title, String genre, String director, Integer year, Double ratingAverage) {
-		List<Movie> movies = new LinkedList<>();
-		String sql = generateSelectQuery(title, genre, director, year, ratingAverage);
+		return findBy(title, genre, director, year, ratingAverage, ratingAverage);
+	}
 
-		try(PreparedStatement pstmt = conn.prepareStatement(sql)){
-			prepareStatement(pstmt, title, genre, director, year, ratingAverage);
+	public List<Movie> findBy(String title, String genre, String director, Integer year, Double minRatingAverage, Double maxRatingAverage) {
+		List<Movie> movies = new LinkedList<>();
+		String sql = generateSelectQuery(title, genre, director, year, minRatingAverage, maxRatingAverage);
+		try(PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
+			prepareStatementSelect(pstmt, title, genre, director, year, minRatingAverage, maxRatingAverage);
 	
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("director"), rs.getString("genre"), rs.getInt("year"), rs.getDouble("ratingAverage"));
+				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("director"), rs.getString("genre"), rs.getInt("year"), rs.getDouble("rating_average"));
 				movies.add(movie);
 			}
 		} catch(SQLException e) {
@@ -48,8 +51,8 @@ public class MovieDAO {
 		return movies;
 	}
 
-	private void prepareStatement(PreparedStatement pstmt, String title, String genre, String director, Integer year,
-			Double ratingAverage) throws SQLException {
+	private void prepareStatementSelect(PreparedStatement pstmt, String title, String genre, String director, Integer year,
+			Double minRatingAverage, Double maxRatingAverage) throws SQLException {
 		int parameterIndex = 1;
 		if (title != null) {
 			pstmt.setString(parameterIndex++, title);
@@ -67,14 +70,18 @@ public class MovieDAO {
 			pstmt.setInt(parameterIndex++, year);
 		}
 		
-		if (ratingAverage != null) {
-			pstmt.setDouble(parameterIndex++, ratingAverage);
+		if (minRatingAverage != null) {
+			pstmt.setDouble(parameterIndex++, minRatingAverage);
+		}
+		
+		if (maxRatingAverage != null) {
+			pstmt.setDouble(parameterIndex++, maxRatingAverage);
 		}
 	}
 
 	private String generateSelectQuery(String title, String genre, String director, Integer year,
-			Double ratingAverage) {
-		StringBuilder builder = new StringBuilder("SELECT title, director, genre, year, rating FROM Movies WHERE 1=1");
+			Double minRatingAverage, Double maxRatingAverage) {
+		StringBuilder builder = new StringBuilder("SELECT id, title, director, genre, year, rating_average FROM Movies WHERE 1=1");
 
 		if (title != null)
 			builder.append(" AND title = ?");
@@ -84,8 +91,10 @@ public class MovieDAO {
 			builder.append(" AND director = ?");
 		if (year != null)
 			builder.append(" AND year = ?");
-		if (ratingAverage != null)
-			builder.append(" AND rating = ?");
+		if (minRatingAverage != null)
+			builder.append(" AND rating_average >= ?");
+		if (maxRatingAverage != null)
+			builder.append(" AND rating_average <= ?");
 
 		return builder.toString();
 	}

@@ -47,7 +47,7 @@ public class PostgresTestContainer {
 						"/docker-entrypoint-initdb.d/init.sql");
 	}
 
-	public static Connection createConnection(PostgreSQLContainer<?> postgresContainer2) {
+	public static Connection createConnection(PostgreSQLContainer<?> postgresContainer) {
 		return new ConnectionPostgress().getConnection(
 				String.format("jdbc:postgresql://localhost:%d/movietex",
 						postgresContainer.getMappedPort(5432)),
