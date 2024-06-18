@@ -1,5 +1,7 @@
 volumes:
+
   dados-movietex:
+
   
 networks:
  banco:
