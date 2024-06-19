@@ -3,13 +3,12 @@ package ifsp.movietex.movie.entity;
 public class Movie {
 	private Integer id;
 	private String title;
-
 	private String description;
-
 	private String director;
 	private String genre;
 	private Integer year;
 	private Double ratingAverage;
+
 
 
 	public Movie(Integer id, String title, String description, String director, String genre, Integer year,
@@ -17,6 +16,7 @@ public class Movie {
 		this.id = id;
 		this.title = title;
 		this.description = description;
+
 
 		this.director = director;
 		this.genre = genre;

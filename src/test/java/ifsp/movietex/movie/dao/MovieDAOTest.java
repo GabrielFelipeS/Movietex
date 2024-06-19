@@ -1,30 +1,10 @@
 package ifsp.movietex.movie.dao;
 
-<<<<<<< HEAD
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-=======
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
->>>>>>> ed3c15e (tests: MovieDAOTest findBy)
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-
-=======
->>>>>>> ed3c15e (tests: MovieDAOTest findBy)
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.base.db.PostgresTestContainer;
 import ifsp.movietex.movie.entity.Movie;
 
@@ -124,7 +104,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
 
->>>>>>> ed3c15e (tests: MovieDAOTest findBy)
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE genre = 'Thriller'");
@@ -296,6 +275,7 @@ public class MovieDAOTest {
 	}
 	
 	@Test
+
 	public void givenFindWithAtLeastOneValue_whenParameterGenreIsThriller_thenReturnAllMoviesWithGenreThriller() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
@@ -396,13 +376,13 @@ public class MovieDAOTest {
 		String msg = dao.insert(new DTOMovie("Divertidamente 2", "Com um salto temporal, Riley se encontra mais velha, passando pela tão temida adolescência. "
 				+ "Junto com o amadurecimento, a sala de controle também está passando por uma adaptação para dar lugar a algo totalmente inesperado: novas emoções.",
 				"Kelsey Mann", "Animação", 2024));
+
 		
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
-		
 		assertEquals("Sucesso ao cadastrar o filme Divertidamente 2 de id: " + movies_count, msg);
 	}
 	
@@ -425,6 +405,7 @@ public class MovieDAOTest {
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}
+
 
 
 }

@@ -26,12 +26,14 @@ public class MovieDAO {
 	private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
 
 
+
 	private Connection conn;
 
 
 	public MovieDAO(Connection conn) {
 		this.conn = conn;
 	}
+
 
 
 	public String insert(DTOMovie dto) {
@@ -70,6 +72,7 @@ public class MovieDAO {
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
 						rs.getDouble("rating_average"));
 				return movie;
+
 			}
 		} catch (SQLException e) {
 			logger.error("Falha ao buscar movie", e);
