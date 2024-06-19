@@ -33,6 +33,7 @@ public class AdvancedSearchServlet extends HttpServlet {
 		String genre = request.getParameter("genero");
 
 		String yearStr = request.getParameter("ano");
+
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 
 		String minRatingAverageStr = request.getParameter("minRatingAverage");
