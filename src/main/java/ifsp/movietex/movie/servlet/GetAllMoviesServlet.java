@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -21,6 +22,8 @@ public class GetAllMoviesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		String director = request.getParameter("director");
@@ -39,7 +42,12 @@ public class GetAllMoviesServlet extends HttpServlet {
 		MovieDAO dao = new MovieDAO(conn);
 		List<Movie> movies = dao.findBy(title, description, genre, director, year, minRatingAverage, maxRatingAverage);
 		
+		movies.forEach(System.out::println);
+		
 		Gson gson = new Gson();
 		String json = gson.toJson(movies);
+		System.out.println(json);
+		
+		session.setAttribute("result", json);
 	}
 }
