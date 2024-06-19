@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionPostgress implements IDBConnector {
-	public static final String DEFAULT_URL_DBTEST = "jdbc:postgresql://localhost:5433/vcriquinho";
+	public static final String DEFAULT_URL_DBTEST = "jdbc:postgresql://localhost:5433/movietex";
 	public static final String DEFAULT_USER_DBTEST = "postgres";
 	public static final String DEFAULT_PASSWORD_DBTEST = "admin";
 
