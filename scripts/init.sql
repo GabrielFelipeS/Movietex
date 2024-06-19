@@ -1,6 +1,7 @@
 CREATE TABLE Movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+	description TEXT NOT NULL,
     director VARCHAR(255),
     genre VARCHAR(255),
     year INT,
@@ -52,22 +53,22 @@ CREATE TRIGGER update_rating_average
 AFTER INSERT ON Assessments
 FOR EACH ROW EXECUTE PROCEDURE update_rating();
 
-INSERT INTO Movies (title, director, genre, year)
-VALUES ('Inception', 'Christopher Nolan', 'Sci-Fi', 2010),
-       ('The Godfather', 'Francis Ford Coppola', 'Crime', 1972),
-       ('Pulp Fiction', 'Quentin Tarantino', 'Crime', 1994),
-       ('Fight Club', 'David Fincher', 'Drama', 1999),
-       ('Forrest Gump', 'Robert Zemeckis', 'Drama', 1994),
-       ('The Matrix', 'Lana Wachowski, Lilly Wachowski', 'Sci-Fi', 1999),
-       ('The Shawshank Redemption', 'Frank Darabont', 'Drama', 1994),
-       ('The Dark Knight', 'Christopher Nolan', 'Action', 2008),
-       ('The Lord of the Rings: The Return of the King', 'Peter Jackson', 'Adventure', 2003),
-       ('Star Wars: Episode V - The Empire Strikes Back', 'Irvin Kershner', 'Action', 1980),
-       ('The Lord of the Rings: The Fellowship of the Ring', 'Peter Jackson', 'Adventure', 2001),
-       ('Star Wars: Episode IV - A New Hope', 'George Lucas', 'Action', 1977),
-       ('The Lord of the Rings: The Two Towers', 'Peter Jackson', 'Adventure', 2002),
-       ('Interstellar', 'Christopher Nolan', 'Adventure', 2014),
-       ('Parasite', 'Bong Joon Ho', 'Thriller', 2019);
+INSERT INTO Movies (title, description, director, genre, year)
+VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: "inception", a implantação de outra ideia na mente de uma pessoa.', 'Christopher Nolan', 'Ficção Científica', 2010),
+       ('O Poderoso Chefão', 'A saga da família Corleone e a ascensão de Michael Corleone como o patriarca.', 'Francis Ford Coppola', 'Crime', 1972),
+       ('Pulp Fiction', 'As vidas de dois assassinos de aluguel, um boxeador e um casal de bandidos se entrelaçam em quatro contos de violência e redenção.', 'Quentin Tarantino', 'Crime', 1994),
+       ('Clube da Luta', 'Um homem insone de escritório e um saboneteiro carismático formam um clube de luta clandestino que se transforma em algo muito mais.', 'David Fincher', 'Drama', 1999),
+       ('Forrest Gump', 'A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.', 'Robert Zemeckis', 'Drama', 1994),
+       ('Matrix', 'Um programador de computador é arrancado de sua vida mundana e se torna o salvador da humanidade enquanto luta contra seres de outra dimensão.', 'Lana Wachowski, Lilly Wachowski', 'Ficção Científica', 1999),
+       ('Um Sonho de Liberdade', 'Dois homens condenados formam uma ligação ao longo de vários anos, encontrando consolo e eventual redenção através de atos de decência comum.', 'Frank Darabont', 'Drama', 1994),
+       ('Batman: O Cavaleiro das Trevas', 'Quando a ameaça conhecida como Coringa causa estragos e caos nas pessoas de Gotham, Batman deve aceitar uma das maiores provações psicológicas e físicas de sua habilidade para combater a injustiça.', 'Christopher Nolan', 'Ação', 2008),
+       ('O Senhor dos Anéis: O Retorno do Rei', 'Gandalf e Aragorn lideram o Mundo dos Homens contra o exército de Sauron para atrair seu olhar do Frodo e Sam enquanto eles se aproximam do Monte Doom com o Um Anel.', 'Peter Jackson', 'Aventura', 2003),
+       ('Star Wars: Episódio V - O Império Contra-Ataca', 'Depois que o Império começa a destruir a Rebelião, Luke Skywalker começa o treinamento Jedi com Yoda. Seus amigos aceitam refúgio do predador Darth Vader e empregam um plano para resgatar Han Solo do príncipe Jabba.', 'Irvin Kershner', 'Ação', 1980),
+       ('O Senhor dos Anéis: A Sociedade do Anel', 'Um hobbit manso do Condado e oito companheiros partem em uma jornada para destruir o poderoso Um Anel e salvar a Terra-média do Senhor das Trevas.', 'Peter Jackson', 'Aventura', 2001),
+       ('Star Wars: Episódio IV - Uma Nova Esperança', 'Luke Skywalker junta-se a Jedi, um contrabandista, um Wookiee e dois droides para salvar o universo do Império, enquanto também tenta resgatar a Princesa Leia do malvado Darth Vader.', 'George Lucas', 'Ação', 1977),
+       ('O Senhor dos Anéis: As Duas Torres', 'Enquanto Frodo e Sam se aproximam de Mordor com a ajuda do Gollum, a divisão ainda leal da Sociedade faz uma resistência contra Sauron e seus novos aliados, Saruman e seus hordas de Isengard.', 'Peter Jackson', 'Aventura', 2002),
+       ('Interestelar', 'Uma equipe de exploradores viaja através de um buraco de minhoca no espaço na tentativa de garantir a sobrevivência da humanidade.', 'Christopher Nolan', 'Aventura', 2014),
+       ('Parasita', 'Uma família pobre e desempregada torna-se obcecada por uma família rica e insinua-se em suas vidas.', 'Bong Joon Ho', 'Thriller', 2019);
 	   
 INSERT INTO Users (email, password, isAdmin)
 VALUES 	('admin@example.com', 'password2', TRUE),
