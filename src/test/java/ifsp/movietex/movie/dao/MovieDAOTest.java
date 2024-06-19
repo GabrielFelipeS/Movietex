@@ -1,11 +1,12 @@
 package ifsp.movietex.movie.dao;
 
+
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.base.db.PostgresTestContainer;
+import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
 import ifsp.movietex.movie.entity.DTOMovie;
@@ -63,7 +64,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null, null, null, null, null, null);
 
-
 		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
@@ -75,7 +75,6 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterTItleIsInception_thenReturnOneMovie() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy("A Origem", null, null, null, null, null);
 
 
@@ -118,7 +117,6 @@ public class MovieDAOTest {
 	public void givenFindBy_whenParameterDirectorIsRobertZemeckis_thenReturnAllMoviesWithDirectorRobertZemeckis()
 			throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy(null,  null, null, "Robert Zemeckis", null, null);
 
 
@@ -138,7 +136,6 @@ public class MovieDAOTest {
 
 		List<Movie> movies = dao.findBy(null, null, null, null, 1999, null);
 
-
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE year = 1999");
 
@@ -152,9 +149,7 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterRatingAverageIs9_thenReturnAllMoviesWithratingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 9.0);
-
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average = 9.0");
@@ -165,12 +160,10 @@ public class MovieDAOTest {
 		assertFalse(movies.isEmpty());
 	}
 
-
 	@Test
 	public void givenFindBy_whenParameterMinRatingAverageIs9_thenReturnAllMoviesWithMinRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 9.0, null);
-
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average >= 9.0");
@@ -187,12 +180,11 @@ public class MovieDAOTest {
 
 		List<Movie> movies = dao.findBy(null, null, null, null, null, null, 9.0);
 
-
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average <= 9.0");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
-
+		
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
@@ -202,7 +194,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 8.0, 9.0);
-
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average >= 8.0 AND rating_average <= 9.0");
@@ -267,6 +258,7 @@ public class MovieDAOTest {
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE description LIKE 'A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.'");
 
+
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
@@ -275,7 +267,6 @@ public class MovieDAOTest {
 	}
 	
 	@Test
-
 	public void givenFindWithAtLeastOneValue_whenParameterGenreIsThriller_thenReturnAllMoviesWithGenreThriller() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
@@ -376,7 +367,6 @@ public class MovieDAOTest {
 		String msg = dao.insert(new DTOMovie("Divertidamente 2", "Com um salto temporal, Riley se encontra mais velha, passando pela tão temida adolescência. "
 				+ "Junto com o amadurecimento, a sala de controle também está passando por uma adaptação para dar lugar a algo totalmente inesperado: novas emoções.",
 				"Kelsey Mann", "Animação", 2024));
-
 		
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies");

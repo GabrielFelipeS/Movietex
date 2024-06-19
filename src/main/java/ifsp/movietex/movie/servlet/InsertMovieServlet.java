@@ -1,7 +1,9 @@
 package ifsp.movietex.movie.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
+
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import com.google.gson.Gson;
 
@@ -25,6 +28,7 @@ public class InsertMovieServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+
 
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
@@ -51,6 +55,7 @@ public class InsertMovieServlet extends HttpServlet {
 		String json = gson.toJson(gson);
 		out.print(json);
 		out.flush();
+
 	}
 
 }
