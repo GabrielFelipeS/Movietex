@@ -2,7 +2,6 @@ CREATE TABLE Movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
 	description TEXT NOT NULL,
-
     director VARCHAR(255),
     genre VARCHAR(255),
     year INT,
@@ -53,7 +52,6 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_rating_average
 AFTER INSERT ON Assessments
 FOR EACH ROW EXECUTE PROCEDURE update_rating();
-
 
 INSERT INTO Movies (title, description, director, genre, year)
 VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: "inception", a implantação de outra ideia na mente de uma pessoa.', 'Christopher Nolan', 'Ficção Científica', 2010),
