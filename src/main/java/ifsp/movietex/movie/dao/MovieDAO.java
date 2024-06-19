@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import ifsp.movietex.movie.entity.Movie;
 
 public class MovieDAO {
-	 private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
 	 
 	private Connection conn;
 
@@ -21,19 +21,33 @@ public class MovieDAO {
 		this.conn = conn;
 	}
 
-	public void insert() {
-
+	public String insert(String title, String description, String genre, String director, Integer year) {
+		try(PreparedStatement ps = conn.prepareStatement("INSERT INTO movies (title, description, director, genre, year) VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+			ps.setString(1, title);
+			ps.setString(2, description);
+			ps.setString(3, genre);
+			ps.setString(4, director);
+			ps.setInt(5, year);
+			
+			int updatedRows = ps.executeUpdate();
+			System.out.println(ps.getGeneratedKeys());
+			
+			return String.format("Sucesso ao cadastrar o filme %s de id: %d", title, ps.getGeneratedKeys());
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return String.format("Falha ao cadastrar o filme %s", title);
+		}
 	}
 
 	public Movie findBy(Integer id) {
 		return null;
 	}
 	
-	public List<Movie> findBy(String title, String genre, String director, Integer year, Double ratingAverage) {
-		return findBy(title, genre, director, year, ratingAverage, ratingAverage);
+	public List<Movie> findBy(String title, String description, String genre, String director, Integer year, Double ratingAverage) {
+		return findBy(title, description, genre, director, year, ratingAverage, ratingAverage);
 	}
 
-	public List<Movie> findBy(String title, String genre, String director, Integer year, Double minRatingAverage, Double maxRatingAverage) {
+	public List<Movie> findBy(String title, String description, String genre, String director, Integer year, Double minRatingAverage, Double maxRatingAverage) {
 		List<Movie> movies = new LinkedList<>();
 		String sql = generateSelectQuery(title, genre, director, year, minRatingAverage, maxRatingAverage);
 		try(PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
@@ -41,7 +55,7 @@ public class MovieDAO {
 	
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("director"), rs.getString("genre"), rs.getInt("year"), rs.getDouble("rating_average"));
+				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"), rs.getString("director"), rs.getString("genre"), rs.getInt("year"), rs.getDouble("rating_average"));
 				movies.add(movie);
 			}
 		} catch(SQLException e) {

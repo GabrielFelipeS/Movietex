@@ -2,6 +2,8 @@ package ifsp.movietex.movie.dao;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.base.db.PostgresTestContainer;
 import ifsp.movietex.movie.entity.Movie;
 
@@ -168,5 +171,30 @@ public class MovieDAOTest {
 
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
+	}
+	
+	@Test
+	public void givenFindInsert_whenMovieAlreadyExists_thenReturnFailedMessage() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		String msg = dao.insert("Inception", "Christopher Nolan", "Sci-Fi", 2010);
+
+		assertEquals("Falha ao cadastrar o filme Inception", msg);
+	}
+	
+	@Test
+	public void givenFindInsert_whenMovieNotExist_thenReturnSuccessMessage() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		String msg = dao.insert("Divertidamente 2", "Com um salto temporal, Riley se encontra mais velha, passando pela tão temida adolescência. "
+				+ "Junto com o amadurecimento, a sala de controle também está passando por uma adaptação para dar lugar a algo totalmente inesperado: novas emoções.",
+				"Kelsey Mann", "Animação", 2024);
+		System.err.println(msg);
+		
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies");
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		
+		assertEquals("Sucesso ao cadastrar o filme de Divertidamente 2: " + movies_count, msg);
 	}
 }
