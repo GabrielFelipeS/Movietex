@@ -15,7 +15,6 @@ import ifsp.movietex.movie.entity.Movie;
 @Testcontainers
 public class MovieDAOTest {
 
-
 	private static final Integer ID_EXISTS = 1;
 	private static final Integer ID_NOT_EXIST = 0;
 
@@ -44,6 +43,30 @@ public class MovieDAOTest {
 		Integer movies_count = rs.getInt(1);
 
 		assertTrue(movies_count == 1);
+		assertTrue(movie != null);
+	}
+	
+	@Test
+	public void givenFindBy_whenIdNotExist_thenReturnNull() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		Movie movie = dao.findBy(ID_NOT_EXIST);
+
+		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE id = " + ID_NOT_EXIST);
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		assertTrue(movie == null);
+	}
+	
+	@Test
+	public void givenFindBy_whenIdExists_thenReturnOneMovie() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		Movie movie = dao.findBy(ID_EXISTS);
+
+		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE id = " + ID_EXISTS);
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
 		assertTrue(movie != null);
 	}
 	
@@ -222,6 +245,7 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 		
+
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
@@ -262,11 +286,13 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
+
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
 	
 	@Test
+
 	public void givenFindWithAtLeastOneValue_whenParameterGenreIsThriller_thenReturnAllMoviesWithGenreThriller() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
@@ -395,7 +421,4 @@ public class MovieDAOTest {
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}
-
-
-
 }

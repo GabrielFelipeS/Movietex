@@ -48,7 +48,6 @@ public class MovieDAO {
 			if (!rs.next() || updatedRows != 1)
 				throw new SQLException("Falha na cadastrar o filme");
 
-
 			return String.format("Sucesso ao cadastrar o filme %s de id: %d", dto.title(), rs.getInt("id"));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -209,7 +208,6 @@ Search and InputMovieServlet)
 		List<Movie> movies = new LinkedList<>();
 		String sql = generateSelectQueryWithOr(title, description, genre, director, year, ratingAverage);
 
-
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelectWithOr(pstmt, title, description, genre, director, year, ratingAverage);
 
@@ -247,9 +245,6 @@ Search and InputMovieServlet)
 
 		return builder.toString();
 	}
-
-
-		System.out.println(sql);
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
