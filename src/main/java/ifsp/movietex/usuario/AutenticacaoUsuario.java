@@ -42,9 +42,7 @@ public class AutenticacaoUsuario extends HttpFilter implements Filter {
         }
     }
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	public void destroy() {}
 
 
 
