@@ -1,6 +1,16 @@
 package ifsp.movietex.movie.dao;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -23,7 +33,6 @@ public class MovieDAOTest {
 	public static PostgreSQLContainer<?> postgresContainer = PostgresTestContainer.getContainer();
 
 	private static Connection connection;
-
 
 	@BeforeAll
 	public static void setUp() {
@@ -101,7 +110,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy("A Origem", null, null, null, null, null);
 
-
 		int ONE_MOVIE_COUNT = 1;
 		assertTrue(movies.size() == ONE_MOVIE_COUNT);
 		assertFalse(movies.isEmpty());
@@ -127,7 +135,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
 
-
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE genre = 'Thriller'");
 		rs.next();
@@ -143,7 +150,6 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null, null, "Robert Zemeckis", null, null);
 
-
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE director = 'Robert Zemeckis'");
 
@@ -157,7 +163,6 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterYearIs1999_thenReturnAllMoviesWithYear1999() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy(null, null, null, null, 1999, null);
 
 		ResultSet rs = connection.createStatement()
@@ -201,7 +206,6 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterMaxRatingAverageIs9_thenReturnAllMoviesWithMaxRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy(null, null, null, null, null, null, 9.0);
 
 		ResultSet rs = connection.createStatement()
@@ -216,7 +220,6 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenParameterMinRatingAverageIs8AndMaxRatingAverageIs9_thenReturnAllMoviesWithMinRatingAverage8AndMaxRatingAverage9() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy(null, null, null, null, null, 8.0, 9.0);
 
 		ResultSet rs = connection.createStatement()
@@ -231,7 +234,6 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindBy_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-
 		List<Movie> movies = dao.findBy("A Origem", 
 				"Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: \\\"inception\\\", a implantação de outra ideia na mente de uma pessoa."
 						,"Christopher Nolan", "Ficção Científica", 2010, 8.3);
@@ -246,7 +248,6 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 		
-
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
@@ -398,6 +399,7 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
+		
 		assertEquals("Sucesso ao cadastrar o filme Divertidamente 2 de id: " + movies_count, msg);
 	}
 	

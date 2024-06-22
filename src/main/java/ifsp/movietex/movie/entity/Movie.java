@@ -14,8 +14,6 @@ public class Movie {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-
-
 		this.director = director;
 		this.genre = genre;
 		this.year = year;
@@ -27,6 +25,4 @@ public class Movie {
 		return "Movie [id=" + id + ", title=" + title + ", description=" + description + ", director=" + director
 				+ ", genre=" + genre + ", year=" + year + ", ratingAverage=" + ratingAverage + "]";
 	}
-
-
 }

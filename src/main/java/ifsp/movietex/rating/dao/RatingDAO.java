@@ -52,7 +52,6 @@ public class RatingDAO {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Rating rating = new Rating(rs.getInt("id_user"), rs.getInt("id_movie"), rs.getDouble("rating") , rs.getString("comment"));
-
 				ratings.add(rating);
 			}
 
