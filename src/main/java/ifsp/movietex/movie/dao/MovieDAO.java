@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,11 @@ import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
 public class MovieDAO {
+
 	private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
 
 	private Connection conn;
+
 
 	public MovieDAO(Connection conn) {
 		this.conn = conn;
@@ -34,7 +38,7 @@ public class MovieDAO {
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
-			
+
 			if (!rs.next() || updatedRows != 1)
 				throw new SQLException("Falha na cadastrar o filme");
 
@@ -43,9 +47,11 @@ public class MovieDAO {
 			logger.error(e.getMessage());
 			return String.format("Falha ao cadastrar o filme %s", dto.title());
 		}
+
 	}
 
 	public Movie findBy(Integer id) {
+
 		try (PreparedStatement pstmt = conn.prepareStatement(
 				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE id = ?",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -57,6 +63,7 @@ public class MovieDAO {
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
 						rs.getDouble("rating_average"));
 				return movie;
+
 			}
 		} catch (SQLException e) {
 			logger.error("Falha ao buscar movie", e);
@@ -70,8 +77,11 @@ public class MovieDAO {
 	}
 
 	public String update(DTOMovie dto) {
+
 		try (PreparedStatement ps = conn.prepareStatement(
 				"UPDATE movies SET title = ?, description = ?, director = ?, genre = ?, year = ? WHERE id = ? ")) {
+
+
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
 			ps.setString(3, dto.genre());
@@ -101,6 +111,7 @@ public class MovieDAO {
 	public List<Movie> findBy(String title, String description, String genre, String director, Integer year,
 			Double minRatingAverage, Double maxRatingAverage) {
 		List<Movie> movies = new LinkedList<>();
+
 		String sql = generateSelectQueryWithAnd(title, description, genre, director, year, minRatingAverage,
 				maxRatingAverage);
 
@@ -113,14 +124,18 @@ public class MovieDAO {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
 						rs.getDouble("rating_average"));
+
 				movies.add(movie);
 			}
+
 		} catch (SQLException e) {
+
 			logger.error("Falha ao buscar movie", e);
 		}
 
 		return movies;
 	}
+
 
 	private void prepareStatementSelect(PreparedStatement pstmt, String title, String description, String genre,
 			String director, Integer year, Double minRatingAverage, Double maxRatingAverage) throws SQLException {
@@ -128,6 +143,7 @@ public class MovieDAO {
 		if (title != null) {
 			pstmt.setString(parameterIndex++, "%" + title + "%");
 		}
+
 
 		if (description != null) {
 			pstmt.setString(parameterIndex++, "%" + description + "%");
@@ -144,6 +160,7 @@ public class MovieDAO {
 		if (year != null) {
 			pstmt.setInt(parameterIndex++, year);
 		}
+
 
 		if (minRatingAverage != null) {
 			pstmt.setDouble(parameterIndex++, minRatingAverage);
@@ -183,7 +200,7 @@ public class MovieDAO {
 		String sql = generateSelectQueryWithOr(title, description, genre, director, year, ratingAverage);
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
+			prepareStatementSelectWithOr(pstmt, title, description, genre, director, year, ratingAverage);
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -218,6 +235,53 @@ public class MovieDAO {
 			builder.append(" OR rating_average = ?");
 
 		return builder.toString();
+	}
+
+	private void prepareStatementSelectWithOr(PreparedStatement pstmt, String title, String description, String genre,
+			String director, Integer year,  Double rating) throws SQLException {
+		int parameterIndex = 1;
+		if (title != null) {
+			pstmt.setString(parameterIndex++, "%" + title + "%");
+		}
+
+		if (description != null) {
+			pstmt.setString(parameterIndex++, "%" + description + "%");
+		}
+
+		if (director != null) {
+			pstmt.setString(parameterIndex++, "%" + director + "%");
+		}
+
+		if (genre != null) {
+			pstmt.setString(parameterIndex++, "%" + genre + "%");
+		}
+
+		if (year != null) {
+			pstmt.setInt(parameterIndex++, year);
+		}
+
+		if (rating != null) {
+			pstmt.setDouble(parameterIndex++, rating);
+		}
+	}
+
+	public List<String> findAllDirectors() {
+		List<String> directors = new LinkedList();
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT director FROM Movies GROUP BY director ORDER BY director");
+			
+			
+			while(rs.next()) {
+				directors.add(rs.getString("director"));
+			}
+			
+			return directors;
+		} catch(Exception e) {
+			logger.error("Falha ao buscar diretores", e);
+		}
+		
+		return directors;
 	}
 
 }

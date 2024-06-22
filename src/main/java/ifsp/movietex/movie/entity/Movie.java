@@ -25,5 +25,4 @@ public class Movie {
 		return "Movie [id=" + id + ", title=" + title + ", description=" + description + ", director=" + director
 				+ ", genre=" + genre + ", year=" + year + ", ratingAverage=" + ratingAverage + "]";
 	}
-
 }

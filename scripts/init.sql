@@ -70,6 +70,7 @@ VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltra
        ('O Senhor dos Anéis: As Duas Torres', 'Enquanto Frodo e Sam se aproximam de Mordor com a ajuda do Gollum, a divisão ainda leal da Sociedade faz uma resistência contra Sauron e seus novos aliados, Saruman e seus hordas de Isengard.', 'Peter Jackson', 'Aventura', 2002),
        ('Interestelar', 'Uma equipe de exploradores viaja através de um buraco de minhoca no espaço na tentativa de garantir a sobrevivência da humanidade.', 'Christopher Nolan', 'Aventura', 2014),
        ('Parasita', 'Uma família pobre e desempregada torna-se obcecada por uma família rica e insinua-se em suas vidas.', 'Bong Joon Ho', 'Thriller', 2019);
+
 	   
 INSERT INTO Users (email, password, isAdmin)
 VALUES 	('admin@example.com', 'password2', TRUE),
