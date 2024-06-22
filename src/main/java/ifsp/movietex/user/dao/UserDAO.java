@@ -36,8 +36,8 @@ public class UserDAO {
 		
 	}
 
-	public boolean findLogin(DTOUser user) {
-		String SQL = "SELECT * FROM" + table + " WHERE email = ? AND password = ?"; 
+	public boolean login(DTOUser user) {
+		String SQL = "SELECT * FROM " + table + " WHERE email = ? AND password = ?"; 
 		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
 			statement.setString(1, user.email());
 			statement.setString(2, user.password());

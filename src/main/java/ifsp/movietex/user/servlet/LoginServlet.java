@@ -1,6 +1,9 @@
-package ifsp.movietex.usuario;
+package ifsp.movietex.user.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,29 +11,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ifsp.movietex.usuario.dao.UsuarioDAO;
+import ifsp.movietex.base.db.ConnectionPostgress;
+import ifsp.movietex.user.dao.UserDAO;
+import ifsp.movietex.user.entity.DTOUser;
 
 /**
  * Servlet implementation class LoginUsuario
  */
-@WebServlet("/LoginUsuario")
+@WebServlet("/LoginUser")
 public class LoginServlet extends HttpServlet {
 
-    private UserDAO usuarioDAO = new UserDAO();
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
 		
-		Usuario usuario = usuarioDAO.findByEmail(email);
-		if(usuario != null && usuario.getSenha().equals(senha)) {
+		PrintWriter writer = response.getWriter();
+		Connection conn = new ConnectionPostgress().getConnection();
+		UserDAO userDao = new UserDAO(conn);
+		
+		String email = request.getParameter("email");
+		String senha = request.getParameter("password");
+		
+		boolean result = userDao.login(new DTOUser(null, email, senha));
+		
+		if(result) {
 			HttpSession session = request.getSession();
-			if(usuario.isAdmin()) {
-				
-			}else {
-				//não admin
-			}
-		}else {
+			if(result) {
+		    	   writer.println("localizado");
+		       }else {
+		    	   writer.println("Não existe");
+
+		       }
 			//se login falhar
 			response.sendRedirect("");
 		}
