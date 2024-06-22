@@ -1,5 +1,6 @@
 package ifsp.movietex.movie.dao;
 
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,11 +12,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import ifsp.movietex.base.db.PostgresTestContainer;
+
 import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
@@ -31,11 +34,13 @@ public class MovieDAOTest {
 
 	private static Connection connection;
 
+
 	@BeforeAll
 	public static void setUp() {
 		postgresContainer.start();
 		connection = PostgresTestContainer.createConnection(postgresContainer);
 	}
+
 
 	@Test
 	public void givenFindBy_whenIdExists_thenReturnOneMovie() throws SQLException {
@@ -390,4 +395,5 @@ public class MovieDAOTest {
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}
+
 }

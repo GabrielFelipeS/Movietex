@@ -48,6 +48,7 @@ public class PostgresTestContainer {
 	}
 
 	public static Connection createConnection(PostgreSQLContainer<?> postgresContainer) {
+
 		return new ConnectionPostgress().getConnection(
 				String.format("jdbc:postgresql://localhost:%d/movietex",
 						postgresContainer.getMappedPort(5432)),
