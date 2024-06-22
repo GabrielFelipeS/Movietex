@@ -24,10 +24,8 @@ import ifsp.movietex.movie.entity.Movie;
 
 @Testcontainers
 public class MovieDAOTest {
-
 	private static final Integer ID_EXISTS = 1;
 	private static final Integer ID_NOT_EXIST = 0;
-
 
 	@Container
 	public static PostgreSQLContainer<?> postgresContainer = PostgresTestContainer.getContainer();
