@@ -122,6 +122,7 @@ public class MovieDAO {
 		return movies;
 	}
 
+
 	private void prepareStatementSelect(PreparedStatement pstmt, String title, String description, String genre,
 			String director, Integer year, Double minRatingAverage, Double maxRatingAverage) throws SQLException {
 		int parameterIndex = 1;
@@ -183,7 +184,7 @@ public class MovieDAO {
 		String sql = generateSelectQueryWithOr(title, description, genre, director, year, ratingAverage);
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
+			prepareStatementSelectWithOr(pstmt, title, description, genre, director, year, ratingAverage);
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -220,4 +221,33 @@ public class MovieDAO {
 		return builder.toString();
 	}
 
+	private void prepareStatementSelectWithOr(PreparedStatement pstmt, String title, String description, String genre,
+			String director, Integer year,  Double rating) throws SQLException {
+		int parameterIndex = 1;
+		if (title != null) {
+			pstmt.setString(parameterIndex++, "%" + title + "%");
+		}
+
+		if (description != null) {
+			pstmt.setString(parameterIndex++, "%" + description + "%");
+		}
+
+		if (director != null) {
+			pstmt.setString(parameterIndex++, "%" + director + "%");
+		}
+
+		if (genre != null) {
+			pstmt.setString(parameterIndex++, "%" + genre + "%");
+		}
+
+		if (year != null) {
+			pstmt.setInt(parameterIndex++, year);
+		}
+
+		if (rating != null) {
+			pstmt.setDouble(parameterIndex++, rating);
+		}
+	}
+	
+	
 }
