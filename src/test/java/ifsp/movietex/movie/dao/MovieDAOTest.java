@@ -282,7 +282,6 @@ public class MovieDAOTest {
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE description LIKE 'A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.'");
 
-
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
@@ -292,7 +291,6 @@ public class MovieDAOTest {
 	}
 	
 	@Test
-
 	public void givenFindWithAtLeastOneValue_whenParameterGenreIsThriller_thenReturnAllMoviesWithGenreThriller() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);

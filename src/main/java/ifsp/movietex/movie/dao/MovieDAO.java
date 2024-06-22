@@ -248,7 +248,6 @@ Search and InputMovieServlet)
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
-
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
@@ -312,6 +311,7 @@ Search and InputMovieServlet)
 		}
 	}
 	
+<<<<<<< HEAD
 
 	public List<String> findAllDirectors() {
 		List<String> directors = new LinkedList();
@@ -331,4 +331,7 @@ Search and InputMovieServlet)
 		
 		return directors;
 	}
+=======
+	
+>>>>>>> 40dfafc (tests: MovieDAOTest add)
 }
