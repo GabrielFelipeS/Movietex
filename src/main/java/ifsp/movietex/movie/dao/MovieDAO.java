@@ -35,8 +35,9 @@ public class MovieDAO {
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
+			
 			if (!rs.next() || updatedRows != 1)
-				throw new Exception("Falha na inserção do filme");
+				throw new SQLException("Falha na cadastrar o filme");
 
 			return String.format("Sucesso ao cadastrar o filme %s de id: %d", dto.title(), rs.getInt("id"));
 		} catch (Exception e) {
@@ -164,7 +165,7 @@ public class MovieDAO {
 		if (description != null)
 			builder.append(" AND description LIKE ?");
 		if (genre != null)
-			builder.append(" AND genre = ?");
+			builder.append(" AND genre LIKE ?");
 		if (director != null)
 			builder.append(" AND director LIKE ?");
 		if (year != null)
@@ -181,8 +182,6 @@ public class MovieDAO {
 			Integer year, Double ratingAverage) {
 		List<Movie> movies = new LinkedList<>();
 		String sql = generateSelectQueryWithOr(title, description, genre, director, year, ratingAverage);
-
-		System.out.println(sql);
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);

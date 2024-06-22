@@ -38,7 +38,7 @@ public class DeleteMovieServlet extends HttpServlet {
 		Gson gson = new Gson();
 
 		ResponseWrapper wrapper = new ResponseWrapper();
-		wrapper.setStatus(success? HttpServletResponse.SC_OK : HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		wrapper.setStatus(success? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 
 		String json = gson.toJson(wrapper);
 
