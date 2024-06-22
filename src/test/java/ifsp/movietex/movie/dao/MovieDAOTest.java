@@ -19,12 +19,13 @@ import ifsp.movietex.base.db.PostgresTestContainer;
 import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
+import ifsp.movietex.movie.entity.DTOMovie;
+import ifsp.movietex.movie.entity.Movie;
+
 @Testcontainers
 public class MovieDAOTest {
-
 	private static final Integer ID_EXISTS = 1;
 	private static final Integer ID_NOT_EXIST = 0;
-
 
 	@Container
 	public static PostgreSQLContainer<?> postgresContainer = PostgresTestContainer.getContainer();
@@ -46,6 +47,7 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
+		assertTrue(movies_count == 1);
 		assertTrue(movie != null);
 	}
 	
@@ -222,22 +224,123 @@ public class MovieDAOTest {
 	}
 	
 	@Test
-	public void givenFindWithAtLeastOneValue_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
+	public void givenFindWithAtLeastOneValue_whenAllParametersIsNull_thenAllMovies() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-		List<Movie> movies = dao.findBy("A Origem", 
-				"Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: \\\"inception\\\", a implantação de outra ideia na mente de uma pessoa."
-						,"Christopher Nolan", "Ficção Científica", 2010, 8.3);
+		List<Movie> movies = dao.findWithAtLeastOneValue(null, null, null, null, null, null);
 
-		ResultSet rs = connection.createStatement()
-				.executeQuery("SELECT COUNT(1) FROM movies WHERE title LIKE '%A Origem%' "
-						+ "OR description LIKE 'Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: \"inception\", a implantação de outra ideia na mente de uma pessoa.'"
-						+ "OR director LIKE '%Christopher Nolan%' "
-						+ "OR genre LIKE '%Ficção Científica%' "
-						+ "OR year = 2010 "
-						+ "OR rating_average = 8.3");
+		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE 1!=1");
 		rs.next();
 		Integer movies_count = rs.getInt(1);
-		
+
+		assertTrue(movies.size() == movies_count);
+		assertTrue(movies.isEmpty());
+	}
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterTItleIsInception_thenReturnOneMovie() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy("A Origem", null, null, null, null, null);
+
+		int ONE_MOVIE_COUNT = 1;
+		assertTrue(movies.size() == ONE_MOVIE_COUNT);
+		assertFalse(movies.isEmpty());
+	}
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterDescriptionByForrestGump_thenReturnAllMoviesWithDescriptionByForrestGump() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy(null, "A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.", 
+				null, null, null, null);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE description LIKE 'A história presidencial de Forrest Gump, um homem simples com um baixo QI, mas de bom coração.'");
+
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+
+		assertTrue(movies.size() == movies_count);
+		assertFalse(movies.isEmpty());
+	}
+	
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterGenreIsThriller_thenReturnAllMoviesWithGenreThriller() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy(null,  null,"Thriller", null, null, null);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE genre = 'Thriller'");
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		assertTrue(movies.size() == movies_count);
+		assertFalse(movies.isEmpty());
+	}
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterDirectorIsRobertZemeckis_thenReturnAllMoviesWithDirectorRobertZemeckis()
+			throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy(null,  null, null, "Robert Zemeckis", null, null);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE director = 'Robert Zemeckis'");
+
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		assertTrue(movies.size() == movies_count);
+		assertFalse(movies.isEmpty());
+	}
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterYearIs1999_thenReturnAllMoviesWithYear1999() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy(null, null, null, null, 1999, null);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE year = 1999");
+
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		assertTrue(movies.size() == movies_count);
+		assertFalse(movies.isEmpty());
+	}
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenParameterRatingAverageIs9_thenReturnAllMoviesWithratingAverage9() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findBy(null, null, null, null, null, 9.0);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE rating_average = 9.0");
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
+		assertTrue(movies.size() == movies_count);
+		assertFalse(movies.isEmpty());
+	}
+
+	
+
+	@Test
+	public void givenFindWithAtLeastOneValue_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
+		MovieDAO dao = new MovieDAO(connection);
+		List<Movie> movies = dao.findWithAtLeastOneValue("O Poderoso Chefão", 
+				"As vidas de dois assassinos de aluguel, um boxeador e um casal de bandidos se entrelaçam em quatro contos de violência e redenção."
+						,"David Fincher", "Drama", 1980, 9.3);
+
+		ResultSet rs = connection.createStatement()
+				.executeQuery("SELECT COUNT(1) FROM movies WHERE title LIKE '%O Poderoso Chefão%' "
+						+ "OR description LIKE 'As vidas de dois assassinos de aluguel, um boxeador e um casal de bandidos se entrelaçam em quatro contos de violência e redenção.%'"
+						+ "OR director LIKE '%David Fincher%' "
+						+ "OR genre LIKE '%Drama%' "
+						+ "OR year = 1980 "
+						+ "OR rating_average = 9.3");
+		rs.next();
+		Integer movies_count = rs.getInt(1);
+
 		assertTrue(movies.size() == movies_count);
 		assertFalse(movies.isEmpty());
 	}
