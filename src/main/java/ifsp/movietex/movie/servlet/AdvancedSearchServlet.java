@@ -27,12 +27,12 @@ public class AdvancedSearchServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("title");
+		String title = request.getParameter("titulo");
 		String description = request.getParameter("description");
-		String director = request.getParameter("director");
-		String genre = request.getParameter("genre");
+		String director = request.getParameter("diretor");
+		String genre = request.getParameter("genero");
 
-		String yearStr = request.getParameter("year");
+		String yearStr = request.getParameter("ano");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 
 		String minRatingAverageStr = request.getParameter("minRatingAverage");

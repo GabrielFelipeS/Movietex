@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -221,6 +222,7 @@ public class MovieDAO {
 		return builder.toString();
 	}
 
+
 	private void prepareStatementSelectWithOr(PreparedStatement pstmt, String title, String description, String genre,
 			String director, Integer year,  Double rating) throws SQLException {
 		int parameterIndex = 1;
@@ -250,4 +252,25 @@ public class MovieDAO {
 	}
 	
 	
+
+	public List<String> findAllDirectors() {
+		List<String> directors = new LinkedList();
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT director FROM Movies GROUP BY director ORDER BY director");
+			
+			
+			while(rs.next()) {
+				directors.add(rs.getString("director"));
+			}
+			
+			return directors;
+		} catch(Exception e) {
+			logger.error("Falha ao buscar diretores", e);
+		}
+		
+		return directors;
+	}
+
+
 }
