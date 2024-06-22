@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import ifsp.movietex.user.entity.DTOUser;
+import ifsp.movietex.user.entity.User;
 
 public class UserDAO {
 	
@@ -52,14 +53,14 @@ public class UserDAO {
 		
 	}
 	
-	public boolean updateUser(DTOUser user) {
+	public boolean updateUser(User user) {
 		String SQL = "UPDATE" + table + "SET nome = ?, email = ?, password = ?, isAdmin=? where id = ?"; 
 
 		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
-			statement.setString(1, user.name());
-			statement.setString(2, user.email());
-			statement.setString(3, user.password());
-			statement.setInt(4, user.id());
+			statement.setString(1, user.getNome());
+			statement.setString(2, user.getEmail());
+			statement.setString(3, user.getSenha());
+			statement.setInt(4, user.getId());
 			
 			statement.execute();
 			
@@ -70,10 +71,10 @@ public class UserDAO {
 		
 	}
 	
-	public boolean deleteUser(DTOUser user) {
+	public boolean deleteUser(Integer id) {
 		String SQL = "DELETE FROM" + table + "WHERE id = ?"; 
 		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
-			statement.setInt(1, user.id());
+			statement.setInt(1, id);
 			return true;
 		} catch (Exception e) {
 			return false;
