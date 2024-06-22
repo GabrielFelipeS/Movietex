@@ -19,9 +19,6 @@ import ifsp.movietex.base.db.PostgresTestContainer;
 import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
-import ifsp.movietex.movie.entity.DTOMovie;
-import ifsp.movietex.movie.entity.Movie;
-
 @Testcontainers
 public class MovieDAOTest {
 	private static final Integer ID_EXISTS = 1;
