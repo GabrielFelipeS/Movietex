@@ -1,4 +1,4 @@
-package ifsp.movietex.usuario;
+package ifsp.movietex.user.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class AutenticacaoUsuario
  */
 @WebFilter("/AutenticacaoUsuario")
-public class AutenticacaoUsuario extends HttpFilter implements Filter {
+public class UserAuthenticationFilter extends HttpFilter implements Filter {
     
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub

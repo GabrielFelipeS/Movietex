@@ -8,13 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ifsp.movietex.usuario.dao.UsuarioDAO;
+
 /**
  * Servlet implementation class LoginUsuario
  */
 @WebServlet("/LoginUsuario")
-public class LoginUsuario extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
-    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private UserDAO usuarioDAO = new UserDAO();
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
