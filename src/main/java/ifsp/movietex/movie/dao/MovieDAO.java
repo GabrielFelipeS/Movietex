@@ -250,7 +250,6 @@ public class MovieDAO {
 			pstmt.setDouble(parameterIndex++, rating);
 		}
 	}
-	
 
 	public List<String> findAllDirectors() {
 		List<String> directors = new LinkedList();
