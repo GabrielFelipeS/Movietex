@@ -67,6 +67,7 @@ public class MovieDAOTest {
 		rs.next();
 		Integer movies_count = rs.getInt(1);
 
+		assertTrue(movies_count == 1);
 		assertTrue(movie != null);
 	}
 	
