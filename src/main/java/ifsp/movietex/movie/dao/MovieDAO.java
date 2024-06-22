@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -246,6 +247,7 @@ Search and InputMovieServlet)
 		return builder.toString();
 	}
 
+
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
 			ResultSet rs = pstmt.executeQuery();
@@ -311,8 +313,6 @@ Search and InputMovieServlet)
 		}
 	}
 	
-<<<<<<< HEAD
-
 	public List<String> findAllDirectors() {
 		List<String> directors = new LinkedList();
 		try {
@@ -331,7 +331,5 @@ Search and InputMovieServlet)
 		
 		return directors;
 	}
-=======
-	
->>>>>>> 40dfafc (tests: MovieDAOTest add)
+
 }

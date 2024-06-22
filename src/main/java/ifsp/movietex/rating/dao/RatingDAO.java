@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class RatingDAO {
 			if (!rs.next() || updatedRows != 1)
 				throw new SQLException("Falha na inserção do filme");
 
+
 			return "Avaliação enviada com sucesso!";
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -46,12 +48,16 @@ public class RatingDAO {
 	public List<Rating> findBy(Integer idFilme) {
 		List<Rating> ratings = new LinkedList<>();
 		try (PreparedStatement ps = conn.prepareStatement(
+
 				"SELECT id_user, id_movie, comment, rating FROM Assessments WHERE id_movie = ?")) {
+
 			ps.setInt(1, idFilme);
 
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
+
 				Rating rating = new Rating(rs.getInt("id_user"), rs.getInt("id_movie"), rs.getDouble("rating") , rs.getString("comment"));
+
 				ratings.add(rating);
 			}
 
