@@ -1,0 +1,66 @@
+package ifsp.movietex.movie.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import ifsp.movietex.base.db.ConnectionPostgress;
+import ifsp.movietex.base.db.ResponseWrapper;
+import ifsp.movietex.movie.dao.MovieDAO;
+import ifsp.movietex.movie.entity.Movie;
+
+@WebServlet("/api/movie/simpleSearch")
+public class SimpleSearchServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+
+		String title = request.getParameter("search");
+		String description = request.getParameter("search");
+		String director = request.getParameter("search");
+		String genre = request.getParameter("search");
+
+		String yearStr = request.getParameter("search");
+		Integer year = yearStr != null && !yearStr.matches("^[^0-9]+$") ? Integer.valueOf(yearStr) : null;
+
+		String ratingAverageStr = request.getParameter("ragin");
+		Double ratingAverage = ratingAverageStr != null && !yearStr.matches("^[^0-9.]+$")
+				? Double.valueOf(ratingAverageStr)
+				: null;
+
+		System.out.println("title " + title);
+		System.out.println("description " + description);
+		System.out.println("director " + director);
+		System.out.println("genre " + genre);
+		System.out.println("year " + year);
+		System.out.println("ratingAverage " + ratingAverage);
+
+		Connection conn = new ConnectionPostgress().getConnection();
+		MovieDAO dao = new MovieDAO(conn);
+		List<Movie> movies = dao.findWithAtLeastOneValue(title, description, genre, director, year, ratingAverage);
+
+		Gson gson = new Gson();
+
+		ResponseWrapper wrapper = new ResponseWrapper();
+		wrapper.setStatus(HttpServletResponse.SC_OK);
+		wrapper.setData(movies);
+
+		String json = gson.toJson(wrapper);
+
+		out.print(json);
+		out.flush();
+	}
+
+}
