@@ -5,7 +5,30 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<link rel="stylesheet" href="dist/styles.css">
+<%--<link rel="stylesheet" href="dist/styles.css">--%>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            screens:{
+                'sm': '640px',
+                'md': '1000px',
+                'lg': '1200px',
+                'xl': '1480px',
+            },
+            extend: {
+                colors: {
+                    'primary': '#CF2028',
+                    'secondary': '#FFB71B',
+                    'danger': '#e3342f',
+                },
+                aspectRatio:{
+                    'banner': '[9/16]',
+                }
+            },
+        },
+    }
+</script>
 <link rel="shortcut icon" href="img/figuras/popcorn.ico" type="image/x-icon">
 
 
