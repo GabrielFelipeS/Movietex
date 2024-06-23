@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AutenticacaoUsuario
  */
-@WebFilter("/AutenticacaoUsuario")
+@WebFilter("/AuthUser")
 public class UserAuthenticationFilter extends HttpFilter implements Filter {
     
 	public void init(FilterConfig fConfig) throws ServletException {
@@ -29,11 +29,15 @@ public class UserAuthenticationFilter extends HttpFilter implements Filter {
 
         // Verifica se há uma sessão existente
         HttpSession session = servRequest.getSession(false);
-        boolean loggedIn = session != null && session.getAttribute("usuario") != null;
+        boolean loggedIn = session != null && session.getAttribute("email") != null;
+        boolean isAdmin = session != null && (String) session.getAttribute("isAdmin") != null;
 
         if (loggedIn) {
-            // Se estiver autenticado, continua a requisição
-            chain.doFilter(servRequest, response);
+        	if("admin".equals(isAdmin)) {
+        		// Se estiver autenticado, continua a requisição
+                chain.doFilter(servRequest, response);
+        	}
+            
         } else {
             // Caso contrário, redireciona para a página de login
         	

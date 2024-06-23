@@ -18,7 +18,7 @@ import ifsp.movietex.user.entity.DTOUser;
 /**
  * Servlet implementation class LoginUsuario
  */
-@WebServlet("/LoginUser")
+@WebServlet("/UserLogin")
 public class LoginServlet extends HttpServlet {
 
 
@@ -32,18 +32,19 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String senha = request.getParameter("password");
 		
-		boolean result = userDao.login(new DTOUser(null, email, senha));
+		String result = userDao.login(new DTOUser(null, email, senha));
 		
-		if(result) {
+		if(result != null) {
 			HttpSession session = request.getSession();
-			if(result) {
-		    	   writer.println("localizado");
-		       }else {
-		    	   writer.println("Não existe");
+			session.setAttribute("isAdmin", result);
+			session.setAttribute("email", email);
+				
+			response.sendRedirect("filmes.jsp");
+			System.out.println("localizado");
+		}else {
+			System.out.println("Não existe");
+			response.sendRedirect("login.jsp");
 
-		       }
-			//se login falhar
-			response.sendRedirect("");
 		}
 		
 		

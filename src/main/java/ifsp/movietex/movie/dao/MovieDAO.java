@@ -28,13 +28,14 @@ public class MovieDAO {
 
 	public String insert(DTOMovie dto) {
 		try (PreparedStatement ps = conn.prepareStatement(
-				"INSERT INTO movies (title, description, director, genre, year) VALUES (?, ?, ?, ?, ?)",
+				"INSERT INTO movies (title, description, director, genre, year, poster) VALUES (?, ?, ?, ?, ?, ?)",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
 			ps.setString(3, dto.genre());
 			ps.setString(4, dto.director());
 			ps.setInt(5, dto.year());
+			ps.setString(6, dto.poster());
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -53,7 +54,7 @@ public class MovieDAO {
 	public Movie findBy(Integer id) {
 
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE id = ?",
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE id = ?",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pstmt.setInt(1, id);
 
@@ -61,7 +62,7 @@ public class MovieDAO {
 			if (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
+						rs.getDouble("rating_average"), rs.getString("poster"));
 				return movie;
 
 			}
@@ -123,7 +124,7 @@ public class MovieDAO {
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
+						rs.getDouble("rating_average"), rs.getString("poster"));
 
 				movies.add(movie);
 			}
@@ -174,7 +175,7 @@ public class MovieDAO {
 	private String generateSelectQueryWithAnd(String title, String description, String genre, String director,
 			Integer year, Double minRatingAverage, Double maxRatingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1=1");
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1=1");
 
 		if (title != null)
 			builder.append(" AND title LIKE ?");
@@ -206,7 +207,7 @@ public class MovieDAO {
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
+						rs.getDouble("rating_average"), rs.getString("poster"));
 				movies.add(movie);
 			}
 		} catch (SQLException e) {
@@ -219,7 +220,7 @@ public class MovieDAO {
 	private String generateSelectQueryWithOr(String title, String description, String genre, String director,
 			Integer year, Double ratingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1!=1");
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1!=1");
 
 		if (title != null)
 			builder.append(" OR title LIKE ?");
@@ -266,7 +267,7 @@ public class MovieDAO {
 	}
 
 	public List<String> findAllDirectors() {
-		List<String> directors = new LinkedList();
+		List<String> directors = new LinkedList<>();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT director FROM Movies GROUP BY director ORDER BY director");
