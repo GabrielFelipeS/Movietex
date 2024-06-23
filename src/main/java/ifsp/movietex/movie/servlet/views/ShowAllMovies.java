@@ -24,8 +24,11 @@ public class ShowAllMovies extends HttpServlet{
         Connection conn = new ConnectionPostgress().getConnection();
         MovieDAO dao = new MovieDAO(conn);
         List<Movie> movies = dao.findAll();
-        
         request.setAttribute("movies", movies);
+        
+        List<String> directors = dao.findAllDirectors();
+        request.setAttribute("directors", directors);
+        
         RequestDispatcher dispatcher = request.getRequestDispatcher("/filmes.jsp");
         dispatcher.forward(request, response);
     }
