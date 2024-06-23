@@ -32,10 +32,9 @@ public class InsertMovieServlet extends HttpServlet {
 		String genre = request.getParameter("genero");
 
 		String yearStr = request.getParameter("ano");
-		System.out.println(yearStr);
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 		
-		String poster = request.getParameter("poster");
+		String poster = "./img/capas/divertida_mente.webp";
 		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
