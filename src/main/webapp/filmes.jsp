@@ -1,11 +1,13 @@
-<%--
+<%@ page import="ifsp.movietex.movie.entity.Movie" %><%--
   Created by IntelliJ IDEA.
   User: Micael Hernandes
   Date: 22/06/2024
   Time: 14:48
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <jsp:include page="head.jsp" />
@@ -105,18 +107,18 @@
 
 
     <section class="w-[70%] h-full p-10 flex flex-row flex-wrap items overflow-auto">
-        <div id="filmes" class="w-full h-full flex flex-row flex-wrap justify-start">
-            <a href="#" class="basis-1/4 h-[400px]  m-2 gap-2 rounded-lg flex flex-col items-center">
-                <div class="w-[220px] h-[330px] m-1 bg-no-repeat  bg-cover bg-center rounded-2xl"
-                     style="background-image: url('./img/capas/divertida_mente.webp');">
-                </div>
-                <div
-                        class="w-[220px] h-[20%] rounded-lg text-secondary flex bg-primary justify-center items-center hover:-translate-y-1 hover:shadow-sm transition-all duration-150">
-                    <p class="text-center font-bold hover:scale-125 transition-all">Divertida Mente 2</p>
-                </div>
-            </a>
-
+        <% Movie[] movies = (Movie[]) request.getAttribute("movies"); %>
+        <% for(Movie movie : movies) { %>
+        <div class="w-[30%] h-[50%] flex flex-col items-center justify-center">
+            <img src="img/filmes/<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"
+                 class="w-[80%] h-[80%] object-cover rounded-lg">
+            <p class="text-primary text-2xl font-bold"><%= movie.getTitle() %></p>
+            <p class="text-primary text-lg font-bold"><%= movie.getGenre() %></p>
+            <p class="text-primary text-lg font-bold"><%= movie.getYear() %></p>
+            <p class="text-primary text-lg font-bold"><%= movie.getDirector() %></p>
+            <p class="text-primary text-lg font-bold"><%= movie.getRatingAverage() %></p>
         </div>
+        <% } %>
         <div id="404" class="w-full h-full hidden flex-col items-center justify-center">
             <img src="img/figuras/404.png" alt="Erro na pesquisa" class="w-auto">
             <p class="text-primary text-2xl font-bold">Nenhum resultado para os filtros informados!</p>
