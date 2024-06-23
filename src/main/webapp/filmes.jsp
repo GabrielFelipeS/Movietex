@@ -115,7 +115,7 @@
   
         <% List<Movie> movies = (List<Movie>) request.getAttribute("movies"); %>
         <% for(Movie movie : movies) { %>
-        <div class="w-[30%] flex flex-col mb-5 items-center justify-center">
+        <div class="w-[30%] flex flex-col aspect-banner mb-5 items-center justify-center">
             <img src="<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"
                  class="w-[200px] object-cover rounded-lg">
             <p class="text-primary text-lg font-bold"><%= movie.getRatingAverage() %> / 10</p>

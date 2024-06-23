@@ -14,6 +14,9 @@ module.exports = {
         'secondary': '#FFB71B',
         'danger': '#e3342f',
       },
+      aspectRatio:{
+        'banner': '[9/16]',
+      }
     },
   },
   plugins: [],

@@ -875,6 +875,10 @@ video {
   display: none;
 }
 
+.aspect-banner {
+  aspect-ratio: [9/16];
+}
+
 .h-32 {
   height: 8rem;
 }
@@ -975,6 +979,10 @@ video {
   width: 20%;
 }
 
+.w-\[200px\] {
+  width: 200px;
+}
+
 .w-\[30\%\] {
   width: 30%;
 }
@@ -1025,10 +1033,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[200px\] {
-  width: 200px;
 }
 
 .max-w-\[300px\] {
