@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="components/head.jsp" />
+    <jsp:include page="head.jsp" />
     <title>Login</title>
 </head>
 <body>
 
-<jsp:include page="components/header.jsp" />
+<jsp:include page="header.jsp" />
 
 <main class="w-full h-[80vh] flex flex-col justify-center items-center">
     <div class="hidden flex-row items-center mb-5 justify-center w-[350px] h-[50px] bg-secondary rounded-lg">
@@ -35,6 +35,6 @@
 </main>
 
 
-<jsp:include page="components/footer.jsp" />
+<jsp:include page="footer.jsp" />
 </body>
 </html>

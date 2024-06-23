@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="components/head.jsp" />
+    <%@ include file="head.jsp" %>
     <title>Title</title>
 </head>
 <body>
 
-<jsp:include page="components/header.jsp" />
+<%@ include file="header.jsp" %>
 
 <main class="w-[60%] mx-auto h-[100px] rounded-lg">
     <div class="swiper mySwiper">
@@ -72,6 +72,6 @@
 </main>
 
 
-<jsp:include page="components/footer.jsp" />
+<jsp:include page="footer.jsp" />
 </body>
 </html>

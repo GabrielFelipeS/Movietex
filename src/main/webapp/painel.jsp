@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="components/head.jsp" />
+    <jsp:include page="head.jsp" />
     <title>Painel ADM</title>
 </head>
 <body>
 
-<jsp:include page="components/header.jsp" />
+<jsp:include page="header.jsp" />
 
 <main class="w-full h-[80vh] flex flex-row">
     <aside class="w-[20%] h-full bg-gray-100 flex flex-col gap-10">
@@ -61,6 +61,6 @@
 </main>
 
 
-<jsp:include page="components/footer.jsp" />
+<jsp:include page="footer.jsp" />
 </body>
 </html>

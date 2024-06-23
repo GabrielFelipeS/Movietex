@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="components/head.jsp" />
+    <jsp:include page="head.jsp" />
     <title>Filme</title>
 </head>
 <body>
 
-<jsp:include page="components/header.jsp" />
+<jsp:include page="header.jsp" />
 
 <main class="w-[60%] h-screen m-auto flex flex-col gap-10">
     <h2 class="text-6xl font-extrabold font-serif mt-5 text-center">Divertida mente 2</h2>
@@ -134,6 +134,6 @@
 </main>
 
 
-<jsp:include page="components/footer.jsp" />
+<jsp:include page="footer.jsp" />
 </body>
 </html>

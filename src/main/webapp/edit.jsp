@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="components/head.jsp" />
+    <jsp:include page="head.jsp" />
     <title>Editar Filme</title>
 </head>
 <body>
 
-<jsp:include page="components/header.jsp" />
+<jsp:include page="header.jsp" />
 
 <main class="w-full  flex flex-col justify-center items-center">
     <div>
@@ -53,6 +53,6 @@
 </main>
 
 
-<jsp:include page="components/footer.jsp" />
+<jsp:include page="footer.jsp" />
 </body>
 </html>
