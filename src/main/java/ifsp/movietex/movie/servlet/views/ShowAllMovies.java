@@ -25,7 +25,7 @@ public class ShowAllMovies extends HttpServlet{
         MovieDAO dao = new MovieDAO(conn);
         List<Movie> movies = dao.findAll();
         request.setAttribute("movies", movies);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("movies.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/filmes.jsp");
         dispatcher.forward(request, response);
     }
 

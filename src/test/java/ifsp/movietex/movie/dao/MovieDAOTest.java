@@ -223,7 +223,7 @@ public class MovieDAOTest {
 	@Test
 	public void givenFindWithAtLeastOneValue_whenAllParametersIsNull_thenAllMovies() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
-		List<Movie> movies = dao.findWithAtLeastOneValue(null, null, null, null, null, null);
+		List<Movie> movies = dao.findWithAtLeastOneValue(null, null, null, null, null);
 
 		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE 1!=1");
 		rs.next();
@@ -325,8 +325,7 @@ public class MovieDAOTest {
 	public void givenFindWithAtLeastOneValue_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
 		List<Movie> movies = dao.findWithAtLeastOneValue("O Poderoso Chefão", 
-				"As vidas de dois assassinos de aluguel, um boxeador e um casal de bandidos se entrelaçam em quatro contos de violência e redenção."
-						,"David Fincher", "Drama", 1980, 9.3);
+						"David Fincher", "Drama", 1980, 9.3);
 
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies WHERE title LIKE '%O Poderoso Chefão%' "
