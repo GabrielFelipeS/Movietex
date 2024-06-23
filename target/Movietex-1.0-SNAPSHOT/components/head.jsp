@@ -5,3 +5,4 @@
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" href="dist/styles.css">
+<link rel="shortcut icon" href="img/figuras/popcorn.ico" type="image/x-icon">
