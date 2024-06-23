@@ -67,6 +67,10 @@
                     <select name="diretor" id="diretor"
                             class="w-full p-2 outline-none ring-1 ring-primary rounded-lg">
                         <option value="">Selecione um diretor</option>
+                                <% List<String> directors = (List<String>) request.getAttribute("directors"); %>
+       							<% for(String directorName : directors) { %>
+                        			 <option value="<%= directorName %>"><%= directorName %></option>
+                               <% } %>
                         <option value="Steven Spielberg">Steven Spielberg</option>
                         <option value="Christopher Nolan">Christopher Nolan</option>
                         <option value="Quentin Tarantino">Quentin Tarantino</option>
