@@ -41,7 +41,6 @@ public class PostgresTestContainer {
 		return new PostgreSQLContainer<>("postgres:16")
 				.withUsername("postgres")
 				.withPassword("admin")
-				.withDatabaseName("movietex")
 				.withExposedPorts(5432).withCopyFileToContainer(
 						MountableFile.forHostPath(Paths.get("scripts", "init.sql").toAbsolutePath().toString()),
 						"/docker-entrypoint-initdb.d/init.sql");

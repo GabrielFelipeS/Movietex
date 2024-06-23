@@ -33,10 +33,12 @@ public class InsertMovieServlet extends HttpServlet {
 
 		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
-
+		
+		String poster = request.getParameter("poster");
+		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String msg = dao.insert(new DTOMovie(title, description, genre, director, year));
+		String msg = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
 		ResponseWrapper wrapper = new ResponseWrapper();
 		if (msg.contains("Sucesso")) {
 			wrapper.setStatus(HttpServletResponse.SC_CREATED);

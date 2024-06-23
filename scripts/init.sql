@@ -10,6 +10,7 @@ CREATE TABLE Movies (
     genre VARCHAR(255),
     year INT,
     rating_average DECIMAL(2,1) DEFAULT 0.0,
+	poster VARCHAR(255) DEFAULT './img/capas/divertida_mente.webp' NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

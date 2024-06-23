@@ -349,7 +349,7 @@ public class MovieDAOTest {
 		String title = "A Origem";
 		String msg = dao.insert(new DTOMovie(title, "Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas "
 				+ "vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: "
-				+ "'inception', a implantação de outra ideia na mente de uma pessoa.", "Christopher Nolan", "Ficção Científica", 2010));
+				+ "'inception', a implantação de outra ideia na mente de uma pessoa.", "Christopher Nolan", "Ficção Científica", 2010, "./img/capas/divertida_mente.webp"));
 
 		assertEquals("Falha ao cadastrar o filme " + title, msg);
 	}
@@ -360,7 +360,7 @@ public class MovieDAOTest {
 		
 		String msg = dao.insert(new DTOMovie("Divertidamente 2", "Com um salto temporal, Riley se encontra mais velha, passando pela tão temida adolescência. "
 				+ "Junto com o amadurecimento, a sala de controle também está passando por uma adaptação para dar lugar a algo totalmente inesperado: novas emoções.",
-				"Kelsey Mann", "Animação", 2024));
+				"Kelsey Mann", "Animação", 2024, "./img/capas/divertida_mente.webp"));
 		
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies");
@@ -376,7 +376,7 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		String title = "The Godfather";
 		String msg = dao.update(new DTOMovie(2, title, "The saga of the Corleone family and the rise of Michael Corleone as the patriarch.",
-				"Francis Ford Coppola", "Crime", 1972));
+				"Francis Ford Coppola", "Crime", 1972, "./img/capas/divertida_mente.webp"));
 		
 		assertEquals(String.format("%s atualizado com sucesso", title), msg);
 	}
@@ -386,7 +386,7 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		String title = "The Godfather";
 		String msg = dao.update(new DTOMovie(ID_NOT_EXIST, title, "The saga of the Corleone family and the rise of Michael Corleone as the patriarch.",
-				"Francis Ford Coppola", "Crime", 1972));
+				"Francis Ford Coppola", "Crime", 1972, "./img/capas/divertida_mente.webp"));
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}
