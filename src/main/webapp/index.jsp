@@ -15,7 +15,7 @@
 
 <%@ include file="header.jsp" %>
 
-<main class="w-[60%] mx-auto h-[100px] rounded-lg">
+<main class="w-[60%] mx-auto h-[450px] rounded-lg">
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">

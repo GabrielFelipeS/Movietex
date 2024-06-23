@@ -22,14 +22,14 @@
     <aside class="w-[30%] h-full  flex flex-col justify-center items-center">
         <div
                 class="w-[80%] h-[90%] bg-white rounded-lg flex flex-col  shadow-secondary drop-shadow-xl">
-            <h2 class="text-3xl font-thin text-center mt-5 font-bold">Filtros de busca</h2>
+            <h2 class="text-3xl font-thin text-center mt-5">Filtros de busca</h2>
 
             <div class="w-[80%] m-auto flex flex-col gap-5">
                 <div>
                     <h3 class="text-xl font-bold my-5">Gênero</h3>
                     <ul class="flex flex-row flex-wrap gap-7">
                         <li>
-                            <input type="radio" id="acao" name="genero" value="acao" checked>
+                            <input type="radio" id="acao" name="genero" value="acao">
                             <label for="acao" class="font-bold">Ação</label>
                         </li>
                         <li>
@@ -81,11 +81,32 @@
 
                 <div class="flex flex-col gap-4">
                     <h3 class="font-bold">
-                        Avaliação:
+                        Avaliação minima:
                     </h3>
-                    <select name="avaliacao" id="avaliacao"
+                    <select name="avaliacao" id="avaliacao_minima"
                             class="w-full p-2 outline-none ring-1 ring-primary rounded-lg">
-                        <option value="" disabled selected>Selecione uma avaliação</option>
+                        <option value="" disabled selected>Selecione uma Avaliação Minima</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <h3 class="font-bold">
+                        Avaliação Maxima:
+                    </h3>
+                    <select name="avaliacao" id="avaliacao_maxima"
+                            class="w-full p-2 outline-none ring-1 ring-primary rounded-lg">
+                        <option value="" disabled selected>Selecione uma Avaliação Maxima</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
