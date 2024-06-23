@@ -8,7 +8,7 @@
     </div>
     <div class="w-full md:w-[90%] h-[50%] flex flex-row ring-1 ring-black rounded-lg relative">
       <div class="w-full flex justify-center items-center">
-        <input type="text" placeholder="Procurar por filme, uma série, uma personalidade..."
+        <input type="text" placeholder="Procurar por titulo, genero, ano..."
                class="w-[90%] bg-transparent pl-3 text-black placeholder:text-black outline-none z-1" id="search">
       </div>
       <div
