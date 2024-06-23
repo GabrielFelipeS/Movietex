@@ -27,28 +27,24 @@ public class UpdateMovieServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String director = request.getParameter("director");
-		String genre = request.getParameter("genre");
+		String idStr = request.getParameter("id");
+		Integer id = idStr != null ? Integer.valueOf(idStr) : null;
 
-		String yearStr = request.getParameter("year");
+		String title = request.getParameter("titulo");
+		String description = request.getParameter("descricao");
+		String director = request.getParameter("diretor");
+		String genre = request.getParameter("genero");
+
+		String yearStr = request.getParameter("ano");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 
-		String minRatingAverageStr = request.getParameter("minRatingAverage");
-		Double minRatingAverage = minRatingAverageStr != null ? Double.valueOf(minRatingAverageStr) : null;
-
-		String maxRatingAverageStr = request.getParameter("maxRatingAverage");
-		Double maxRatingAverage = maxRatingAverageStr != null ? Double.valueOf(maxRatingAverageStr) : null;
-
-		String poster = request.getParameter("poster");
+		String poster = "./img/capas/divertida_mente.webp";
 		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String mensagem = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
+		String mensagem = dao.update(new DTOMovie(id, title, description, genre, director, year, poster));
 
 		Gson gson = new Gson();
-
 		
 		response.setStatus(mensagem.contains("Sucesso") ? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 
