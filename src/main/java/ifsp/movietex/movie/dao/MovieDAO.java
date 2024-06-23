@@ -54,14 +54,14 @@ public class MovieDAO {
 	public Movie findBy(Integer id) {
 
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE id = ?",
+				"SELECT id, title, description, director, genre, year, duration, rating_average, poster FROM Movies WHERE id = ?",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pstmt.setInt(1, id);
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
-						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
+						rs.getString("director"), rs.getString("genre"), rs.getString("duration") ,rs.getInt("year"),
 						rs.getDouble("rating_average"), rs.getString("poster"));
 				return movie;
 
@@ -123,7 +123,7 @@ public class MovieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
-						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
+						rs.getString("director"), rs.getString("genre"), rs.getString("duration"), rs.getInt("year"),
 						rs.getDouble("rating_average"), rs.getString("poster"));
 
 				movies.add(movie);
@@ -175,7 +175,7 @@ public class MovieDAO {
 	private String generateSelectQueryWithAnd(String title, String description, String genre, String director,
 			Integer year, Double minRatingAverage, Double maxRatingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1=1");
+				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies WHERE 1=1");
 
 		if (title != null)
 			builder.append(" AND title LIKE ?");
@@ -206,7 +206,7 @@ public class MovieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
-						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
+						rs.getString("director"), rs.getString("genre"), rs.getString("duration") ,rs.getInt("year"),
 						rs.getDouble("rating_average"), rs.getString("poster"));
 				movies.add(movie);
 			}
@@ -220,7 +220,7 @@ public class MovieDAO {
 	private String generateSelectQueryWithOr(String title, String description, String genre, String director,
 			Integer year, Double ratingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1!=1");
+				"SELECT id, title, description, director, genre, year, duration, rating_average, poster FROM Movies WHERE 1!=1");
 
 		if (title != null)
 			builder.append(" OR title LIKE ?");
