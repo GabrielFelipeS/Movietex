@@ -30,7 +30,7 @@ public class FindRatingsByMovie extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String idFilmeStr = Objects.requireNonNull(request.getParameter("idFilme"), "ID do filme não pode ser nulo");
+		String idFilmeStr = Objects.requireNonNull(request.getParameter("idMovie"), "ID do filme não pode ser nulo");
 		Integer idFilme = Integer.valueOf(idFilmeStr);
 
 		Connection conn = new ConnectionPostgress().getConnection();
