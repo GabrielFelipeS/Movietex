@@ -24,14 +24,14 @@ public class InsertRating extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String idFilmeStr = request.getParameter("idFilme");
+		String idFilmeStr = request.getParameter("idMovie");
 		Integer idFilme = Integer.valueOf(idFilmeStr);
 	
-		String idUsuarioStr = request.getParameter("idUsuarioStr");
+		String idUsuarioStr = request.getParameter("idUser");
 		Integer idUsuario = Integer.valueOf(idUsuarioStr);
 		
-		String comentario = request.getParameter("comentario");
-		String notaStr = request.getParameter("nota");
+		String comentario = request.getParameter("comment");
+		String notaStr = request.getParameter("note");
 		Double nota = Double.valueOf(notaStr);
 
 		Connection conn = new ConnectionPostgress().getConnection();
