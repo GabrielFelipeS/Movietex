@@ -21,7 +21,7 @@
     </div>
     <div class="w-[80%] h-[450px] bg-gray rounded-lg flex flex-col justify-evenly items-center">
         <h2 class="text-2xl text-primary font-bold">Login</h2>
-        <form action="" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
+        <form action="/" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
             <input type="text" placeholder="E-mail" class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none"
                    required>
             <input type="password" placeholder="Senha"
