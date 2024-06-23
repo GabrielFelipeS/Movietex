@@ -104,6 +104,28 @@ public class MovieDAO {
 
 	}
 
+	public List<Movie> findAll() {
+		List<Movie> movies = new LinkedList<>();
+
+		try (PreparedStatement pstmt = conn.prepareStatement("SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies", PreparedStatement.RETURN_GENERATED_KEYS)) {
+			
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
+						rs.getString("director"), rs.getString("genre"), rs.getString("duration"), rs.getInt("year"),
+						rs.getDouble("rating_average"), rs.getString("poster"));
+
+				movies.add(movie);
+			}
+
+		} catch (SQLException e) {
+
+			logger.error("Falha ao buscar movie", e);
+		}
+		return movies;
+	}
+
 	public List<Movie> findBy(String title, String description, String genre, String director, Integer year,
 			Double ratingAverage) {
 		return findBy(title, description, genre, director, year, ratingAverage, ratingAverage);
@@ -137,6 +159,26 @@ public class MovieDAO {
 		return movies;
 	}
 
+	private String generateSelectQueryWithAnd(String title, String description, String genre, String director,
+			Integer year, Double minRatingAverage, Double maxRatingAverage) {
+		StringBuilder builder = new StringBuilder(
+				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies WHERE 1=1");
+
+		if (title != null)
+			builder.append(" AND LOWER(title) LIKE ?");
+		if (genre != null)
+			builder.append(" AND LOWER(genre) LIKE ?");
+		if (director != null)
+			builder.append(" AND LOWER(director) LIKE ?");
+		if (year != null)
+			builder.append(" AND year = ?");
+		if (minRatingAverage != null)
+			builder.append(" AND rating_average >= ?");
+		if (maxRatingAverage != null)
+			builder.append(" AND rating_average <= ?");
+
+		return builder.toString();
+	}
 
 	private void prepareStatementSelect(PreparedStatement pstmt, String title, String description, String genre,
 			String director, Integer year, Double minRatingAverage, Double maxRatingAverage) throws SQLException {
@@ -172,36 +214,15 @@ public class MovieDAO {
 		}
 	}
 
-	private String generateSelectQueryWithAnd(String title, String description, String genre, String director,
-			Integer year, Double minRatingAverage, Double maxRatingAverage) {
-		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies WHERE 1=1");
 
-		if (title != null)
-			builder.append(" AND title LIKE ?");
-		if (description != null)
-			builder.append(" AND description LIKE ?");
-		if (genre != null)
-			builder.append(" AND genre LIKE ?");
-		if (director != null)
-			builder.append(" AND director LIKE ?");
-		if (year != null)
-			builder.append(" AND year = ?");
-		if (minRatingAverage != null)
-			builder.append(" AND rating_average >= ?");
-		if (maxRatingAverage != null)
-			builder.append(" AND rating_average <= ?");
 
-		return builder.toString();
-	}
-
-	public List<Movie> findWithAtLeastOneValue(String title, String description, String genre, String director,
+	public List<Movie> findWithAtLeastOneValue(String title, String genre, String director,
 			Integer year, Double ratingAverage) {
 		List<Movie> movies = new LinkedList<>();
-		String sql = generateSelectQueryWithOr(title, description, genre, director, year, ratingAverage);
+		String sql = generateSelectQueryWithOr(title, genre, director, year, ratingAverage);
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			prepareStatementSelectWithOr(pstmt, title, description, genre, director, year, ratingAverage);
+			prepareStatementSelectWithOr(pstmt, title, genre, director, year, ratingAverage);
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -217,15 +238,13 @@ public class MovieDAO {
 		return movies;
 	}
 
-	private String generateSelectQueryWithOr(String title, String description, String genre, String director,
+	private String generateSelectQueryWithOr(String title, String genre, String director,
 			Integer year, Double ratingAverage) {
 		StringBuilder builder = new StringBuilder(
 				"SELECT id, title, description, director, genre, year, duration, rating_average, poster FROM Movies WHERE 1!=1");
 
 		if (title != null)
 			builder.append(" OR title LIKE ?");
-		if (description != null)
-			builder.append(" OR description LIKE ?");
 		if (genre != null)
 			builder.append(" OR genre LIKE ?");
 		if (director != null)
@@ -238,15 +257,11 @@ public class MovieDAO {
 		return builder.toString();
 	}
 
-	private void prepareStatementSelectWithOr(PreparedStatement pstmt, String title, String description, String genre,
+	private void prepareStatementSelectWithOr(PreparedStatement pstmt, String title, String genre,
 			String director, Integer year,  Double rating) throws SQLException {
 		int parameterIndex = 1;
 		if (title != null) {
 			pstmt.setString(parameterIndex++, "%" + title + "%");
-		}
-
-		if (description != null) {
-			pstmt.setString(parameterIndex++, "%" + description + "%");
 		}
 
 		if (director != null) {
@@ -284,5 +299,6 @@ public class MovieDAO {
 		
 		return directors;
 	}
+
 
 }

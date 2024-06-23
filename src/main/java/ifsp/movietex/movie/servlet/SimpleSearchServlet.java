@@ -26,11 +26,10 @@ public class SimpleSearchServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("search");
-		String description = request.getParameter("search");
-		String director = request.getParameter("search");
-		String genre = request.getParameter("search");
-
+		String title = request.getParameter("search").toLowerCase();
+		String director = request.getParameter("search").toLowerCase();
+		String genre = request.getParameter("search").toLowerCase();
+		System.out.println(title);
 		String yearStr = request.getParameter("search");
 		Integer year = yearStr != null && !yearStr.matches("^[^0-9]+$") ? Integer.valueOf(yearStr) : null;
 
@@ -41,7 +40,7 @@ public class SimpleSearchServlet extends HttpServlet {
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		List<Movie> movies = dao.findWithAtLeastOneValue(title, description, genre, director, year, ratingAverage);
+		List<Movie> movies = dao.findWithAtLeastOneValue(title, genre, director, year, ratingAverage);
 
 		Gson gson = new Gson();
 
