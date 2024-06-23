@@ -4,5 +4,5 @@
       integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<%--<script src="https://cdn.tailwindcss.com"></script>--%>
 <link rel="stylesheet" href="dist/styles.css">
-<link rel="shortcut icon" href="img/figuras/popcorn.ico" type="image/x-icon">

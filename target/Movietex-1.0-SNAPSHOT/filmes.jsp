@@ -15,18 +15,18 @@
 
 <jsp:include page="components/header.jsp" />
 
-<main class="w-full h-[80vh]  flex flex-row">
+<main class="w-full h-[80vh] flex flex-row">
     <aside class="w-[30%] h-full  flex flex-col justify-center items-center">
         <div
                 class="w-[80%] h-[90%] bg-white rounded-lg flex flex-col  shadow-secondary drop-shadow-xl">
-            <h2 class="text-3xl font-thin text-center mt-5">Filtros de busca</h2>
+            <h2 class="text-3xl font-thin text-center mt-5 font-bold">Filtros de busca</h2>
 
             <div class="w-[80%] m-auto flex flex-col gap-5">
                 <div>
                     <h3 class="text-xl font-bold my-5">Gênero</h3>
                     <ul class="flex flex-row flex-wrap gap-7">
                         <li>
-                            <input type="radio" id="acao" name="genero" value="acao">
+                            <input type="radio" id="acao" name="genero" value="acao" checked>
                             <label for="acao" class="font-bold">Ação</label>
                         </li>
                         <li>
@@ -78,7 +78,7 @@
                     </h3>
                     <select name="avaliacao" id="avaliacao"
                             class="w-full p-2 outline-none ring-1 ring-primary rounded-lg">
-                        <option value="">Selecione uma avaliação</option>
+                        <option value="" disabled selected>Selecione uma avaliação</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
