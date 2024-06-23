@@ -17,20 +17,7 @@
       </div>
       <div
               class="absolute flex top-full left-0 flex-col z-100 w-full h-auto max-h-[80vh] overflow-auto gap-5 mt-2" style="z-index: 99999" id="resultArea">
-        <div
-                class="w-full h-auto flex flex-col justify-center items-center md:items-start md:flex-row md:justify-start gap-2 p-4 bg-gray-100 rounded-lg">
-          <img src="img/capas/divertida_mente.webp" alt="Cartaz do Filme X"
-               class="z-10 max-w-[300px] md:w-[30%] rounded-lg">
-          <div class="flex flex-col">
-            <h2 class="text-2xl font-bold">Divertida Mente 2</h2>
-            <p class="">20 de junho de 2024 | 1h 36min</p>
-            <p><span class="font-bold"><a href="">Aventura</a> , <a href="">Ação</a>, <a
-                    href="">Comédia</a></span></p>
-            <p>Direção: <span class="font-bold"><a href="">Kelsey Mann</a></span></p>
-            <p>Ano Lançamento: <span class="font-bold">2024</span></p>
-          </div>
-        </div>
-
+        
         <div class="w-full h-[100px] rounded-lg bg-gray-100 hidden flex-row items-center justify-around" id="searchFail">
           <h2 class="text-xl p-3 font-bold">Nenhum resultado para: <span class="text-primary" id="searchTextError">Teste</span>
           </h2>
