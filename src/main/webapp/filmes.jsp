@@ -111,18 +111,18 @@
     </aside>
 
 
-    <section class="w-[70%] h-full p-10 flex flex-row flex-wrap items overflow-auto">
+    <section class="w-[70%] h-full p-10 flex flex-row m-auto flex-wrap items overflow-auto">
   
         <% List<Movie> movies = (List<Movie>) request.getAttribute("movies"); %>
         <% for(Movie movie : movies) { %>
-        <div class="w-[30%] h-[50%] flex flex-col items-center justify-center">
-            <img src="img/filmes/<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"
-                 class="w-[80%] h-[80%] object-cover rounded-lg">
-            <p class="text-primary text-2xl font-bold"><%= movie.getTitle() %></p>
-            <p class="text-primary text-lg font-bold"><%= movie.getGenre() %></p>
-            <p class="text-primary text-lg font-bold"><%= movie.getYear() %></p>
-            <p class="text-primary text-lg font-bold"><%= movie.getDirector() %></p>
-            <p class="text-primary text-lg font-bold"><%= movie.getRatingAverage() %></p>
+        <div class="w-[30%] flex flex-col mb-5 items-center justify-center">
+            <img src="<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"
+                 class="w-[200px] object-cover rounded-lg">
+            <p class="text-primary text-lg font-bold"><%= movie.getRatingAverage() %> / 10</p>
+            <a href="./movie/<%= movie.getId() %>"
+                class="bg-primary text-white p-2 rounded-lg hover:-translate-y-1 transition-all duration-150">Ver
+                 detalhes</a>
+            
         </div>
         <% } %>
         <div id="404" class="w-full h-full hidden flex-col items-center justify-center">
