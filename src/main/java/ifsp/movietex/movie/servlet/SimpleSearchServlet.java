@@ -34,7 +34,7 @@ public class SimpleSearchServlet extends HttpServlet {
 		String yearStr = request.getParameter("search");
 		Integer year = yearStr != null && !yearStr.matches("^[^0-9]+$") ? Integer.valueOf(yearStr) : null;
 
-		String ratingAverageStr = request.getParameter("ragin");
+		String ratingAverageStr = request.getParameter("search");
 		Double ratingAverage = ratingAverageStr != null && !yearStr.matches("^[^0-9.]+$")
 				? Double.valueOf(ratingAverageStr)
 				: null;
