@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.rating.dao.RatingDAO;
 import ifsp.movietex.rating.entity.Rating;
 
@@ -39,11 +38,9 @@ public class FindRatingsByMovie extends HttpServlet {
 		List<Rating> ratings = dao.findBy(idFilme);
 		
 		Gson gson = new Gson();
-		ResponseWrapper wrapper = new ResponseWrapper();
-		wrapper.setStatus(HttpServletResponse.SC_OK);
-		wrapper.setData(ratings);
+		response.setStatus(HttpServletResponse.SC_OK);
 
-		String json = gson.toJson(wrapper);
+		String json = gson.toJson(ratings);
 
 		out.print(json);
 		out.flush();

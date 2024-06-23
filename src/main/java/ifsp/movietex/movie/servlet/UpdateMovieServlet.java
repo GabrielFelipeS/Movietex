@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.DTOMovie;
 
@@ -46,16 +45,14 @@ public class UpdateMovieServlet extends HttpServlet {
 		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String msg = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
+		String mensagem = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
 
 		Gson gson = new Gson();
 
-		ResponseWrapper wrapper = new ResponseWrapper();
 		
-		wrapper.setStatus(msg.contains("Sucesso") ? HttpServletResponse.SC_OK : HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		wrapper.setData(msg);
+		response.setStatus(mensagem.contains("Sucesso") ? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 
-		String json = gson.toJson(wrapper);
+		String json = gson.toJson(mensagem);
 
 		out.print(json);
 		out.flush();
