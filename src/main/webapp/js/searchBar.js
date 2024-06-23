@@ -28,8 +28,8 @@ searchInput.addEventListener('input', async (e) => {
             searchFailCard.style.display = 'block';
             searchTextError.textContent = searchTerm;
         } else {
-            console.log(data);
-            data.data.forEach(item => {
+            let response = [data];
+            data.forEach(item => {
                 const card = document.createElement('div');
                 card.classList.add('w-full', 'h-auto', 'flex', 'flex-col', 'justify-center', 'items-center', 'md:items-start', 'md:flex-row', 'md:justify-start', 'gap-2', 'p-4', 'bg-gray-100', 'rounded-lg');
 
