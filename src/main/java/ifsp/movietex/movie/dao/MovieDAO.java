@@ -106,9 +106,7 @@ public class MovieDAO {
 
 	public List<Movie> findAll() {
 		List<Movie> movies = new LinkedList<>();
-
 		try (PreparedStatement pstmt = conn.prepareStatement("SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies", PreparedStatement.RETURN_GENERATED_KEYS)) {
-			
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -118,9 +116,7 @@ public class MovieDAO {
 
 				movies.add(movie);
 			}
-
 		} catch (SQLException e) {
-
 			logger.error("Falha ao buscar movie", e);
 		}
 		return movies;
@@ -213,8 +209,6 @@ public class MovieDAO {
 			pstmt.setDouble(parameterIndex++, maxRatingAverage);
 		}
 	}
-
-
 
 	public List<Movie> findWithAtLeastOneValue(String title, String genre, String director,
 			Integer year, Double ratingAverage) {
