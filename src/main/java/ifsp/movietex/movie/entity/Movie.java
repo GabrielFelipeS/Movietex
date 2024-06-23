@@ -8,9 +8,10 @@ public class Movie {
 	private String genre;
 	private Integer year;
 	private Double ratingAverage;
+	private String poster;
 
 	public Movie(Integer id, String title, String description, String director, String genre, Integer year,
-			Double ratingAverage) {
+			Double ratingAverage, String poster) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -18,6 +19,7 @@ public class Movie {
 		this.genre = genre;
 		this.year = year;
 		this.ratingAverage = ratingAverage;
+		this.poster = poster;
 	}
 
 	@Override

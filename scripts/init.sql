@@ -1,3 +1,7 @@
+create database movietex;
+
+\c movietex
+
 CREATE TABLE Movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -6,6 +10,7 @@ CREATE TABLE Movies (
     genre VARCHAR(255),
     year INT,
     rating_average DECIMAL(2,1) DEFAULT 0.0,
+	poster VARCHAR(255) DEFAULT './img/capas/divertida_mente.webp' NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -14,6 +19,7 @@ ADD CONSTRAINT unique_movie UNIQUE (title, director, year);
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,    
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     isAdmin BOOLEAN DEFAULT FALSE,
@@ -71,27 +77,29 @@ VALUES ('A Origem', 'Um ladrão profissional que rouba informações ao infiltra
        ('Parasita', 'Uma família pobre e desempregada torna-se obcecada por uma família rica e insinua-se em suas vidas.', 'Bong Joon Ho', 'Thriller', 2019);
 
 	   
-INSERT INTO Users (email, password, isAdmin)
-VALUES 	('admin@example.com', 'password2', TRUE),
-		('admin2@example.com', 'password6', TRUE),
-		('user1@example.com', 'password1', FALSE),
-		('user2@example.com', 'password3', FALSE),
-		('user3@example.com', 'password4', FALSE),
-		('user4@example.com', 'password5', FALSE),
-		('user5@example.com', 'password7', FALSE),
-		('user6@example.com', 'password8', FALSE),
-		('user7@example.com', 'password9', FALSE),
-		('user8@example.com', 'password10', FALSE),
-		('user9@example.com', 'password11', FALSE),
-		('user10@example.com', 'password12', FALSE),
-		('user11@example.com', 'password13', FALSE),
-		('user12@example.com', 'password14', FALSE),
-		('user13@example.com', 'password15', FALSE),
-		('user14@example.com', 'password16', FALSE),
-		('user15@example.com', 'password17', FALSE),
-		('user16@example.com', 'password18', FALSE),
-		('user17@example.com', 'password19', FALSE),
-		('user18@example.com', 'password20', FALSE);
+INSERT INTO Users (email, password, name, isAdmin)
+VALUES 
+    ('admin@example.com', 'password2', 'Alice Smith', TRUE),
+    ('admin2@example.com', 'password6', 'Bob Johnson', TRUE),
+    ('user1@example.com', 'password1', 'Charlie Brown', FALSE),
+    ('user2@example.com', 'password3', 'David Williams', FALSE),
+    ('user3@example.com', 'password4', 'Eva Jones', FALSE),
+    ('user4@example.com', 'password5', 'Frank Miller', FALSE),
+    ('user5@example.com', 'password7', 'Grace Davis', FALSE),
+    ('user6@example.com', 'password8', 'Hannah Wilson', FALSE),
+    ('user7@example.com', 'password9', 'Isaac Moore', FALSE),
+    ('user8@example.com', 'password10', 'Jack Taylor', FALSE),
+    ('user9@example.com', 'password11', 'Katie Anderson', FALSE),
+    ('user10@example.com', 'password12', 'Liam Thomas', FALSE),
+    ('user11@example.com', 'password13', 'Mia Martinez', FALSE),
+    ('user12@example.com', 'password14', 'Noah Robinson', FALSE),
+    ('user13@example.com', 'password15', 'Olivia Clark', FALSE),
+    ('user14@example.com', 'password16', 'Paul Rodriguez', FALSE),
+    ('user15@example.com', 'password17', 'Quinn Lewis', FALSE),
+    ('user16@example.com', 'password18', 'Ruby Lee', FALSE),
+    ('user17@example.com', 'password19', 'Sophia Walker', FALSE),
+    ('user18@example.com', 'password20', 'Thomas Hall', FALSE);
+
 	   
 INSERT INTO Assessments (id_movie, id_user, rating, comment)
 VALUES (1, 1, 8.5, 'Ótimo filme com uma trama complexa e interessante.'),

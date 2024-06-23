@@ -19,15 +19,10 @@ import ifsp.movietex.base.db.PostgresTestContainer;
 import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
-import ifsp.movietex.movie.entity.DTOMovie;
-import ifsp.movietex.movie.entity.Movie;
-
 @Testcontainers
 public class MovieDAOTest {
-
 	private static final Integer ID_EXISTS = 1;
 	private static final Integer ID_NOT_EXIST = 0;
-
 
 	@Container
 	public static PostgreSQLContainer<?> postgresContainer = PostgresTestContainer.getContainer();
@@ -40,33 +35,6 @@ public class MovieDAOTest {
 		connection = PostgresTestContainer.createConnection(postgresContainer);
 	}
 
-
-
-	@Test
-	public void givenFindBy_whenIdExists_thenReturnOneMovie() throws SQLException {
-		MovieDAO dao = new MovieDAO(connection);
-		Movie movie = dao.findBy(ID_EXISTS);
-
-		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE id = " + ID_EXISTS);
-		rs.next();
-		Integer movies_count = rs.getInt(1);
-
-		assertTrue(movies_count == 1);
-		assertTrue(movie != null);
-	}
-	
-	@Test
-	public void givenFindBy_whenIdNotExist_thenReturnNull() throws SQLException {
-		MovieDAO dao = new MovieDAO(connection);
-		Movie movie = dao.findBy(ID_NOT_EXIST);
-
-		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM movies WHERE id = " + ID_NOT_EXIST);
-		rs.next();
-		Integer movies_count = rs.getInt(1);
-
-		assertTrue(movie == null);
-	}
-	
 	@Test
 	public void givenFindBy_whenIdExists_thenReturnOneMovie() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);
@@ -381,7 +349,7 @@ public class MovieDAOTest {
 		String title = "A Origem";
 		String msg = dao.insert(new DTOMovie(title, "Um ladrão profissional que rouba informações ao infiltrar-se no subconsciente de suas "
 				+ "vítimas é oferecido a chance de ter seu passado criminal apagado como pagamento por uma tarefa aparentemente impossível: "
-				+ "'inception', a implantação de outra ideia na mente de uma pessoa.", "Christopher Nolan", "Ficção Científica", 2010));
+				+ "'inception', a implantação de outra ideia na mente de uma pessoa.", "Christopher Nolan", "Ficção Científica", 2010, "./img/capas/divertida_mente.webp"));
 
 		assertEquals("Falha ao cadastrar o filme " + title, msg);
 	}
@@ -392,7 +360,7 @@ public class MovieDAOTest {
 		
 		String msg = dao.insert(new DTOMovie("Divertidamente 2", "Com um salto temporal, Riley se encontra mais velha, passando pela tão temida adolescência. "
 				+ "Junto com o amadurecimento, a sala de controle também está passando por uma adaptação para dar lugar a algo totalmente inesperado: novas emoções.",
-				"Kelsey Mann", "Animação", 2024));
+				"Kelsey Mann", "Animação", 2024, "./img/capas/divertida_mente.webp"));
 		
 		ResultSet rs = connection.createStatement()
 				.executeQuery("SELECT COUNT(1) FROM movies");
@@ -408,7 +376,7 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		String title = "The Godfather";
 		String msg = dao.update(new DTOMovie(2, title, "The saga of the Corleone family and the rise of Michael Corleone as the patriarch.",
-				"Francis Ford Coppola", "Crime", 1972));
+				"Francis Ford Coppola", "Crime", 1972, "./img/capas/divertida_mente.webp"));
 		
 		assertEquals(String.format("%s atualizado com sucesso", title), msg);
 	}
@@ -418,7 +386,7 @@ public class MovieDAOTest {
 		MovieDAO dao = new MovieDAO(connection);
 		String title = "The Godfather";
 		String msg = dao.update(new DTOMovie(ID_NOT_EXIST, title, "The saga of the Corleone family and the rise of Michael Corleone as the patriarch.",
-				"Francis Ford Coppola", "Crime", 1972));
+				"Francis Ford Coppola", "Crime", 1972, "./img/capas/divertida_mente.webp"));
 		
 		assertEquals(String.format("Falha na atualização do filme: %s", title), msg);
 	}

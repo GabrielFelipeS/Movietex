@@ -42,9 +42,11 @@ public class UpdateMovieServlet extends HttpServlet {
 		String maxRatingAverageStr = request.getParameter("maxRatingAverage");
 		Double maxRatingAverage = maxRatingAverageStr != null ? Double.valueOf(maxRatingAverageStr) : null;
 
+		String poster = request.getParameter("poster");
+		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String msg = dao.insert(new DTOMovie(title, description, genre, director, year));
+		String msg = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
 
 		Gson gson = new Gson();
 

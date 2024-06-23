@@ -8,17 +8,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-<<<<<<< HEAD
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.List;
-
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,39 +16,30 @@ import ifsp.movietex.movie.entity.DTOMovie;
 import ifsp.movietex.movie.entity.Movie;
 
 public class MovieDAO {
-<<<<<<< HEAD
 
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 	private static final Logger logger = LoggerFactory.getLogger(MovieDAO.class);
 
 	private Connection conn;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 	public MovieDAO(Connection conn) {
 		this.conn = conn;
 	}
 
 	public String insert(DTOMovie dto) {
 		try (PreparedStatement ps = conn.prepareStatement(
-				"INSERT INTO movies (title, description, director, genre, year) VALUES (?, ?, ?, ?, ?)",
+				"INSERT INTO movies (title, description, director, genre, year, poster) VALUES (?, ?, ?, ?, ?, ?)",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
 			ps.setString(3, dto.genre());
 			ps.setString(4, dto.director());
 			ps.setInt(5, dto.year());
+			ps.setString(6, dto.poster());
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 			if (!rs.next() || updatedRows != 1)
 				throw new SQLException("Falha na cadastrar o filme");
 
@@ -67,19 +48,13 @@ public class MovieDAO {
 			logger.error(e.getMessage());
 			return String.format("Falha ao cadastrar o filme %s", dto.title());
 		}
-<<<<<<< HEAD
 
 	}
 
 	public Movie findBy(Integer id) {
 
-=======
-	}
-
-	public Movie findBy(Integer id) {
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE id = ?",
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE id = ?",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pstmt.setInt(1, id);
 
@@ -87,12 +62,9 @@ public class MovieDAO {
 			if (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
+						rs.getDouble("rating_average"), rs.getString("poster"));
 				return movie;
-<<<<<<< HEAD
 
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 			}
 		} catch (SQLException e) {
 			logger.error("Falha ao buscar movie", e);
@@ -101,24 +73,16 @@ public class MovieDAO {
 		return null;
 	}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 	public Boolean deleteBy(Integer id) {
 		return null;
 	}
 
 	public String update(DTOMovie dto) {
-<<<<<<< HEAD
 
 		try (PreparedStatement ps = conn.prepareStatement(
 				"UPDATE movies SET title = ?, description = ?, director = ?, genre = ?, year = ? WHERE id = ? ")) {
 
-=======
-		try (PreparedStatement ps = conn.prepareStatement(
-				"UPDATE movies SET title = ?, description = ?, director = ?, genre = ?, year = ? WHERE id = ? ")) {
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
+
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
 			ps.setString(3, dto.genre());
@@ -148,10 +112,7 @@ public class MovieDAO {
 	public List<Movie> findBy(String title, String description, String genre, String director, Integer year,
 			Double minRatingAverage, Double maxRatingAverage) {
 		List<Movie> movies = new LinkedList<>();
-<<<<<<< HEAD
 
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 		String sql = generateSelectQueryWithAnd(title, description, genre, director, year, minRatingAverage,
 				maxRatingAverage);
 
@@ -159,28 +120,17 @@ public class MovieDAO {
 			prepareStatementSelect(pstmt, title, description, genre, director, year, minRatingAverage,
 					maxRatingAverage);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
-<<<<<<< HEAD
-
+						rs.getDouble("rating_average"), rs.getString("poster"));
 
 				movies.add(movie);
 			}
 
 		} catch (SQLException e) {
 
-=======
-				movies.add(movie);
-			}
-		} catch (SQLException e) {
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 			logger.error("Falha ao buscar movie", e);
 		}
 
@@ -195,10 +145,7 @@ public class MovieDAO {
 			pstmt.setString(parameterIndex++, "%" + title + "%");
 		}
 
-<<<<<<< HEAD
-Search and InputMovieServlet)
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
+
 		if (description != null) {
 			pstmt.setString(parameterIndex++, "%" + description + "%");
 		}
@@ -215,10 +162,7 @@ Search and InputMovieServlet)
 			pstmt.setInt(parameterIndex++, year);
 		}
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 		if (minRatingAverage != null) {
 			pstmt.setDouble(parameterIndex++, minRatingAverage);
 		}
@@ -231,12 +175,8 @@ Search and InputMovieServlet)
 	private String generateSelectQueryWithAnd(String title, String description, String genre, String director,
 			Integer year, Double minRatingAverage, Double maxRatingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1=1");
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1=1");
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 		if (title != null)
 			builder.append(" AND title LIKE ?");
 		if (description != null)
@@ -267,7 +207,7 @@ Search and InputMovieServlet)
 			while (rs.next()) {
 				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
+						rs.getDouble("rating_average"), rs.getString("poster"));
 				movies.add(movie);
 			}
 		} catch (SQLException e) {
@@ -280,44 +220,7 @@ Search and InputMovieServlet)
 	private String generateSelectQueryWithOr(String title, String description, String genre, String director,
 			Integer year, Double ratingAverage) {
 		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1!=1");
-
-		if (title != null)
-			builder.append(" OR title LIKE ?");
-		if (description != null)
-			builder.append(" OR description LIKE ?");
-		if (genre != null)
-			builder.append(" OR genre LIKE ?");
-		if (director != null)
-			builder.append(" OR director LIKE ?");
-		if (year != null)
-			builder.append(" OR year = ?");
-		if (ratingAverage != null)
-			builder.append(" OR rating_average = ?");
-
-		return builder.toString();
-	}
-
-		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			prepareStatementSelect(pstmt, title, description, genre, director, year, ratingAverage, ratingAverage);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
-						rs.getString("director"), rs.getString("genre"), rs.getInt("year"),
-						rs.getDouble("rating_average"));
-				movies.add(movie);
-			}
-		} catch (SQLException e) {
-			logger.error("Falha ao buscar movie", e);
-		}
-
-		return movies;
-	}
-
-	private String generateSelectQueryWithOr(String title, String description, String genre, String director,
-			Integer year, Double ratingAverage) {
-		StringBuilder builder = new StringBuilder(
-				"SELECT id, title, description, director, genre, year, rating_average FROM Movies WHERE 1!=1");
+				"SELECT id, title, description, director, genre, year, rating_average, poster FROM Movies WHERE 1!=1");
 
 		if (title != null)
 			builder.append(" OR title LIKE ?");
@@ -362,13 +265,9 @@ Search and InputMovieServlet)
 			pstmt.setDouble(parameterIndex++, rating);
 		}
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 	public List<String> findAllDirectors() {
-		List<String> directors = new LinkedList();
+		List<String> directors = new LinkedList<>();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT director FROM Movies GROUP BY director ORDER BY director");
@@ -386,8 +285,4 @@ Search and InputMovieServlet)
 		return directors;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 514725f0c87b3c2bbe4a7b531327795f71c752ef
 }

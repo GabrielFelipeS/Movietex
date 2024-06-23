@@ -16,7 +16,7 @@ services:
       - banco
     volumes:
       #  Volume dos dados
-      - dados-movietex:/var/lib/postgresql/data
+      #- dados-movietex:/var/lib/postgresql/data
       # Scripts
       - ./scripts:/scripts
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
