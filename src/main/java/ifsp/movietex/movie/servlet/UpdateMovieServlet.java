@@ -38,11 +38,14 @@ public class UpdateMovieServlet extends HttpServlet {
 		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 
+		String durationStr = request.getParameter("duration");
+		Integer duration = durationStr != null ? Integer.valueOf(durationStr) : null;
+		
 		String poster = "./img/capas/divertida_mente.webp";
 		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String mensagem = dao.update(new DTOMovie(id, title, description, genre, director, year, poster));
+		String mensagem = dao.update(new DTOMovie(id, title, description, genre, director, year, duration, poster));
 
 		Gson gson = new Gson();
 		
