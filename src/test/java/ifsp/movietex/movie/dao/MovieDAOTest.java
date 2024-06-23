@@ -319,8 +319,6 @@ public class MovieDAOTest {
 		assertFalse(movies.isEmpty());
 	}
 
-	
-
 	@Test
 	public void givenFindWithAtLeastOneValue_whenAllParameterWithInformation_thenReturnAllWithThisInformations() throws SQLException {
 		MovieDAO dao = new MovieDAO(connection);

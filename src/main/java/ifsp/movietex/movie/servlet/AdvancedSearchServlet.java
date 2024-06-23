@@ -26,10 +26,9 @@ public class AdvancedSearchServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String director = request.getParameter("director");
-		String genre = request.getParameter("genre");
+		String title = request.getParameter("title").toLowerCase();
+		String director = request.getParameter("director").toLowerCase();
+		String genre = request.getParameter("genre").toLowerCase();
 
 		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
@@ -42,7 +41,7 @@ public class AdvancedSearchServlet extends HttpServlet {
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		List<Movie> movies = dao.findBy(title, description, genre, director, year, minRatingAverage, maxRatingAverage);
+		List<Movie> movies = dao.findBy(title, genre, director, year, minRatingAverage, maxRatingAverage);
 
 		response.setStatus(HttpServletResponse.SC_OK);
 		
