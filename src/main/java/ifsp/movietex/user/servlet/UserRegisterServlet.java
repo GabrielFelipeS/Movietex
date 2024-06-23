@@ -17,7 +17,7 @@ import ifsp.movietex.user.entity.DTOUser;
 /**
  * Servlet implementation class CadastroUsuario
  */
-@WebServlet("/UserRegisterServlet")
+@WebServlet("/UserRegister")
 public class UserRegisterServlet extends HttpServlet {
 
 	
