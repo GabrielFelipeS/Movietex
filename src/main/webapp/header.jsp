@@ -30,7 +30,7 @@
           <li class="p-3 bg-primary rounded-t-lg text-white font-bold"><a href="">Início</a></li>
           <li
                   class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100 hover:-translate-y-1 transition-all duration-150 ease-in-out">
-            <a href="filmes.jsp">Filmes</a>
+            <a href="./movies">Filmes</a>
           </li>
           <!-- <li
               class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100 hover:-translate-y-1 transition-all duration-150 ease-in-out">
