@@ -33,7 +33,7 @@ public class ShowMovie extends HttpServlet{
         Connection conn = new ConnectionPostgress().getConnection();
         MovieDAO dao = new MovieDAO(conn);
         Movie movies = dao.findBy(id);
-        request.setAttribute("movies", movies);
+        request.setAttribute("movie", movies);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/interna.jsp");
         dispatcher.forward(request, response);

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="ifsp.movietex.movie.entity.Movie" %>
+
 <html>
 <head>
     <jsp:include page="head.jsp" />
@@ -15,8 +17,10 @@
 
 <jsp:include page="header.jsp" />
 
+<% Movie movie = request.getAttribute("movie"); %>
+
 <main class="w-[60%] h-screen m-auto flex flex-col gap-10">
-    <h2 class="text-6xl font-extrabold font-serif mt-5 text-center">Divertida mente 2</h2>
+    <h2 class="text-6xl font-extrabold font-serif mt-5 text-center"></h2>
     <div
             class="w-full h-[450px] flex flex-col justify-start items-center md:items-start md:flex-row md:justify-start gap-2 p-4  rounded-lg ">
         <img src="img/capas/divertida_mente.webp" alt="Cartaz do Filme X"
