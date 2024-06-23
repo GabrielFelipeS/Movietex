@@ -9,14 +9,14 @@
     <div class="w-full md:w-[90%] h-[50%] flex flex-row ring-1 ring-black rounded-lg relative">
       <div class="w-full flex justify-center items-center">
         <input type="text" placeholder="Procurar por filme, uma série, uma personalidade..."
-               class="w-[90%] bg-transparent pl-3 text-black placeholder:text-black outline-none z-1">
+               class="w-[90%] bg-transparent pl-3 text-black placeholder:text-black outline-none z-1" id="search">
       </div>
       <div
               class="flex justify-center items-center p-1 w-[10%] h-[100%] bg-secondary hover:bg-primary cursor-pointer hover:text-white rounded-e-lg">
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
       <div
-              class="absolute hidden top-full left-0 flex-col z-100 w-full h-auto max-h-[80vh] overflow-auto gap-5 mt-2">
+              class="absolute flex top-full left-0 flex-col z-100 w-full h-auto max-h-[80vh] overflow-auto gap-5 mt-2" style="z-index: 99999" id="resultArea">
         <div
                 class="w-full h-auto flex flex-col justify-center items-center md:items-start md:flex-row md:justify-start gap-2 p-4 bg-gray-100 rounded-lg">
           <img src="img/capas/divertida_mente.webp" alt="Cartaz do Filme X"
@@ -31,8 +31,8 @@
           </div>
         </div>
 
-        <div class="w-full h-[100px] rounded-lg bg-gray-100 flex flex-row items-center justify-around">
-          <h2 class="text-xl p-3 font-bold">Nenhum resultado para: <span class="text-primary">Teste</span>
+        <div class="w-full h-[100px] rounded-lg bg-gray-100 hidden flex-row items-center justify-around" id="searchFail">
+          <h2 class="text-xl p-3 font-bold">Nenhum resultado para: <span class="text-primary" id="searchTextError">Teste</span>
           </h2>
           <img src="img/figuras/pipoca_chao.png" alt="" class="h-[100%]">
         </div>
