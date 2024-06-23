@@ -28,7 +28,7 @@ public class AdvancedSearchServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		String title = request.getParameter("titulo");
-		String description = request.getParameter("description");
+		String description = request.getParameter("descricao");
 		String director = request.getParameter("diretor");
 		String genre = request.getParameter("genero");
 

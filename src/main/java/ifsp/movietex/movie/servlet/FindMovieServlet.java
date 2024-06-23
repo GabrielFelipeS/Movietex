@@ -36,7 +36,7 @@ public class FindMovieServlet extends HttpServlet {
 			MovieDAO dao = new MovieDAO(conn);
 			Movie movie = dao.findBy(id);
 
-			wrapper.setStatus(movie == null? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
+			wrapper.setStatus(movie != null? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 			wrapper.setData(movie);
 		
 		} else {
