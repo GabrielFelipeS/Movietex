@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.rating.dao.RatingDAO;
 
 
@@ -37,19 +36,17 @@ public class InsertRating extends HttpServlet {
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		RatingDAO dao = new RatingDAO(conn);
-		String msg = dao.insert(idFilme, idUsuario, nota, comentario);
-		ResponseWrapper wrapper = new ResponseWrapper();
-		if (msg.contains("Sucesso")) {
-			wrapper.setStatus(HttpServletResponse.SC_CREATED);
+		String mensagem = dao.insert(idFilme, idUsuario, nota, comentario);
+		if (mensagem.contains("Sucesso")) {
+			response.setStatus(HttpServletResponse.SC_CREATED);
 		} else {
-			wrapper.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		
-		wrapper.setData(msg);
 
 		Gson gson = new Gson();
 
-		String json = gson.toJson(gson);
+		String json = gson.toJson(mensagem);
 		out.print(json);
 		out.flush();
 		

@@ -3,7 +3,6 @@ package ifsp.movietex.movie.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
-import ifsp.movietex.movie.entity.Movie;
 
 /**
  * Servlet implementation class DeleteMovieServlet
@@ -29,7 +26,7 @@ public class DeleteMovieServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		Integer id = Integer.valueOf(request.getParameter("title"));
+		Integer id = Integer.valueOf(request.getParameter("id"));
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
@@ -37,11 +34,9 @@ public class DeleteMovieServlet extends HttpServlet {
 
 		Gson gson = new Gson();
 
-		ResponseWrapper wrapper = new ResponseWrapper();
+		response.setStatus(success? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 
-		wrapper.setStatus(success? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
-
-		String json = gson.toJson(wrapper);
+		String json = gson.toJson(success);
 
 		out.print(json);
 		out.flush();

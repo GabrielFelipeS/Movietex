@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.Movie;
 
@@ -40,24 +39,15 @@ public class SimpleSearchServlet extends HttpServlet {
 				? Double.valueOf(ratingAverageStr)
 				: null;
 
-		System.out.println("title " + title);
-		System.out.println("description " + description);
-		System.out.println("director " + director);
-		System.out.println("genre " + genre);
-		System.out.println("year " + year);
-		System.out.println("ratingAverage " + ratingAverage);
-
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
 		List<Movie> movies = dao.findWithAtLeastOneValue(title, description, genre, director, year, ratingAverage);
 
 		Gson gson = new Gson();
 
-		ResponseWrapper wrapper = new ResponseWrapper();
-		wrapper.setStatus(HttpServletResponse.SC_OK);
-		wrapper.setData(movies);
+		response.setStatus(HttpServletResponse.SC_OK);
 
-		String json = gson.toJson(wrapper);
+		String json = gson.toJson(movies);
 
 		out.print(json);
 		out.flush();

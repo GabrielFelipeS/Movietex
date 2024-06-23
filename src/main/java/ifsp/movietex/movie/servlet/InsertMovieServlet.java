@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.DTOMovie;
 
@@ -26,31 +25,31 @@ public class InsertMovieServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		String director = request.getParameter("director");
-		String genre = request.getParameter("genre");
+		String title = request.getParameter("titulo");
+		System.out.println(title);
+		String description = request.getParameter("descricao");
+		String director = request.getParameter("diretor");
+		String genre = request.getParameter("genero");
 
-		String yearStr = request.getParameter("year");
+		String yearStr = request.getParameter("ano");
+		System.out.println(yearStr);
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 		
 		String poster = request.getParameter("poster");
 		
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
-		String msg = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
-		ResponseWrapper wrapper = new ResponseWrapper();
-		if (msg.contains("Sucesso")) {
-			wrapper.setStatus(HttpServletResponse.SC_CREATED);
+		String mensagem = dao.insert(new DTOMovie(title, description, genre, director, year, poster));
+		
+		if (mensagem.contains("Sucesso")) {
+			response.setStatus(HttpServletResponse.SC_CREATED);
 		} else {
-			wrapper.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
-
-		wrapper.setData(msg);
 
 		Gson gson = new Gson();
 
-		String json = gson.toJson(gson);
+		String json = gson.toJson(mensagem);
 		out.print(json);
 		out.flush();
 	}

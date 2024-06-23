@@ -14,13 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
 
 /**
  * Servlet implementation class FindAllDirectorsServlet
  */
-@WebServlet("/FindAllDirectorsServlet")
+@WebServlet("/api/movie/findAllDirectors")
 public class FindAllDirectorsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -35,11 +34,9 @@ public class FindAllDirectorsServlet extends HttpServlet {
 		
 		Gson gson = new Gson();
 		
-		ResponseWrapper wrapper = new ResponseWrapper();
-		wrapper.setStatus(HttpServletResponse.SC_OK);
-		wrapper.setData(directors);
+		response.setStatus(HttpServletResponse.SC_OK);
 
-		String json = gson.toJson(wrapper);
+		String json = gson.toJson(directors);
 
 		out.print(json);
 		out.flush();

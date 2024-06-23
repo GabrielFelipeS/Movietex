@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.base.db.ResponseWrapper;
 import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.Movie;
 
@@ -23,29 +22,25 @@ public class FindMovieServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
-		ResponseWrapper wrapper = new ResponseWrapper();
 		PrintWriter out = response.getWriter();
 
 		String idString = request.getParameter("id");
-		
+		Gson gson = new Gson();
+		String json = null;
 		if(idString != null) {
-			System.out.println("AQUI " + idString);
 			Integer id = Integer.valueOf(idString);
 
 			Connection conn = new ConnectionPostgress().getConnection();
 			MovieDAO dao = new MovieDAO(conn);
 			Movie movie = dao.findBy(id);
-
-			wrapper.setStatus(movie == null? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
-			wrapper.setData(movie);
+			json = gson.toJson(movie);
+			response.setStatus(movie != null? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
 		
 		} else {
-			wrapper.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			wrapper.setData("ID não pode ser nulo");
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			json = "ID não pode ser nulo";
 		}
 		
-		Gson gson = new Gson();
-		String json = gson.toJson(wrapper);
 		out.print(json);
 		out.flush();
 	
