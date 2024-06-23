@@ -24,11 +24,14 @@ searchInput.addEventListener('input', async (e) => {
 
         resultArea.innerHTML = '';
 
-        if (data.length === 0) {
-            searchFailCard.style.display = 'block';
-            searchTextError.textContent = searchTerm;
+        if (data.length == 0) {
+            resultArea.innerHTML = `
+            <div class="w-full h-[100px] rounded-lg bg-gray-100 flex flex-row items-center justify-around" id="searchFail">
+                <h2 class="text-xl p-3 font-bold">Nenhum resultado para: <span class="text-primary" id="searchTextError">${searchTerm}</span></h2>
+                <img src="img/figuras/pipoca_chao.png" alt="" class="h-[100%]">
+            </div>
+        `;
         } else {
-            let response = [data];
             data.forEach(item => {
                 const card = document.createElement('div');
                 card.classList.add('w-full', 'h-auto', 'flex', 'flex-col', 'justify-center', 'items-center', 'md:items-start', 'md:flex-row', 'md:justify-start', 'gap-2', 'p-4', 'bg-gray-100', 'rounded-lg');

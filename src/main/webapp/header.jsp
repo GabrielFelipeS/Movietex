@@ -18,11 +18,7 @@
       <div
               class="absolute flex top-full left-0 flex-col z-100 w-full h-auto max-h-[80vh] overflow-auto gap-5 mt-2" style="z-index: 99999" id="resultArea">
         
-        <div class="w-full h-[100px] rounded-lg bg-gray-100 hidden flex-row items-center justify-around" id="searchFail">
-          <h2 class="text-xl p-3 font-bold">Nenhum resultado para: <span class="text-primary" id="searchTextError">Teste</span>
-          </h2>
-          <img src="img/figuras/pipoca_chao.png" alt="" class="h-[100%]">
-        </div>
+        
 
       </div>
     </div>
