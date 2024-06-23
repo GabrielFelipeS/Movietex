@@ -25,13 +25,13 @@ public class InsertMovieServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("titulo");
+		String title = request.getParameter("title");
 		System.out.println(title);
-		String description = request.getParameter("descricao");
-		String director = request.getParameter("diretor");
-		String genre = request.getParameter("genero");
+		String description = request.getParameter("description");
+		String director = request.getParameter("director");
+		String genre = request.getParameter("genre");
 
-		String yearStr = request.getParameter("ano");
+		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 		
 		String poster = "./img/capas/divertida_mente.webp";

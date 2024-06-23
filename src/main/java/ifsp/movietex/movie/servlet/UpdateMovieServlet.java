@@ -30,12 +30,12 @@ public class UpdateMovieServlet extends HttpServlet {
 		String idStr = request.getParameter("id");
 		Integer id = idStr != null ? Integer.valueOf(idStr) : null;
 
-		String title = request.getParameter("titulo");
-		String description = request.getParameter("descricao");
-		String director = request.getParameter("diretor");
-		String genre = request.getParameter("genero");
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
+		String director = request.getParameter("director");
+		String genre = request.getParameter("genre");
 
-		String yearStr = request.getParameter("ano");
+		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
 
 		String poster = "./img/capas/divertida_mente.webp";
