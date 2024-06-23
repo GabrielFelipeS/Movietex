@@ -35,11 +35,14 @@ public class UserRegisterServlet extends HttpServlet {
        boolean result = userDao.register(new DTOUser(name, email, password));
        if(result) {
     	   writer.println("Cadastrado");
+    	   System.out.println("Ok");
+           response.sendRedirect("login.jsp");
        }else {
     	   writer.println("Erro no cadastro");
+    	   System.out.println("erro");
 
        }
-        response.sendRedirect(" ");
+
 	}
 	
 	

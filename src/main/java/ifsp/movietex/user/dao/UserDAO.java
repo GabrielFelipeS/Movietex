@@ -37,18 +37,22 @@ public class UserDAO {
 		
 	}
 
-	public boolean findLogin(DTOUser user) {
-		String SQL = "SELECT * FROM" + table + " WHERE email = ? AND password = ?"; 
+	public String login(DTOUser user) {
+		String SQL = "SELECT * FROM " + table + " WHERE email = ? AND password = ?"; 
 		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
 			statement.setString(1, user.email());
 			statement.setString(2, user.password());
 			ResultSet resultSet =statement.executeQuery();
 			
-			return resultSet.next();
+			if(resultSet.next()) {
+				return resultSet.getBoolean("isAdmin") ? "admin" : "user";
+			}else {
+				return null;
+			}
 			
 		} catch (Exception e) {
 			System.out.println("Erro no login");
-			return false;
+			return null;
 		}
 		
 	}
