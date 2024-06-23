@@ -29,7 +29,6 @@ public class FindMovieServlet extends HttpServlet {
 		String idString = request.getParameter("id");
 		
 		if(idString != null) {
-			System.out.println("AQUI " + idString);
 			Integer id = Integer.valueOf(idString);
 
 			Connection conn = new ConnectionPostgress().getConnection();

@@ -29,7 +29,7 @@ public class DeleteMovieServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		Integer id = Integer.valueOf(request.getParameter("title"));
+		Integer id = Integer.valueOf(request.getParameter("id"));
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
