@@ -155,5 +155,6 @@
 
 
 <jsp:include page="footer.jsp" />
+<script src="js/menu.js"></script>
 </body>
 </html>
