@@ -63,13 +63,14 @@ searchButton.addEventListener('click', async () => {
         if(generoSelecionado){
             generoSelecionado.checked = false;
         }
-        anoLancamento.value = '';
-        diretorSelecionado.value = '';
-        avaliacaoMinima.value = '';
-        avaliacaoMaxima.value = '';
+        
 
 
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
     }
+    anoLancamento.value = '';
+        diretorSelecionado.value = '';
+        avaliacaoMinima.value = '';
+        avaliacaoMaxima.value = '';
 });
