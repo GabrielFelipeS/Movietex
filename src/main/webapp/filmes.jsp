@@ -1,4 +1,5 @@
-<%@ page import="ifsp.movietex.movie.entity.Movie" %><%--
+<%@ page import="ifsp.movietex.movie.entity.Movie" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Micael Hernandes
   Date: 22/06/2024
@@ -107,7 +108,8 @@
 
 
     <section class="w-[70%] h-full p-10 flex flex-row flex-wrap items overflow-auto">
-        <% Movie[] movies = (Movie[]) request.getAttribute("movies"); %>
+  
+        <% List<Movie> movies = (List<Movie>) request.getAttribute("movies"); %>
         <% for(Movie movie : movies) { %>
         <div class="w-[30%] h-[50%] flex flex-col items-center justify-center">
             <img src="img/filmes/<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"

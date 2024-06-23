@@ -104,8 +104,7 @@ public class MovieDAO {
 	public List<Movie> findAll() {
 		List<Movie> movies = new LinkedList<>();
 		try (PreparedStatement pstmt = conn.prepareStatement(
-				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies",
-				PreparedStatement.RETURN_GENERATED_KEYS)) {
+				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies")) {
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
