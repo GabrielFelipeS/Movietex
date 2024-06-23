@@ -132,7 +132,7 @@ public class MovieDAO {
 
 		String sql = generateSelectQueryWithAnd(title, genre, director, year, minRatingAverage,
 				maxRatingAverage);
-
+		
 		try (PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			prepareStatementSelect(pstmt, title, genre, director, year, minRatingAverage,
 					maxRatingAverage);
@@ -179,15 +179,15 @@ public class MovieDAO {
 			String director, Integer year, Double minRatingAverage, Double maxRatingAverage) throws SQLException {
 		int parameterIndex = 1;
 		if (title != null) {
-			pstmt.setString(parameterIndex++, "%" + title + "%");
+			pstmt.setString(parameterIndex++, "%" + title.toLowerCase() + "%");
 		}
 
 		if (director != null) {
-			pstmt.setString(parameterIndex++, "%" + director + "%");
+			pstmt.setString(parameterIndex++, "%" + director.toLowerCase() + "%");
 		}
 
 		if (genre != null) {
-			pstmt.setString(parameterIndex++, "%" + genre + "%");
+			pstmt.setString(parameterIndex++, "%" + genre.toLowerCase() + "%");
 		}
 
 		if (year != null) {
@@ -248,15 +248,15 @@ public class MovieDAO {
 			Integer year, Double rating) throws SQLException {
 		int parameterIndex = 1;
 		if (title != null) {
-			pstmt.setString(parameterIndex++, "%" + title + "%");
+			pstmt.setString(parameterIndex++, "%" + title.toLowerCase() + "%");
 		}
 
 		if (director != null) {
-			pstmt.setString(parameterIndex++, "%" + director + "%");
+			pstmt.setString(parameterIndex++, "%" + director.toLowerCase() + "%");
 		}
 
 		if (genre != null) {
-			pstmt.setString(parameterIndex++, "%" + genre + "%");
+			pstmt.setString(parameterIndex++, "%" + genre.toLowerCase() + "%");
 		}
 
 		if (year != null) {

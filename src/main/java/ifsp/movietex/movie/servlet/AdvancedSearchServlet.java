@@ -26,9 +26,9 @@ public class AdvancedSearchServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("title").toLowerCase();
-		String director = request.getParameter("director").toLowerCase();
-		String genre = request.getParameter("genre").toLowerCase();
+		String title = request.getParameter("title");
+		String director = request.getParameter("director");
+		String genre = request.getParameter("genre");
 
 		String yearStr = request.getParameter("year");
 		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;

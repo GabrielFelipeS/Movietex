@@ -26,9 +26,9 @@ public class SimpleSearchServlet extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String title = request.getParameter("search").toLowerCase();
-		String director = request.getParameter("search").toLowerCase();
-		String genre = request.getParameter("search").toLowerCase();
+		String title = request.getParameter("search");
+		String director = request.getParameter("search");
+		String genre = request.getParameter("search");
 		String yearStr = request.getParameter("search");
 		Integer year = yearStr != null && !yearStr.matches("^[^0-9]+$") ? Integer.valueOf(yearStr) : null;
 
