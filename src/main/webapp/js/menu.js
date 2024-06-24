@@ -26,7 +26,7 @@ searchButton.addEventListener('click', async () => {
         url += `director=${diretorSelecionado}&`;
     }
     if (avaliacaoMinima) {
-        url += `minRating=${avaliacaoMinima}&`;
+        url += `minRatingAverage=${avaliacaoMinima}&`;
     }
     if (avaliacaoMaxima) {
         url += `maxRatingAverage=${avaliacaoMaxima}&`;

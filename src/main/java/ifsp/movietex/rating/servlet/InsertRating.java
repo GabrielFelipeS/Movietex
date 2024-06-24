@@ -37,18 +37,17 @@ public class InsertRating extends HttpServlet {
 		Connection conn = new ConnectionPostgress().getConnection();
 		RatingDAO dao = new RatingDAO(conn);
 		String mensagem = dao.insert(idFilme, idUsuario, nota, comentario);
+	
 		if (mensagem.contains("Sucesso")) {
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
-		
 
 		Gson gson = new Gson();
 
 		String json = gson.toJson(mensagem);
 		out.print(json);
 		out.flush();
-		
 	}
 }

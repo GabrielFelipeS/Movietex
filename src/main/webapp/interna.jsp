@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ifsp.movietex.movie.entity.Movie" %>
+<%@ page import="ifsp.movietex.rating.entity.Rating" %>
+<%@ page import="java.util.List" %>
 
 <html>
 <head>
@@ -18,6 +20,7 @@
 <jsp:include page="header.jsp" />
 
 <% Movie movie = (Movie) request.getAttribute("movie"); %>
+<% List<Rating> ratings = (List<Rating>) request.getAttribute("ratings"); %>
 
 <main class="w-[60%] h-screen m-auto flex flex-col gap-10">
     <h2 class="text-6xl font-extrabold font-serif mt-5 text-center"><%= movie.getTitle() %></h2>
@@ -56,49 +59,9 @@
             </div>
 
             <div>
-                <h2 class="text-xl font-serif"> 5 / 10</h2>
-                <h2 class="font-serif text-xl">Micael Hernandes</h2>
-                <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates maxime
-                    iure dolorum quidem porro unde deleniti hic nostrum dolores nesciunt saepe, repudiandae ullam
-                    itaque, fuga fugit nobis placeat necessitatibus voluptatibus magni sed praesentium. Dolorum
-                    aspernatur nostrum esse animi sint vitae maiores voluptas quam, reiciendis iste similique minus
-                    aut earum ea hic dignissimos placeat? Ea odit minima repellendus explicabo voluptatem fuga!</p>
-            </div>
-        </div>
-        <div class="w-full rounded-lg mt-2 h-[200px]  flex flex-row gap-5 items-center">
-            <div class="flex flex-col w-[100px] items-center">
-                <div class="w-[100px] h-[100px] bg-primary rounded-full bg-cover"
-                     style="background-image: url('https://img.freepik.com/fotos-gratis/pessoa-3d-vendo-um-filme-no-cinema_23-2151024901.jpg');">
-
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-serif"> 5 / 10</h2>
-                <h2 class="font-serif text-xl">Micael Hernandes</h2>
-                <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates maxime
-                    iure dolorum quidem porro unde deleniti hic nostrum dolores nesciunt saepe, repudiandae ullam
-                    itaque, fuga fugit nobis placeat necessitatibus voluptatibus magni sed praesentium. Dolorum
-                    aspernatur nostrum esse animi sint vitae maiores voluptas quam, reiciendis iste similique minus
-                    aut earum ea hic dignissimos placeat? Ea odit minima repellendus explicabo voluptatem fuga!</p>
-            </div>
-        </div>
-        <div class="w-full rounded-lg mt-2 h-[200px]  flex flex-row gap-5 items-center">
-            <div class="flex flex-col w-[100px] items-center">
-                <div class="w-[100px] h-[100px] bg-primary rounded-full bg-cover"
-                     style="background-image: url('https://img.freepik.com/fotos-gratis/pessoa-3d-vendo-um-filme-no-cinema_23-2151024901.jpg');">
-
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-serif"> 5 / 10</h2>
-                <h2 class="font-serif text-xl">Micael Hernandes</h2>
-                <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates maxime
-                    iure dolorum quidem porro unde deleniti hic nostrum dolores nesciunt saepe, repudiandae ullam
-                    itaque, fuga fugit nobis placeat necessitatibus voluptatibus magni sed praesentium. Dolorum
-                    aspernatur nostrum esse animi sint vitae maiores voluptas quam, reiciendis iste similique minus
-                    aut earum ea hic dignissimos placeat? Ea odit minima repellendus explicabo voluptatem fuga!</p>
+                <h2 class="text-xl font-serif"> <%= ratings.get(0).getNota()%> / 10</h2>
+                <h2 class="font-serif text-xl"><%= ratings.get(0).getNota()%></h2>
+                <p class="text-justify"><%= ratings.get(0).getComentario()%></p>
             </div>
         </div>
 
