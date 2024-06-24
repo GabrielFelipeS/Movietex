@@ -16,6 +16,23 @@
 <jsp:include page="header.jsp" />
 
 <main class="w-full h-[80vh] flex flex-col justify-center items-center">
+   <%-- Verifica se há mensagem --%>
+    <c:if test="${not empty param.error}">
+        <div >
+            <h2 style="color: red"><b>${param.error}</b></h2>
+        </div>
+    </c:if>
+ <c:if test="${not empty param.cadastroSucess}">
+        <div >
+            <h2 style="color: green"><b>${param.accessDenied}</b></h2>
+        </div>
+    </c:if>
+ <c:if test="${not empty param.accessDenied}">
+        <div >
+            <h2 style="color: green"><b>${param.cadastroSucess}</b></h2>
+        </div>
+    </c:if>
+
     <div class="hidden flex-row items-center mb-5 justify-center w-[350px] h-[50px] bg-secondary rounded-lg">
         <h2 class="text-white">Erro ao Logar</h2>
     </div>

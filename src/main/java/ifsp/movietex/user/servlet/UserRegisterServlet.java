@@ -2,6 +2,7 @@ package ifsp.movietex.user.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -34,13 +35,14 @@ public class UserRegisterServlet extends HttpServlet {
 
        boolean result = userDao.register(new DTOUser(name, email, password));
        if(result) {
-    	   writer.println("Cadastrado");
     	   System.out.println("Ok");
-           response.sendRedirect("login.jsp");
+    	   String Message = "Cadastrado com sucesso! Faça o login.";
+	       response.sendRedirect("login.jsp?cadastroSucess=" + URLEncoder.encode(Message, "UTF-8"));
        }else {
-    	   writer.println("Erro no cadastro");
     	   System.out.println("erro");
-
+    	   String Message = "Usuário já existe.";
+	       response.sendRedirect("registro.jsp?error=" + URLEncoder.encode(Message, "UTF-8"));
+	       
        }
 
 	}

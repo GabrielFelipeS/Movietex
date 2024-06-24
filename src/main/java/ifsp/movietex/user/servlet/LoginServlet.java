@@ -2,6 +2,7 @@ package ifsp.movietex.user.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -21,33 +22,48 @@ import ifsp.movietex.user.entity.DTOUser;
 @WebServlet("/UserLogin")
 public class LoginServlet extends HttpServlet {
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		PrintWriter writer = response.getWriter();
 		Connection conn = new ConnectionPostgress().getConnection();
 		UserDAO userDao = new UserDAO(conn);
-		
+
 		String email = request.getParameter("email");
 		String senha = request.getParameter("password");
-		
+
 		String result = userDao.login(new DTOUser(null, email, senha));
-		
-		if(result != null) {
+
+		if (result != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("isAdmin", result);
 			session.setAttribute("email", email);
-				
-			response.sendRedirect("filmes.jsp");
-			System.out.println("localizado");
-		}else {
+			session.setAttribute("userLoggedIn", true);
+
+			if ((boolean) session.getAttribute("userLoggedIn")) {
+				System.out.println("logado");
+			}
+
+			String redirectUrl = (String) session.getAttribute("redirectUrl");
+			if (redirectUrl != null) {
+				session.removeAttribute("redirectUrl");
+				response.sendRedirect(redirectUrl);
+				System.out.println("localizado");
+			} else {
+				System.out.println(result);
+
+				String Message = "Bem vindo(a)!";
+				response.sendRedirect("index.jsp?msg=" + URLEncoder.encode(Message, "UTF-8"));
+
+			}
+
+		} else {
 			System.out.println("Não existe");
-			response.sendRedirect("login.jsp");
+			String Message = "E-mail ou senha incorretos. Tente novamente.";
+			response.sendRedirect("login.jsp?error=" + URLEncoder.encode(Message, "UTF-8"));
 
 		}
-		
-		
+
 	}
 
 }
