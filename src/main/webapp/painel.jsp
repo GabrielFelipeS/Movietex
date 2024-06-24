@@ -62,5 +62,6 @@
 
 
 <jsp:include page="footer.jsp" />
+<script src="js/ShowFilmesPanel.js"></script>
 </body>
 </html>
