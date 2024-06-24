@@ -3,6 +3,11 @@ const resultArea = document.querySelector('#resultArea');
 const searchFailCard = document.querySelector('#searchFail');
 const searchTextError = document.querySelector('#searchTextError');
 
+const currentUrl = window.location.href;
+
+let baseUrl = currentUrl.replace(/\/movies\/?$/, '');
+
+
 searchInput.addEventListener('input', async (e) => {
     const searchTerm = searchInput.value.trim();
 
@@ -13,7 +18,7 @@ searchInput.addEventListener('input', async (e) => {
     }
 
     try {
-        const searchUrl = `http://localhost:8080/Movietex_war_exploded/api/movie/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
+        const searchUrl = `${baseUrl}/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
 
         const response = await fetch(searchUrl);
         if (!response.ok) {
