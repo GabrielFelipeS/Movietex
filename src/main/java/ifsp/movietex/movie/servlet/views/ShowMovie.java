@@ -20,23 +20,33 @@ public class ShowMovie extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getPathInfo();
+        String path = request.getPathInfo().substring(1);
         Integer id = null;
-        if (path != null) {
-            path = path.substring(1);
+        if (path.matches("^[^0-9]+$")) {
+        	 response.sendRedirect(getCorrectRedirect(path));
+             return;
+        } else {
             id = Integer.parseInt(path);
-        }else{
-            response.sendRedirect("/movies");
-            return;
+            
+            Connection conn = new ConnectionPostgress().getConnection();
+            MovieDAO dao = new MovieDAO(conn);
+            Movie movie = dao.findBy(id);
+            
+            if(movie == null) {
+            	 response.sendRedirect("../movies");
+            } else {
+                request.setAttribute("movie", movie);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/interna.jsp");
+                dispatcher.forward(request, response);
+            }
+            
+        
         }
 
-        Connection conn = new ConnectionPostgress().getConnection();
-        MovieDAO dao = new MovieDAO(conn);
-        Movie movies = dao.findBy(id);
-        request.setAttribute("movie", movies);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/interna.jsp");
-        dispatcher.forward(request, response);
     }
+
+	private String getCorrectRedirect(String path) {
+		return path.matches("^movies$")? "../movies" : "../home";
+	}
 
 }
