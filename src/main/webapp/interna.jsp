@@ -17,33 +17,27 @@
 
 <jsp:include page="header.jsp" />
 
-<% Movie movie = request.getAttribute("movie"); %>
+<% Movie movie = (Movie) request.getAttribute("movie"); %>
 
 <main class="w-[60%] h-screen m-auto flex flex-col gap-10">
-    <h2 class="text-6xl font-extrabold font-serif mt-5 text-center"></h2>
+    <h2 class="text-6xl font-extrabold font-serif mt-5 text-center"><%= movie.getTitle() %></h2>
     <div
             class="w-full h-[450px] flex flex-col justify-start items-center md:items-start md:flex-row md:justify-start gap-2 p-4  rounded-lg ">
-        <img src="img/capas/divertida_mente.webp" alt="Cartaz do Filme X"
+        <img src=".<%= movie.getPoster() %>" alt="Cartaz do Filme X"
              class="z-10 max-w-[300px] md:w-[30%] rounded-lg">
         <div class="flex flex-col justify-start mt-1 h-full gap-3">
             <div>
                 <p class="">20 de junho de 2024 | 1h 36min</p>
-                <p><span class="font-bold"><a href="">Aventura</a> , <a href="">Ação</a>, <a
-                        href="">Comédia</a></span></p>
-                <p>Direção: <span class="font-bold"><a href="">Kelsey Mann</a></span></p>
-                <p>Ano Lançamento: <span class="font-bold">2024</span></p>
+                <p><span class="font-bold"><a href=""><%= movie.getGenre() %></a></span></p>
+                <p>Direção: <span class="font-bold"><a href=""><%= movie.getDirector() %></a></span></p>
+                <p>Ano Lançamento: <span class="font-bold"><%= movie.getYear() %></span></p>
             </div>
             <div>
-                <p class="font-bold ">Avaliação: <span class="text-yellow-400"> 5/10</span></p>
+                <p class="font-bold ">Avaliação: <span class="text-yellow-400">  <%=movie.getRatingAverage()%>/10</span></p>
             </div>
             <div>
                 <h2 class="text-2xl font-bold">Sinopse:</h2>
-                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet rerum,
-                    fugit doloremque numquam nobis illum, voluptatem ullam ut sunt consequatur error ab itaque quo
-                    assumenda. Voluptates quos dignissimos sed tempora labore nostrum delectus, optio esse earum in
-                    ea reprehenderit similique quam tempore consectetur recusandae eos mollitia eveniet corporis.
-                    Dolorem excepturi iusto, obcaecati corrupti cum impedit ex. Consectetur beatae explicabo
-                    repellat!</p>
+                <p class="text-justify"><%=movie.getDescription()%></p>
             </div>
 
         </div>
@@ -112,8 +106,8 @@
             <h2 class="text-4xl font-serif">Avaliar Filme</h2>
             <form action="" class="w-full bg-gray-100 rounded-lg relative">
                 <div
-                        class="absolute top-0 left-0 w-full h-full bg-gray-100 bg-opacity-95 flex rounded-lg flex-col justify-center items-center">
-                    <img src="img/figuras/ticket.png" alt="Imagem de necessario login" class="h-[80%]">
+                        class="absolute top-0 left-0 w-full h-full bg-gray-100 bg-opacity-95 hidden rounded-lg flex-col justify-center items-center">
+                    <img src="../img/figuras/ticket.png" alt="Imagem de necessario login" class="h-[80%]">
                     <h2 class="text-2xl text-black font-serif uppercase">Necessario login para poder avaliar!</h2>
                     <a href=""
                        class="p-5 bg-primary m-2 rounded-lg text-white w-[20%] text-center hover:-translate-y-1 hover:scale-105 transition-all duration-150">Logar-se</a>
@@ -139,5 +133,17 @@
 
 
 <jsp:include page="footer.jsp" />
+<script>
+    const inputNumero = document.getElementById('nota');
+
+    inputNumero.addEventListener('input', function() {
+        let valor = parseInt(this.value);
+        if (isNaN(valor)) {
+            this.value = '';
+        } else {
+            this.value = Math.max(0, Math.min(10, valor));
+        }
+    });
+</script>
 </body>
 </html>
