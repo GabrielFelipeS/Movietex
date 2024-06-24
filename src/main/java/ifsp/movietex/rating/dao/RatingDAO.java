@@ -22,14 +22,15 @@ public class RatingDAO {
 		this.conn = conn;
 	}
 
-	public String insert(Integer idFilme, Integer idUsuario, Double nota, String comentario) {
+	public String insert(Integer idFilme, Integer idUsuario, String nomeUsuario, Double nota, String comentario) {
 		try (PreparedStatement ps = conn.prepareStatement(
-				"INSERT INTO Assessments (id_movie, id_user, rating, comment) VALUES (?, ?, ?, ?)",
+				"INSERT INTO Assessments (id_movie, id_user, rating, userName, comment) VALUES (?, ?, ?, ?, ?)",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1, idFilme);
 			ps.setInt(2, idUsuario);
 			ps.setDouble(3, nota);
-			ps.setString(4, comentario);
+			ps.setString(4, nomeUsuario);
+			ps.setString(5, comentario);
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -46,12 +47,12 @@ public class RatingDAO {
 	public List<Rating> findBy(Integer idFilme) {
 		List<Rating> ratings = new LinkedList<>();
 		try (PreparedStatement ps = conn.prepareStatement(
-				"SELECT id_user, id_movie, comment, rating FROM Assessments WHERE id_movie = ?")) {
+				"SELECT id_user, id_movie, comment, userName, rating FROM Assessments WHERE id_movie = ?")) {
 			ps.setInt(1, idFilme);
 
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Rating rating = new Rating(null, rs.getInt("id_movie"), rs.getDouble("rating") , rs.getString("comment"));
+				Rating rating = new Rating(rs.getInt("id_user"), rs.getString("userName"), rs.getInt("id_movie"), rs.getDouble("rating") , rs.getString("comment"));
 				ratings.add(rating);
 			}
 

@@ -42,7 +42,8 @@ class RatingDAOTest {
 		ResultSet rs = connection.createStatement().executeQuery("SELECT COUNT(1) FROM Assessments WHERE id_movie = " + ID_EXISTS);
 		rs.next();
 		Integer rating_count = rs.getInt(1);
-		
+		System.out.println("ratings " + ratings.size());
+		System.out.println("rating_count " + rating_count);
 		assertTrue(ratings.size() == rating_count);
 		assertFalse(ratings.isEmpty());
 	}
@@ -63,7 +64,7 @@ class RatingDAOTest {
 	@Test
 	public void givenInsert_whenAssesmentsNotExist_thenReturnFailedMessage() throws SQLException {
 		RatingDAO dao = new RatingDAO(connection);
-		String msg = dao.insert(1, 2, 8.4, "Muito bom");
+		String msg = dao.insert(1, 2, "Teste", 8.4, "Muito bom");
 
 		assertEquals("Avaliação enviada com sucesso!", msg);
 	}
@@ -71,7 +72,7 @@ class RatingDAOTest {
 	@Test
 	public void givenInsert_whenAssesmentsAlreadyExistsWithUserToMovie_thenReturnFailedMessage() throws SQLException {
 		RatingDAO dao = new RatingDAO(connection);
-		String msg = dao.insert(1, 1, 8.4, "Muito bom");
+		String msg = dao.insert(1, 1, "Teste",8.4, "Muito bom");
 
 		assertEquals("Falha ao enviar a avaliação!", msg);
 	}

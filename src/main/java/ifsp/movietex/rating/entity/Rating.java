@@ -1,20 +1,26 @@
 package ifsp.movietex.rating.entity;
 
 public class Rating {
-	private String usuario;
+	private Integer idUSer;
+	private String name;
 	private Integer idFilme;
 	private Double nota;
-	private String comentario;
+	private String comment;
 
-	public Rating(String usuario, Integer idFilme, Double nota, String comentario) {
-		this.usuario = usuario;
+	public Rating(Integer idUSer, String name, Integer idFilme, Double nota, String comment) {
+		this.idUSer = idUSer;
+		this.name = name;
 		this.idFilme = idFilme;
 		this.nota = nota;
-		this.comentario = comentario;
+		this.comment = comment;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public Integer getIdUSer() {
+		return idUSer;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public Integer getIdFilme() {
@@ -25,8 +31,8 @@ public class Rating {
 		return nota;
 	}
 
-	public String getComentario() {
-		return comentario;
+	public String getComment() {
+		return comment;
 	}
 
 }

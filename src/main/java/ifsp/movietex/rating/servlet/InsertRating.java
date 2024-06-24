@@ -30,13 +30,16 @@ public class InsertRating extends HttpServlet {
 		String idUsuarioStr = request.getParameter("idUser");
 		Integer idUsuario = Integer.valueOf(idUsuarioStr);
 		
+		String userName = request.getParameter("userName");
+		
+		
 		String comentario = request.getParameter("comment");
 		String notaStr = request.getParameter("note");
 		Double nota = Double.valueOf(notaStr);
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		RatingDAO dao = new RatingDAO(conn);
-		String mensagem = dao.insert(idFilme, idUsuario, nota, comentario);
+		String mensagem = dao.insert(idFilme, idUsuario, userName, nota, comentario);
 	
 		if (mensagem.contains("Sucesso")) {
 			response.setStatus(HttpServletResponse.SC_CREATED);
