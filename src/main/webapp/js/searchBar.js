@@ -18,7 +18,7 @@ searchInput.addEventListener('input', async (e) => {
     }
 
     try {
-        const searchUrl = `${baseUrl}/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
+        const searchUrl = `${baseUrl}api/movie/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
 
         const response = await fetch(searchUrl);
         if (!response.ok) {
