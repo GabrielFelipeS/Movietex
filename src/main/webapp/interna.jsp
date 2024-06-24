@@ -49,7 +49,7 @@
     <div class="w-full h-screen">
 
         <h2 class="text-4xl font-serif before:h-full before:text-primary before:content-['*']">Avaliações</h2>
-
+	<% for(Rating rating : ratings) { %>
         <div class="w-full rounded-lg mt-2 h-[200px]  flex flex-row gap-5 items-center">
             <div class="flex flex-col w-[100px] items-center">
                 <div class="w-[100px] h-[100px] bg-primary rounded-full bg-cover"
@@ -59,12 +59,12 @@
             </div>
 
             <div>
-                <h2 class="text-xl font-serif"> <%= ratings.get(0).getNota()%> / 10</h2>
-                <h2 class="font-serif text-xl"><%= ratings.get(0).getNota()%></h2>
-                <p class="text-justify"><%= ratings.get(0).getComentario()%></p>
+                <h2 class="text-xl font-serif"> <%= rating.getNota()%> / 10</h2>
+                <h2 class="font-serif text-xl"><%= rating.getName()%></h2>
+                <p class="text-justify"><%= rating.getComment()%></p>
             </div>
         </div>
-
+	<% } %>
         <div class="w-full rounded-lg mt-2 h-[400px]  flex flex-col gap-5">
             <h2 class="text-4xl font-serif">Avaliar Filme</h2>
             <form action="" class="w-full bg-gray-100 rounded-lg relative">
