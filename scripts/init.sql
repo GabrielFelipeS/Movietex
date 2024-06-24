@@ -29,8 +29,8 @@ CREATE TABLE Users (
 
 CREATE TABLE Assessments (
     id SERIAL PRIMARY KEY,
-    id_movie INT REFERENCES Movies(id),
-    id_user INT REFERENCES Users(id),
+    id_movie INT REFERENCES Movies(id) ON DELETE CASCADE,
+    id_user INT REFERENCES Users(id) ON DELETE CASCADE,
     rating FLOAT,
     comment TEXT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
