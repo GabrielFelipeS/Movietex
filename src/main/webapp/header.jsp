@@ -31,7 +31,7 @@
 				<ul class="flex flex-row">
 					<li
 						class="p-3 rounded-t-lg text-primary font-bold  hover:bg-gray-100  duration-150 ease-in-out"><a
-						href="">Início</a></li>
+						href="./">Início</a></li>
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
 						<a href="./movies">Filmes</a>
@@ -52,7 +52,7 @@
 					</li>
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="registro.jsp">Registra-se</a>
+						<a href="registro.jsp">Registre-se</a>
 					</li>
 					<%}%>
 
