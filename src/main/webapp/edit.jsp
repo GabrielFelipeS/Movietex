@@ -37,7 +37,7 @@
 			<label for="duration" class="text-white">Gênero</label> <select
 				required name="genre" id="genre" value="<%=movie.getGenre()%>"
 				class="rounded-lg pl-3 h-[30px] outline-none">
-				<option value="">Selecione um gênero</option>
+				<option value="<% movie.getGenre();%>">Selecione um gênero</option>
 				<option value="Ação">Ação</option>
 				<option value="Aventura">Aventura</option>
 				<option value="Comédia">Comédia</option>
@@ -64,17 +64,21 @@
 			</select> 
 			 <label
 				for="year" class="text-white">Ano de Lançamento</label> <input
-				required type="text" name="year" id="year"
+				required type="number" name="year" id="year" min="1900" max="2024" oninput="validarAno(this)"
 				value="<%=movie.getYear()%>"
 				class="rounded-lg pl-3 h-[30px] outline-none"> <label
 				for="synopsis" class="text-white">Sinopse</label>
 			<textarea required name="synopsis" id="synopsis"
 				class="rounded-lg pl-3 h-32 w-full"><%=movie.getDescription()%></textarea>
+			<div>
+				<img src="../.<%=movie.getPoster()%>" alt="Capa do Filme"
+					class="max-w-[200px] aspect-banner rounded-lg">
+			</div>
 			<label for="cover" class="text-white">Capa do Filme</label> <input
-				required type="file" name="cover" id="cover" accept="image/*"
+				type="file" name="cover" id="cover" accept="image/*"
 				class="text-white rounded-lg pl-3 h-[14%]">
 			<button type="submit"
-				class="bg-white text-primary rounded-lg h-[40px] font-bold hover:-translate-y-1 transition-all duration-150">Cadastrar</button>
+				class="bg-white text-primary rounded-lg h-[40px] font-bold hover:-translate-y-1 transition-all duration-150">Atualizar</button>
 		</form>
 
 
@@ -82,5 +86,12 @@
 
 
 	<jsp:include page="footer.jsp" />
+	<script>
+		function validarAno(input) {
+			 if (input.value > 2024) {
+				input.value = 2024;
+			}
+		}
+	</script>
 </body>
 </html>
