@@ -39,7 +39,7 @@
             <option value="Terror">Terror</option>
         </select>
         <label for="director" class="text-white">Diretor</label> <select
-            name="diretor" id="diretor"
+            name="director" id="director"
             class="rounded-lg pl-3 h-[30px] outline-none">
         <option value="" disabled selected>Selecione um diretor</option>    
         <%

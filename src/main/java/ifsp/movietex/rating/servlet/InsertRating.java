@@ -46,10 +46,6 @@ public class InsertRating extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 
-		Gson gson = new Gson();
-
-		String json = gson.toJson(mensagem);
-		out.print(json);
-		out.flush();
+		response.sendRedirect("home");
 	}
 }
