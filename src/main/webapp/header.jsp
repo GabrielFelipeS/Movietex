@@ -62,7 +62,7 @@
 
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="painel">Painel</a>
+						<a href="<%=request.getContextPath()%>/painel">Painel</a>
 					</li>
 					
 						<%}%>
@@ -73,7 +73,7 @@
 					
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="logout">Sair</a>
+						<a href="<%=request.getContextPath()%>/logout">Sair</a>
 					</li>
 					
 					<%}%>
