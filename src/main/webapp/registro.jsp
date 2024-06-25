@@ -46,10 +46,10 @@
             <input type="password" name="password" placeholder="Senha"
                    class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none" required>
             <button
-                    class="w-full h-[40px] bg-secondary text-white rounded-lg hover:-translate-y-1 hover:bg-primary transition-all duration-150">Registrar</button>
+                    class="w-full h-[40px] bg-primary text-white rounded-lg hover:-translate-y-1 hover:bg-primary transition-all duration-150">Registrar</button>
         </form>
         <a href="login"
-           class="text-xl font-bold text-white animate-bounce bg-secondary px-5 py-2 rounded-lg hover:animate-none transition-all duration-150">Logar-se</a>
+           class="text-xl font-bold text-white animate-bounce bg-primary px-5 py-2 rounded-lg hover:animate-none transition-all duration-150">Logar-se</a>
     </div>
 </main>
 
