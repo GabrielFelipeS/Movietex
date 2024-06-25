@@ -1,7 +1,7 @@
 package ifsp.movietex.user.dao;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Connection;
@@ -52,23 +52,23 @@ class UserDAOTest {
 	@Test
 	public void givenLogin_whenUserAlreadyExistsAndIsAdminAndPasswordCorrect_thenReturnStringAdmin() throws SQLException {
 		UserDAO dao = new UserDAO(connection);
-		String role = dao.login(new DTOUser("Bob Johnson", "admin2@example.com", "password6"));
+		User user = dao.login(new DTOUser("Bob Johnson", "admin2@example.com", "password6"));
 		
-		assertEquals("admin", role);
+		assertFalse(user.isAdmin());
 	}
 	
 	@Test
 	public void givenLogin_whenUserAlreadyExistsAndIsNotAdminAndPasswordCorrect_thenReturnStringAdmin() throws SQLException {
 		UserDAO dao = new UserDAO(connection);
-		String role = dao.login(new DTOUser("Charlie Brown", "user1@example.com", "password1"));
+		User user = dao.login(new DTOUser("Charlie Brown", "user1@example.com", "password1"));
 		
-		assertEquals("user", role);
+		assertFalse(user.isAdmin());
 	}
 	
 	@Test
 	public void givenLogin_whenUserAlreadyExistsAndPasswordIncorrect_thenReturnNull() throws SQLException {
 		UserDAO dao = new UserDAO(connection);
-		String role = dao.login(new DTOUser("Alice Smith", "admin@example.com", "password3"));
+		User role = dao.login(new DTOUser("Alice Smith", "admin@example.com", "password3"));
 		
 		assertEquals(null, role);
 	}

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.Connection;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
-import ifsp.movietex.movie.dao.MovieDAO;
-import ifsp.movietex.movie.entity.Movie;
 import ifsp.movietex.user.dao.UserDAO;
 import ifsp.movietex.user.entity.DTOUser;
+import ifsp.movietex.user.entity.User;
 
 /**
  * Servlet implementation class LoginUsuario
@@ -34,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		PrintWriter writer = response.getWriter();
 		Connection conn = new ConnectionPostgress().getConnection();
 		UserDAO userDao = new UserDAO(conn);
@@ -42,14 +39,16 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String senha = request.getParameter("password");
 
-		String result = userDao.login(new DTOUser(null, email, senha));
-
-		if (result != null) {
+		User user = userDao.login(new DTOUser(null, email, senha));
+		
+		if (user != null && user.isAdmin()) {
 			HttpSession session = request.getSession();
-			session.setAttribute("isAdmin", result);
+			session.setAttribute("isAdmin", user.isAdmin() ? "admin" : "user");
 			session.setAttribute("email", email);
 			session.setAttribute("userLoggedIn", true);
+			session.setAttribute("id", user.getId());
 
+			
 			if ((boolean) session.getAttribute("userLoggedIn")) {
 				System.out.println("logado");
 			}
@@ -60,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect(redirectUrl);
 				System.out.println("localizado");
 			} else {
-				System.out.println(result);
+				System.out.println(user.isAdmin());
 
 				String Message = "Bem vindo(a)!";
 				response.sendRedirect("index.jsp?msg=" + URLEncoder.encode(Message, "UTF-8"));

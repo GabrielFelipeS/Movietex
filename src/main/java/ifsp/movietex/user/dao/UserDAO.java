@@ -17,73 +17,73 @@ public class UserDAO {
 	private Connection conn;
 	private String table = "Users";
 	private String fieldNames = "(name, email, password)";
-	
-	
+
 	public UserDAO(Connection conn) {
 		this.conn = conn;
 	}
 
 	public boolean register(DTOUser user) {
-		String SQL = "insert into " + table + " " + fieldNames + " values (?,?,?)"; 
+		String SQL = "insert into " + table + " " + fieldNames + " values (?,?,?)";
 
-		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
-				statement.setString(1, user.name());
-				statement.setString(2, user.email());
-				statement.setString(3, user.password());
-				
-				statement.executeUpdate();
-				
-				return true;
+		try (PreparedStatement statement = conn.prepareStatement(SQL)) {
+			statement.setString(1, user.name());
+			statement.setString(2, user.email());
+			statement.setString(3, user.password());
+
+			statement.executeUpdate();
+
+			return true;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return false;
 		}
-		
+
 	}
 
-	public String login(DTOUser user) {
-		String SQL = "SELECT * FROM " + table + " WHERE email = ? AND password = ?"; 
-		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
+	public User login(DTOUser user) {
+		String SQL = "SELECT * FROM " + table + " WHERE email = ? AND password = ?";
+		try (PreparedStatement statement = conn.prepareStatement(SQL)) {
 			statement.setString(1, user.email());
 			statement.setString(2, user.password());
-			ResultSet resultSet =statement.executeQuery();
-			
-			if(resultSet.next()) {
-				return resultSet.getBoolean("isAdmin") ? "admin" : "user";
-			}else {
+			ResultSet rs = statement.executeQuery();
+
+			if (rs.next()) {
+				return new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"),
+						rs.getBoolean("isAdmin"));
+			} else {
 				throw new RuntimeException("Login invalido");
 			}
-			
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return null;
 		}
-		
-	}
-	
-	public boolean updateUser(User user) {
-		String SQL = "UPDATE " + table + " SET name = ?, email = ?, password = ?, isAdmin=? where id = ?"; 
 
-		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
+	}
+
+	public boolean updateUser(User user) {
+		String SQL = "UPDATE " + table + " SET name = ?, email = ?, password = ?, isAdmin=? where id = ?";
+
+		try (PreparedStatement statement = conn.prepareStatement(SQL)) {
 			statement.setString(1, user.getNome());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, user.getSenha());
 			statement.setBoolean(4, user.isAdmin());
 			statement.setInt(5, user.getId());
-			
+
 			Integer modifyRolls = statement.executeUpdate();
 			Boolean updateSuccess = modifyRolls == 1;
-			return updateSuccess;	
+			return updateSuccess;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			return false;
 		}
-		
+
 	}
-	
+
 	public boolean deleteUser(Integer id) {
-		String SQL = "DELETE FROM " + table + " WHERE id = ?"; 
-		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
+		String SQL = "DELETE FROM " + table + " WHERE id = ?";
+		try (PreparedStatement statement = conn.prepareStatement(SQL)) {
 			statement.setInt(1, id);
 			Integer modifyRolls = statement.executeUpdate();
 			Boolean deleteSuccess = modifyRolls == 1;
