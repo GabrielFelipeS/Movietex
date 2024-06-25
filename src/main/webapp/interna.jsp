@@ -67,7 +67,7 @@
 	<% } %>
         <div class="w-full rounded-lg mt-2 h-[400px]  flex flex-col gap-5">
             <h2 class="text-4xl font-serif">Avaliar Filme</h2>
-            <form action="api/rating/insert" class="w-full bg-gray-100 rounded-lg relative">
+            <form class="w-full bg-gray-100 rounded-lg relative" id="formRating">
                 <div class="absolute top-0 left-0 w-full h-full bg-gray-100 bg-opacity-95
     <% if (session.getAttribute("email") != null) { %>
         hidden
@@ -83,11 +83,11 @@
                 <div class="flex flex-col gap-5 p-5 ">
                     <div class="flex flex-col gap-2">
                         <label for="nota">Nota</label>
-                        <input type="number" name="nota" id="nota" min="0" max="10" class="p-2 rounded-lg" required>
+                        <input type="number" name="rating" id="rating" min="0" max="10" class="p-2 rounded-lg" required>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="comentario">Comentário</label>
-                        <textarea name="comentario" id="comentario" cols="30" rows="10" class="p-2 rounded-lg"
+                        <textarea name="review" id="review" cols="30" rows="10" class="p-2 rounded-lg"
                                   required></textarea>
                     </div>
                     <div class="flex flex-col gap-2">
@@ -102,7 +102,12 @@
 
 <jsp:include page="footer.jsp" />
 <script>
-    const inputNumero = document.getElementById('nota');
+    let user = '<%= session.getAttribute("id") %>';
+    let movie = '<%= movie.getId() %>';
+    let userName = '<%= session.getAttribute("name") %>';
+
+    console.log(user, movie, userName)
+    const inputNumero = document.getElementById('rating');
 
     inputNumero.addEventListener('input', function() {
         let valor = parseInt(this.value);
@@ -113,5 +118,6 @@
         }
     });
 </script>
+<script src="<%=request.getContextPath()%>/js/reviewMovie.js" defer></script>
 </body>
 </html>
