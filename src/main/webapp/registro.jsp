@@ -38,10 +38,10 @@
     </div>
     <div class="w-[80%] h-[450px] bg-gray rounded-lg flex flex-col justify-evenly items-center">
         <h2 class="text-2xl text-primary font-bold">Registre-se</h2>
-        <form action="UserRegister" method="POST" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
+        <form action="<%=request.getContextPath()%>/registro" method="POST" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
             <input type="text" name= "name" placeholder="Nome" class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none"
                    required>
-            <input type="text" name="email" placeholder="E-mail" class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none"
+            <input type="email" name="email" placeholder="E-mail" class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none"
                    required>
             <input type="password" name="password" placeholder="Senha"
                    class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none" required>
