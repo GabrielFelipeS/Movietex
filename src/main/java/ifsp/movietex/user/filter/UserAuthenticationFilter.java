@@ -19,11 +19,6 @@ import javax.servlet.http.HttpSession;
 public class UserAuthenticationFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        // Initialization code if needed
-    }
-
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -40,26 +35,17 @@ public class UserAuthenticationFilter implements Filter {
         System.out.println("Admin: " + isAdmin);
         
         if (loggedIn) {
-            if (!isAdmin && (requestURI.endsWith("/painel.jsp") || requestURI.endsWith("/cadastro.jsp") || requestURI.endsWith("/edit.jsp"))) {
-            	String Message = "Você não pode continuar! Acesso exclusivo de administradores.";
-            	httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp?accessDenied=" + URLEncoder.encode(Message, "UTF-8") );
-      
-                return;
-            }
+        	  chain.doFilter(request, response);
         } else {
-        	String Message = "Acesso exclusivo de administradores.";
-        	httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp?accessDenied=" + URLEncoder.encode(Message, "UTF-8") );
+        	String message = "Acesso exclusivo de administradores.";
+        	httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp?accessDenied=" + URLEncoder.encode(message, "UTF-8") );
               return;
         }
 
-        chain.doFilter(request, response);
+      
     }
 
- 
-    @Override
-    public void destroy() {
-        // Cleanup code if needed
-    }
+
 
     private boolean isRequestedPage(String requestURI, ArrayList<String> pages) {
         return pages.stream().anyMatch(page -> requestURI.equals(page) || requestURI.startsWith(page + "/"));

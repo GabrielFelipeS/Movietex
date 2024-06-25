@@ -32,10 +32,10 @@ public class InsertMovieServlet extends HttpServlet {
 		String genre = request.getParameter("genre");
 
 		String yearStr = request.getParameter("year");
-		Integer year = yearStr != null ? Integer.valueOf(yearStr) : null;
+		Integer year = Integer.valueOf(yearStr);
 		
 		String durationStr = request.getParameter("duration");
-		Integer duration = durationStr != null ? Integer.valueOf(durationStr) : null;
+		Integer duration = Integer.valueOf(durationStr);
 		
 		String poster = "./img/capas/divertida_mente.webp";
 		

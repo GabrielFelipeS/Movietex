@@ -18,7 +18,7 @@ import ifsp.movietex.movie.entity.Movie;
 /**
  * Servlet implementation class EditServlet
  */
-@WebServlet("/edit/*")
+@WebServlet("/painel/edit/*")
 public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

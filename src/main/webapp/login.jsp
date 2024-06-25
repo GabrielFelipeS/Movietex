@@ -38,7 +38,7 @@
     </div>
     <div class="w-[80%] h-[450px] bg-gray rounded-lg flex flex-col justify-evenly items-center">
         <h2 class="text-2xl text-primary font-bold">Login</h2>
-        <form action="UserLogin" method= "POST" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
+        <form action="login" method= "POST" class="flex flex-col w-[40%] h-[60%] justify-center gap-5">
             <input name ="email" type="text" placeholder="E-mail" class="w-full h-[40px] bg-gray-100 rounded-lg p-2 outline-none"
                    required>
             <input name="password" type="password" placeholder="Senha"

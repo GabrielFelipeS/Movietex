@@ -3,7 +3,6 @@ package ifsp.movietex.movie.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,12 +14,11 @@ import com.google.gson.Gson;
 
 import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.movie.dao.MovieDAO;
-import ifsp.movietex.movie.entity.Movie;
 
 /**
  * Servlet implementation class DeleteMovieServlet
  */
-@WebServlet("/api/movie/delete/*")
+@WebServlet("/painel/api/movie/delete/*")
 public class DeleteMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
