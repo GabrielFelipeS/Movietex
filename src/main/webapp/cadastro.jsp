@@ -37,8 +37,21 @@
             <option value="Suspense">Suspense</option>
             <option value="Terror">Terror</option>
         </select>
-        <label for="director" class="text-white">Diretor</label>
-        <input required type="text" name="director" id="director" class="rounded-lg pl-3 h-[30px] outline-none">
+        <label for="director" class="text-white">Diretor</label> <select
+            name="diretor" id="diretor"
+            class="rounded-lg pl-3 h-[30px] outline-none">
+        <option value="" disabled selected>Selecione um diretor</option>    
+        <%
+            List<String> directors = (List<String>) request.getAttribute("directors");
+        %>
+        <%
+            for (String directorName : directors) {
+        %>
+        <option value="<%=directorName%>"><%=directorName%></option>
+        <%
+            }
+        %>
+    </select>
         <label for="year" class="text-white">Ano de Lançamento</label>
         <input required type="text" name="year" id="year" class="rounded-lg pl-3 h-[30px] outline-none">
         <label for="description" class="text-white">Sinopse</label>
