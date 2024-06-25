@@ -1,5 +1,7 @@
 <%@ page import="ifsp.movietex.movie.entity.Movie" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+
+<%--
   Created by IntelliJ IDEA.
   User: Micael Hernandes
   Date: 22/06/2024

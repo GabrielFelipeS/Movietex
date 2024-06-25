@@ -25,7 +25,7 @@
 		<div>
 			<h2 class="text-4xl font-bold text-primary p-5">Editar Filme</h2>
 		</div>
-		<form action="" method=""
+		<form action="/api/movie/update" method="POST"
 			class="w-[550px]  justify-around rounded-lg flex flex-col bg-primary p-4 gap-3"
 			enctype="multipart/form-data">
 			<label for="name" class="text-white">Nome do filme</label> <input
@@ -48,7 +48,7 @@
 				<option value="Suspense">Suspense</option>
 				<option value="Terror">Terror</option>
 			</select> <label for="director" class="text-white">Diretor</label> <select
-				name="diretor" id="diretor"
+				name="director" id="diretor"
 				class="rounded-lg pl-3 h-[30px] outline-none">
 				<option value="">Selecione um diretor</option>
 				<%

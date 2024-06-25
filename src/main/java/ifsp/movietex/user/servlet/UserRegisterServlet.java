@@ -42,6 +42,7 @@ public class UserRegisterServlet extends HttpServlet {
 		String name = request.getParameter("name");
 
        boolean result = userDao.register(new DTOUser(name, email, password));
+       System.out.println(result);
        if(result) {
     	   System.out.println("Ok");
     	   String Message = "Cadastrado com sucesso! Faça o login.";

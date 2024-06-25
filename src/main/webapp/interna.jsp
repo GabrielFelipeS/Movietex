@@ -36,7 +36,8 @@
                 <p>Ano Lançamento: <span class="font-bold"><%= movie.getYear() %></span></p>
             </div>
             <div>
-                <p class="font-bold ">Avaliação: <span class="text-yellow-400">  <%=movie.getRatingAverage()%>/10</span></p>
+                <p class="font-bold ">Avaliação: 
+                <span class="text-yellow-400">  <%=movie.getRatingAverage()%>/10</span></p>
             </div>
             <div>
                 <h2 class="text-2xl font-bold">Sinopse:</h2>

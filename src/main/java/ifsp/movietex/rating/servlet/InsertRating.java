@@ -46,6 +46,6 @@ public class InsertRating extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 
-		response.sendRedirect("home");
+		response.sendRedirect(request.getContextPath() + "/movie/" + idFilme);
 	}
 }

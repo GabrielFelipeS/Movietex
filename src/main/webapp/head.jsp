@@ -29,6 +29,6 @@
         },
     }
 </script>
-<link rel="shortcut icon" href="img/figuras/popcorn.ico" type="image/x-icon">
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/img/figuras/popcorn.ico" type="image/x-icon">
 
 

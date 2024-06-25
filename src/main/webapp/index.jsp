@@ -1,3 +1,6 @@
+<%@ page import="ifsp.movietex.movie.entity.Movie"%>
+<%@ page import="java.util.List"%>
+
 <%--
   Created by IntelliJ IDEA.
   User: Micael Hernandes
@@ -44,25 +47,26 @@
 		<div class="w-full flex flex-col mt-10">
 			<div
 				class=" flex top-full flex-col z-100 w-full h-auto max-h-[80vh] overflow-auto gap-5 mt-2">
+				<% List<Movie> movies = (List<Movie>) request.getAttribute("movies"); %>
+				<% for(Movie movie : movies) { %>
 				<!-- Exemplo de card -->
 				<div
 					class="w-full h-[450px] flex flex-col justify-center items-center md:items-start md:flex-row md:justify-start gap-2 p-4 bg-gray-100 rounded-lg ">
-					<img src="img/capas/divertida_mente.webp" alt="Cartaz do Filme X"
+					<img src="<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>"
 						class="z-10 max-w-[300px] md:w-[30%] rounded-lg">
 					<div class="flex flex-col justify-center h-full gap-3">
 						<div>
 							<h2 class="text-2xl font-bold">Divertida Mente 2</h2>
 							<p class="">20 de junho de 2024 | 1h 36min</p>
 							<p>
-								<span class="font-bold"><a href="">Aventura</a> , <a
-									href="">Ação</a>, <a href="">Comédia</a></span>
+								<span class="font-bold"><a href=""><%= movie.getGenre() %></a></span>
 							</p>
 							<p>
-								Direção: <span class="font-bold"><a href="">Kelsey
-										Mann</a></span>
+								Direção: <span class="font-bold"><a href=""><%= movie.getDirector() %>
+										</a></span>
 							</p>
 							<p>
-								Ano Lançamento: <span class="font-bold">2024</span>
+								Ano Lançamento: <span class="font-bold"><%= movie.getYear() %></span>
 							</p>
 						</div>
 						<div>
@@ -75,11 +79,7 @@
 						</div>
 						<div>
 							<p class="text-justify">
-								<span class="font-bold">Sinopse:</span> Lorem ipsum dolor sit
-								amet consectetur adipisicing elit. Eveniet, fugit ad? Deserunt
-								accusamus rerum consectetur et omnis, nihil pariatur possimus
-								reiciendis, libero vero, alias odio id eaque quasi voluptas
-								accusantium!
+								<span class="font-bold">Sinopse:</span> <%= movie.getDescription() %>
 							</p>
 						</div>
 						<div>
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<!-- Fim exemplo de card -->
-
+			 <% } %>
 			</div>
 		</div>
 	</main>

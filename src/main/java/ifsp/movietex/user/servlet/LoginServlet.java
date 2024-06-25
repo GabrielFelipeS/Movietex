@@ -38,11 +38,10 @@ public class LoginServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String senha = request.getParameter("password");
-
+		
 		User user = userDao.login(new DTOUser(null, email, senha));
 		System.out.println(user);
-		if (user != null && user.isAdmin()) {
-			System.out.println("login" + user.isAdmin());
+		if (user != null) {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("isAdmin", user.isAdmin() ? "admin" : "user");
@@ -57,20 +56,17 @@ public class LoginServlet extends HttpServlet {
 			}
 
 			String redirectUrl = (String) session.getAttribute("redirectUrl");
+			session.removeAttribute("redirectUrl");
+			System.out.println(redirectUrl);
 			if (redirectUrl != null) {
-				session.removeAttribute("redirectUrl");
 				response.sendRedirect(redirectUrl);
-				System.out.println("localizado");
 			} else {
-				System.out.println(user.isAdmin());
-
 				String Message = "Bem vindo(a)!";
 				response.sendRedirect("index.jsp?msg=" + URLEncoder.encode(Message, "UTF-8"));
 
 			}
 
 		} else {
-			System.out.println("Não existe");
 			String Message = "E-mail ou senha incorretos. Tente novamente.";
 			response.sendRedirect("login.jsp?error=" + URLEncoder.encode(Message, "UTF-8"));
 
