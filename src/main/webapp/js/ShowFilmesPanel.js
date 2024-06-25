@@ -17,7 +17,7 @@ window.addEventListener('load', async () => {
         <div
                     class="w-[90%] h-[150px] bg-primary text-white rounded-lg flex flex-row gap-10 justify-between items-center">
                 <div class="flex flex-row gap-5 h-full items-center ml-2">
-                    <img src="${filme.poster}" alt="Cartaz do Filme X" class="h-[80%] rounded-lg">
+                    <img src="${baseUrl}/${(filme.poster).replace('./','')}" alt="Cartaz do Filme X" class="h-[80%] rounded-lg">
                     <div>
                         <h2 class="text-2xl">${filme.title}</h2>
                         <p><span class="font-bold"><a href="">${filme.genre}</a></span></p>
