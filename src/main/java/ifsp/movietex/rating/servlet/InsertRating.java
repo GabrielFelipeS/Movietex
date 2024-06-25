@@ -30,7 +30,8 @@ public class InsertRating extends HttpServlet {
 		String idUsuarioStr = request.getParameter("idUser");
 		Integer idUsuario = Integer.valueOf(idUsuarioStr);
 		
-		String userName = request.getParameter("userName");
+		String userName = (String) request.getSession().getAttribute("name");
+
 		
 		
 		String comentario = request.getParameter("comment");
