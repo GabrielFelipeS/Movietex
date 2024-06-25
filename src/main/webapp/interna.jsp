@@ -77,7 +77,7 @@
     rounded-lg flex-col justify-center items-center">
                     <img src="../img/figuras/ticket.png" alt="Imagem de necessario login" class="h-[80%]">
                     <h2 class="text-2xl text-black font-serif uppercase">Necessário login para poder avaliar!</h2>
-                    <a href="" class="p-5 bg-primary m-2 rounded-lg text-white w-[20%] text-center hover:-translate-y-1 hover:scale-105 transition-all duration-150">Logar-se</a>
+                    <a href="<%=request.getContextPath()%>/login" class="p-5 bg-primary m-2 rounded-lg text-white w-[20%] text-center hover:-translate-y-1 hover:scale-105 transition-all duration-150">Logar-se</a>
                 </div>
 
                 <div class="flex flex-col gap-5 p-5 ">

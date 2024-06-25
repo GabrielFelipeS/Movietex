@@ -5,8 +5,8 @@ const searchTextError = document.querySelector('#searchTextError');
 
 const currentUrl = window.location.href;
 
-let baseUrl = currentUrl.replace(/\/movies\/?$/, '');
-
+//let baseUrl = currentUrl.replace(/\/movies\/?$/, '');
+let baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/")).replace(/\/movie\/?$/, '');
 
 searchInput.addEventListener('input', async (e) => {
     const searchTerm = searchInput.value.trim();
@@ -18,8 +18,9 @@ searchInput.addEventListener('input', async (e) => {
     }
 
     try {
-        const searchUrl = `${baseUrl}api/movie/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
-
+        const searchUrl = `${baseUrl}/api/movie/simpleSearch?search=${encodeURIComponent(searchTerm)}`;
+        console.log(baseUrl)
+		console.log(searchUrl)
         const response = await fetch(searchUrl);
         if (!response.ok) {
             throw new Error('Erro ao buscar dados');

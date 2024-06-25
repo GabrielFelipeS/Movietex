@@ -26,7 +26,7 @@ public class ShowMovie extends HttpServlet{
         String path = request.getPathInfo().substring(1);
         Integer id = null;
         if (path.matches("^[^0-9]+$")) {
-        	 response.sendRedirect(getCorrectRedirect(path));
+        	 response.sendRedirect("../movies");
              return;
         } else {
             id = Integer.parseInt(path);
@@ -50,9 +50,5 @@ public class ShowMovie extends HttpServlet{
         }
 
     }
-
-	private String getCorrectRedirect(String path) {
-		return path.matches("^movies$")? "../movies" : "../home";
-	}
 
 }

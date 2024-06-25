@@ -46,7 +46,7 @@
             <button
                     class="w-full h-[40px] bg-secondary text-white rounded-lg hover:-translate-y-1 hover:bg-primary transition-all duration-150">Entrar</button>
         </form>
-        <a href=""
+        <a href="registro"
            class="text-xl font-bold text-white animate-bounce bg-secondary px-5 py-2 rounded-lg hover:animate-none transition-all duration-150">Registre-se</a>
     </div>
 </main>
