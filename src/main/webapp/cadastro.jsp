@@ -19,7 +19,7 @@
     <div>
         <h2 class="text-4xl font-bold text-primary p-5">Cadastrar Filme</h2>
     </div>
-    <form action="painel/api/movie/insert" method="" class="w-[550px] justify-around rounded-lg flex flex-col bg-primary p-4 gap-3" enctype="multipart/form-data">
+    <form action="painel/api/movie/insert" method="POST" class="w-[550px] justify-around rounded-lg flex flex-col bg-primary p-4 gap-3" enctype="multipart/form-data">
         <label for="name" class="text-white">Nome do filme</label>
         <input required type="text" name="name" id="name" class="rounded-lg pl-3 h-[30px] outline-none">
         <label for="duration" class="text-white">Duração</label>
