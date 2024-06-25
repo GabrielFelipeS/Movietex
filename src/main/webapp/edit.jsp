@@ -35,7 +35,7 @@
 				type="text" name="duration" value="<%=movie.getDuration()%>"
 				id="duration" class="rounded-lg pl-3 h-[30px] outline-none">
 			<label for="duration" class="text-white">Gênero</label> <select
-				required name="genre" id="genre" value="<%=movie.getGenre()%>"
+				 name="genre" id="genre" value="<%=movie.getGenre()%>"
 				class="rounded-lg pl-3 h-[30px] outline-none">
 				<option value="<% movie.getGenre();%>">Selecione um gênero</option>
 				<option value="Ação">Ação</option>
