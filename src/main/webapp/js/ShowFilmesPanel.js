@@ -26,7 +26,7 @@ window.addEventListener('load', async () => {
                     </div>
                 </div>
                 <div class="flex items-center p-5 gap-5">
-                    <a href="${baseUrl+'a/edit/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-pen-to-square text-2xl text-white"></i></a>
+                    <a href="${baseUrl+'edit/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-pen-to-square text-2xl text-white"></i></a>
                     <a href="${baseUrl+'api/movie/delete/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-trash-can text-2xl text-white"></i></a>
                 </div>
             </div>`

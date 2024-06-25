@@ -3,6 +3,7 @@ package ifsp.movietex.movie.servlet.views;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,11 @@ public class EditServlet extends HttpServlet {
 
 		Movie movie = daoMovie.findBy(id);
 		request.setAttribute("movie", movie);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+		
+		 List<String> directors = daoMovie.findAllDirectors();
+	     request.setAttribute("directors", directors);
+	        
+        request.getRequestDispatcher("/edit.jsp").forward(request, response);
 	}
 
 }

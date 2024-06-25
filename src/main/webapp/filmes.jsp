@@ -71,11 +71,6 @@
                                     <% for(String directorName : directors) { %>
                                          <option value="<%= directorName %>"><%= directorName %></option>
                                    <% } %>
-                            <option value="Steven Spielberg">Steven Spielberg</option>
-                            <option value="Christopher Nolan">Christopher Nolan</option>
-                            <option value="Quentin Tarantino">Quentin Tarantino</option>
-                            <option value="Martin Scorsese">Martin Scorsese</option>
-                            <option value="David Fincher">David Fincher</option>
                         </select>
                     </div>
 
