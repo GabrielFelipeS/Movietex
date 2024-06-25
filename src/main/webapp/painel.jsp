@@ -32,9 +32,9 @@
     <section class="w-[80%] h-full flex flex-col pl-3 gap-5">
         <h2 class="text-start text-4xl text-primary mt-5"> Filmes </h2>
 
-        <button
+        <a href="<%=request.getContextPath()%>/painel/cadastro"
                 class="p-2 bg-green-600 w-[150px] rounded-lg text-white mt-2 hover:-translate-y-1 transition-all duration-150">
-            Cadastrar filmes</button>
+            Cadastrar filmes</a>
 
 
         <div class="w-full max-h-[80vh] overflow-auto flex flex-col gap-4" id="PainelFilmsArea">
