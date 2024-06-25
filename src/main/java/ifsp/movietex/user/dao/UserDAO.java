@@ -48,6 +48,7 @@ public class UserDAO {
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {
+				System.out.println(rs.getBoolean("isAdmin"));
 				return new User(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("password"),
 						rs.getBoolean("isAdmin"));
 			} else {

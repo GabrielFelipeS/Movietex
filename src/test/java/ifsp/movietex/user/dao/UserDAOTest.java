@@ -74,6 +74,14 @@ class UserDAOTest {
 	}
 	
 	@Test
+	public void givenLogin_whenUserAlreadyExistsAndPasswordCorrect_thenReturnNull() throws SQLException {
+		UserDAO dao = new UserDAO(connection);
+		User role = dao.login(new DTOUser("Alice Smith", "admin@example.com", "password2"));
+		
+		assertTrue(role.isAdmin());
+	}
+	
+	@Test
 	public void givenDeleteUser_whenUserIDExists_thenReturnTrue() throws SQLException {
 		UserDAO dao = new UserDAO(connection);
 		Boolean success = dao.deleteUser(ID_EXISTS);

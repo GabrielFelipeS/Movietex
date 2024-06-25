@@ -40,8 +40,10 @@ public class LoginServlet extends HttpServlet {
 		String senha = request.getParameter("password");
 
 		User user = userDao.login(new DTOUser(null, email, senha));
-		
+		System.out.println(user);
 		if (user != null && user.isAdmin()) {
+			System.out.println("login" + user.isAdmin());
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("isAdmin", user.isAdmin() ? "admin" : "user");
 			session.setAttribute("email", email);
