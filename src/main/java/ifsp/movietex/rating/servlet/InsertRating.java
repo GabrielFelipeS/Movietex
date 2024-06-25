@@ -32,8 +32,6 @@ public class InsertRating extends HttpServlet {
 		
 		String userName = (String) request.getSession().getAttribute("name");
 
-		
-		
 		String comentario = request.getParameter("comment");
 		String notaStr = request.getParameter("note");
 		Double nota = Double.valueOf(notaStr);

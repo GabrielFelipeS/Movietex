@@ -43,8 +43,8 @@
         <input required type="text" name="year" id="year" class="rounded-lg pl-3 h-[30px] outline-none">
         <label for="description" class="text-white">Sinopse</label>
         <textarea required name="description" id="description" class="rounded-lg pl-3 h-32 w-full"></textarea>
-        <label for="cover" class="text-white">Capa do Filme</label>
-        <input required type="file" name="cover" id="cover" accept="image/*"
+        <label for="file" class="text-white">Capa do Filme</label>
+        <input required type="file" name="file" id="file" accept="image/*"
                class="text-white rounded-lg pl-3 h-[30px] outline-none">
         <button type="submit"
                 class="bg-white text-primary rounded-lg h-[40px] font-bold hover:-translate-y-1 transition-all duration-150">Cadastrar</button>

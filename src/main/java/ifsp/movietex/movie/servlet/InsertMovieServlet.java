@@ -44,17 +44,16 @@ public class InsertMovieServlet extends HttpServlet {
 		String durationStr = request.getParameter("duration");
 		Integer duration = Integer.valueOf(durationStr);
 
-		String poster = "./img/capas/divertida_mente.webp";
+		
 
 		Part filePart = request.getPart("file"); // Recupera <input type="file" name="file">
 	      
 		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-		System.out.println(fileName);
 		
 		InputStream fileContent = filePart.getInputStream();
 
 		// Escreve o conteúdo do arquivo em um novo arquivo no servidor
-		File uploads = new File("/img/capas");
+		File uploads = new File("./img/capas/");
 		File file = new File(uploads, fileName);
 		try (InputStream input = fileContent; OutputStream output = new FileOutputStream(file)) {
 			byte[] buffer = new byte[1024];
@@ -63,6 +62,8 @@ public class InsertMovieServlet extends HttpServlet {
 				output.write(buffer, 0, bytesRead);
 			}
 		}
+		
+		String poster = "./img/capas/" + fileName;
 
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
