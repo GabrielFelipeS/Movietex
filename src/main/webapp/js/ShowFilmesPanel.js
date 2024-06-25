@@ -5,8 +5,8 @@ console.log(PainelFilmsArea);
 window.addEventListener('load', async () => {
     const currentUrl = window.location.href;
 
-    let baseUrl = currentUrl.replace(/\/painel.jsp\/?$/, '');
-
+    let baseUrl = currentUrl.replace(/\painel\/?$/, '');
+	console.log(baseUrl)
     let url = baseUrl+ '/api/movie/findAll';
     console.log(url)
     const response = await fetch(url);
@@ -26,8 +26,8 @@ window.addEventListener('load', async () => {
                     </div>
                 </div>
                 <div class="flex items-center p-5 gap-5">
-                    <a href="${baseUrl+'/painel/edit/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-pen-to-square text-2xl text-white"></i></a>
-                    <a href="${baseUrl+'/painel/delete/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-trash-can text-2xl text-white"></i></a>
+                    <a href="${baseUrl+'a/edit/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-pen-to-square text-2xl text-white"></i></a>
+                    <a href="${baseUrl+'api/movie/delete/'+filme.id}" class="hover:-translate-y-1 transition-all duration-150"><i class="fa-solid fa-trash-can text-2xl text-white"></i></a>
                 </div>
             </div>`
     })

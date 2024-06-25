@@ -48,11 +48,11 @@
 					%>
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="login.jsp">Login</a>
+						<a href="login">Login</a>
 					</li>
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="registro.jsp">Registre-se</a>
+						<a href="registro">Registre-se</a>
 					</li>
 					<%}%>
 
@@ -62,7 +62,7 @@
 
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="painel.jsp">Painel</a>
+						<a href="painel">Painel</a>
 					</li>
 					
 						<%}%>
