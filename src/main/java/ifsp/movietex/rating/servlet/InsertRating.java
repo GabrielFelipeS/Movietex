@@ -16,7 +16,7 @@ import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.rating.dao.RatingDAO;
 
 
-@WebServlet("/apt/rating/insertRating")
+@WebServlet("/api/rating/insert")
 public class InsertRating extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  

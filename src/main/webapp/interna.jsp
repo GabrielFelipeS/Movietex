@@ -67,7 +67,7 @@
 	<% } %>
         <div class="w-full rounded-lg mt-2 h-[400px]  flex flex-col gap-5">
             <h2 class="text-4xl font-serif">Avaliar Filme</h2>
-            <form action="" class="w-full bg-gray-100 rounded-lg relative">
+            <form action="api/rating/insert" class="w-full bg-gray-100 rounded-lg relative">
                 <div class="absolute top-0 left-0 w-full h-full bg-gray-100 bg-opacity-95
     <% if (session.getAttribute("email") != null) { %>
         hidden

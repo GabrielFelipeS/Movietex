@@ -16,7 +16,7 @@ import ifsp.movietex.base.db.ConnectionPostgress;
 import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.DTOMovie;
 
-@WebServlet("/api/movie/insert")
+@WebServlet("/painel/api/movie/insert")
 public class InsertMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
