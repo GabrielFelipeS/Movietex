@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -293,5 +294,25 @@ public class MovieDAO {
 		}
 
 		return directors;
+	}
+	
+	public List<Movie> findAllMoviesInCurrentYear() {
+		List<Movie> movies = new LinkedList<>();
+		try (PreparedStatement pstmt = conn.prepareStatement(
+				"SELECT id, title, description, director, genre, duration, year, rating_average, poster FROM Movies WHERE year = ?")) {
+				pstmt.setInt(1, LocalDate.now().getYear());
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Movie movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
+						rs.getString("director"), rs.getString("genre"), rs.getString("duration"), rs.getInt("year"),
+						rs.getDouble("rating_average"), rs.getString("poster"));
+
+				movies.add(movie);
+			}
+		} catch (SQLException e) {
+			logger.error("Falha ao buscar movie", e);
+		}
+		return movies;
+
 	}
 }
