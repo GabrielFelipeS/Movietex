@@ -19,12 +19,12 @@
     <div>
         <h2 class="text-4xl font-bold text-primary p-5">Cadastrar Filme</h2>
     </div>
-    <form action="painel/api/movie/insert" method="POST" class="w-[550px] justify-around rounded-lg flex flex-col bg-primary p-4 gap-3" enctype="multipart/form-data">
-        <label for="name" class="text-white">Nome do filme</label>
-        <input required type="text" name="name" id="name" class="rounded-lg pl-3 h-[30px] outline-none">
+    <form action="api/movie/insert" method="POST" class="w-[550px] justify-around rounded-lg flex flex-col bg-primary p-4 gap-3" enctype="multipart/form-data">
+        <label for="title" class="text-white">Nome do filme</label>
+        <input required type="text" name="title" id="title" class="rounded-lg pl-3 h-[30px] outline-none">
         <label for="duration" class="text-white">Duração</label>
         <input required type="text" name="duration" id="duration" class="rounded-lg pl-3 h-[30px] outline-none">
-        <label for="duration"class="text-white">Gênero</label>
+        <label for="genre"class="text-white">Gênero</label>
         <select required name="genre" id="genre" class="rounded-lg pl-3 h-[30px] outline-none">
             <option value="">Selecione um gênero</option>
             <option value="Ação">Ação</option>
@@ -41,8 +41,8 @@
         <input required type="text" name="director" id="director" class="rounded-lg pl-3 h-[30px] outline-none">
         <label for="year" class="text-white">Ano de Lançamento</label>
         <input required type="text" name="year" id="year" class="rounded-lg pl-3 h-[30px] outline-none">
-        <label for="synopsis" class="text-white">Sinopse</label>
-        <textarea required name="synopsis" id="synopsis" class="rounded-lg pl-3 h-32 w-full"></textarea>
+        <label for="description" class="text-white">Sinopse</label>
+        <textarea required name="description" id="description" class="rounded-lg pl-3 h-32 w-full"></textarea>
         <label for="cover" class="text-white">Capa do Filme</label>
         <input required type="file" name="cover" id="cover" accept="image/*"
                class="text-white rounded-lg pl-3 h-[30px] outline-none">

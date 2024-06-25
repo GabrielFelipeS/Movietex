@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("email", email);
 			session.setAttribute("userLoggedIn", true);
 			session.setAttribute("id", user.getId());
+			session.setAttribute("name", user.getNome());
 
 			
 			if ((boolean) session.getAttribute("userLoggedIn")) {

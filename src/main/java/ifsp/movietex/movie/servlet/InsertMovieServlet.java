@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,16 +18,16 @@ import ifsp.movietex.movie.dao.MovieDAO;
 import ifsp.movietex.movie.entity.DTOMovie;
 
 @WebServlet("/painel/api/movie/insert")
+@MultipartConfig
 public class InsertMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		String title = request.getParameter("title");
-		System.out.println(title);
+		System.out.println("title " + title);
 		String description = request.getParameter("description");
 		String director = request.getParameter("director");
 		String genre = request.getParameter("genre");
@@ -48,6 +49,7 @@ public class InsertMovieServlet extends HttpServlet {
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
+		response.setContentType("application/json;charset=UTF-8");
 
 		Gson gson = new Gson();
 
