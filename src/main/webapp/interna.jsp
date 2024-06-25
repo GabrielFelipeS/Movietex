@@ -67,7 +67,7 @@
 	<% } %>
         <div class="w-full rounded-lg mt-2 h-[400px]  flex flex-col gap-5">
             <h2 class="text-4xl font-serif">Avaliar Filme</h2>
-            <form class="w-full bg-gray-100 rounded-lg relative" id="formRating">
+            <form method="POST" action="<%= request.getContextPath() %>/api/rating/insert" class="w-full bg-gray-100 rounded-lg relative">
                 <div class="absolute top-0 left-0 w-full h-full bg-gray-100 bg-opacity-95
     <% if (session.getAttribute("email") != null) { %>
         hidden
@@ -83,11 +83,13 @@
                 <div class="flex flex-col gap-5 p-5 ">
                     <div class="flex flex-col gap-2">
                         <label for="nota">Nota</label>
-                        <input type="number" name="rating" id="rating" min="0" max="10" class="p-2 rounded-lg" required>
+                        <input type="number" name="note" id="rating" min="0" max="10" class="p-2 rounded-lg" required>
                     </div>
+                    <input type="text" class="hidden" name="idUser" value="<%= session.getAttribute("id") %>">
+                    <input type="text" class="hidden" name="idMovie" value="<%= movie.getId() %>">
                     <div class="flex flex-col gap-2">
                         <label for="comentario">Comentário</label>
-                        <textarea name="review" id="review" cols="30" rows="10" class="p-2 rounded-lg"
+                        <textarea name="comment" id="review" cols="30" rows="10" class="p-2 rounded-lg"
                                   required></textarea>
                     </div>
                     <div class="flex flex-col gap-2">
