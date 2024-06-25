@@ -73,7 +73,7 @@
 					
 					<li
 						class="p-3 text-primary font-bold rounded-t-lg hover:bg-gray-100  duration-150 ease-in-out">
-						<a href="LogoutServlet">Sair</a>
+						<a href="logout">Sair</a>
 					</li>
 					
 					<%}%>

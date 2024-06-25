@@ -72,7 +72,17 @@ public class MovieDAO {
 	}
 
 	public Boolean deleteBy(Integer id) {
-		return null;
+		String SQL = "DELETE FROM movies WHERE id = ?"; 
+		try(PreparedStatement statement = conn.prepareStatement(SQL)) {
+			statement.setInt(1, id);
+			Integer modifyRolls = statement.executeUpdate();
+			Boolean deleteSuccess = modifyRolls == 1;
+			System.out.println(modifyRolls);
+			return deleteSuccess;
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return false;
+		}
 	}
 
 	public String update(DTOMovie dto) {

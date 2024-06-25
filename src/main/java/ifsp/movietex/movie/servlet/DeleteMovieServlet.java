@@ -25,22 +25,20 @@ public class DeleteMovieServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
 		Integer id = Integer.valueOf(request.getParameter("id"));
-
+		System.out.println(id);
 		Connection conn = new ConnectionPostgress().getConnection();
 		MovieDAO dao = new MovieDAO(conn);
 		Boolean success = dao.deleteBy(id);
-
+		System.out.println(success);
 		Gson gson = new Gson();
 
+		String appContext = request.getContextPath();
+		System.out.println(appContext);
+		
 		response.setStatus(success? HttpServletResponse.SC_OK : HttpServletResponse.SC_BAD_REQUEST);
-
-		String json = gson.toJson(success);
-
-		out.print(json);
-		out.flush();
-
+		response.sendRedirect(appContext+"/painel");
 	}
 
 }
