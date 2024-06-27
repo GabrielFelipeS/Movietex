@@ -19,7 +19,7 @@ public class LogoutServlet extends HttpServlet {
 	            System.out.println("Sessao invalidada");
 	        }
 			String Message = "Volte Sempre!";
-			response.sendRedirect("index.jsp?msg=" + URLEncoder.encode(Message, "UTF-8"));
+			response.sendRedirect(request.getContextPath() + "/home");
 
 	    }
 

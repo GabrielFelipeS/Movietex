@@ -62,14 +62,13 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect(redirectUrl);
 			} else {
 				String Message = "Bem vindo(a)!";
-				response.sendRedirect("index.jsp?msg=" + URLEncoder.encode(Message, "UTF-8"));
+				response.sendRedirect(request.getContextPath() + "/home");
 
 			}
 
 		} else {
 			String Message = "E-mail ou senha incorretos. Tente novamente.";
-			response.sendRedirect("login.jsp?error=" + URLEncoder.encode(Message, "UTF-8"));
-
+			response.sendRedirect(request.getContextPath() + "/home");
 		}
 
 	}

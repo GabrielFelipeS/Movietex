@@ -25,12 +25,12 @@
 		<div>
 			<h2 class="text-4xl font-bold text-primary p-5">Editar Filme</h2>
 		</div>
-		<form action="/api/movie/update" method="POST"
+		<form action="<%=request.getContextPath()%>/api/movie/update" method="POST"
 			class="w-[550px]  justify-around rounded-lg flex flex-col bg-primary p-4 gap-3"
 			enctype="multipart/form-data">
-			<label for="name" class="text-white">Nome do filme</label> <input
-				required type="text" value="<%=movie.getTitle()%>" name="name"
-				id="name" class="rounded-lg pl-3 h-[30px] outline-none"> <label
+			<label for="title" class="text-white">Nome do filme</label> <input
+				required type="text" value="<%=movie.getTitle()%>" name="title"
+				id="title" class="rounded-lg pl-3 h-[30px] outline-none"> <label
 				for="duration" class="text-white">Duração</label> <input required
 				type="text" name="duration" value="<%=movie.getDuration()%>"
 				id="duration" class="rounded-lg pl-3 h-[30px] outline-none">
@@ -67,16 +67,19 @@
 				required type="number" name="year" id="year" min="1900" max="2024" oninput="validarAno(this)"
 				value="<%=movie.getYear()%>"
 				class="rounded-lg pl-3 h-[30px] outline-none"> <label
-				for="synopsis" class="text-white">Sinopse</label>
-			<textarea required name="synopsis" id="synopsis"
+				for="description" class="text-white">Sinopse</label>
+			<textarea required name="description" id="description"
 				class="rounded-lg pl-3 h-32 w-full"><%=movie.getDescription()%></textarea>
 			<div>
 				<img src="../.<%=movie.getPoster()%>" alt="Capa do Filme"
 					class="max-w-[200px] aspect-banner rounded-lg">
 			</div>
-			<label for="cover" class="text-white">Capa do Filme</label> <input
-				type="file" name="cover" id="cover" accept="image/*"
-				class="text-white rounded-lg pl-3 h-[14%]">
+			<label for="file" class="text-white">Capa do Filme</label> <input
+				type="file" name="file" id="file" accept="image/*"
+				class="text-white rounded-lg pl-3 h-[14%]" required>
+			
+			<input type="hidden" name="id" value="<%=movie.getId()%>">
+			<input type="hidden" name="poster" value="<%=movie.getPoster()%>">
 			<button type="submit"
 				class="bg-white text-primary rounded-lg h-[40px] font-bold hover:-translate-y-1 transition-all duration-150">Atualizar</button>
 		</form>

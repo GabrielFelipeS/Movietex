@@ -27,14 +27,15 @@ public class MovieDAO {
 
 	public String insert(DTOMovie dto) {
 		try (PreparedStatement ps = conn.prepareStatement(
-				"INSERT INTO movies (title, description, director, genre, year, poster) VALUES (?, ?, ?, ?, ?, ?)",
+				"INSERT INTO movies (title, description, duration, director, genre, year, poster) VALUES (?, ?, ?, ?, ?, ?, ?)",
 				PreparedStatement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
-			ps.setString(3, dto.genre());
-			ps.setString(4, dto.director());
-			ps.setInt(5, dto.year());
-			ps.setString(6, dto.poster());
+			ps.setInt(3, dto.duration());
+			ps.setString(4, dto.genre());
+			ps.setString(5, dto.director());
+			ps.setInt(6, dto.year());
+			ps.setString(7, dto.poster());
 
 			int updatedRows = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -89,15 +90,17 @@ public class MovieDAO {
 	public String update(DTOMovie dto) {
 
 		try (PreparedStatement ps = conn.prepareStatement(
-				"UPDATE movies SET title = ?, description = ?, director = ?, genre = ?, year = ? WHERE id = ? ")) {
+				"UPDATE movies SET title = ?, description = ?, duration = ?, director = ?, genre = ?, year = ?, poster = ? WHERE id = ? ")) {
 
 			ps.setString(1, dto.title());
 			ps.setString(2, dto.description());
-			ps.setString(3, dto.genre());
+			ps.setInt(3, dto.duration());
 			ps.setString(4, dto.director());
-			ps.setInt(5, dto.year());
-			ps.setInt(6, dto.id());
-
+			ps.setString(5, dto.genre());
+			ps.setInt(6, dto.year());
+			ps.setString(7, dto.poster());
+			ps.setInt(8, dto.id());
+			
 			int affectedRows = ps.executeUpdate();
 
 			if (affectedRows == 0) {

@@ -33,6 +33,7 @@ public class DeleteMovieServlet extends HttpServlet {
 		MovieDAO dao = new MovieDAO(conn);
 		Boolean success = dao.deleteBy(id);
 		System.out.println(success);
+		
 		Gson gson = new Gson();
 
 		String appContext = request.getContextPath();

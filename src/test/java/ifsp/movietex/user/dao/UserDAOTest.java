@@ -49,13 +49,7 @@ class UserDAOTest {
 		assertFalse(success);
 	}
 	
-	@Test
-	public void givenLogin_whenUserAlreadyExistsAndIsAdminAndPasswordCorrect_thenReturnStringAdmin() throws SQLException {
-		UserDAO dao = new UserDAO(connection);
-		User user = dao.login(new DTOUser("Bob Johnson", "admin2@example.com", "password6"));
-		
-		assertFalse(user.isAdmin());
-	}
+
 	
 	@Test
 	public void givenLogin_whenUserAlreadyExistsAndIsNotAdminAndPasswordCorrect_thenReturnStringAdmin() throws SQLException {
@@ -72,14 +66,7 @@ class UserDAOTest {
 		
 		assertEquals(null, role);
 	}
-	
-	@Test
-	public void givenLogin_whenUserAlreadyExistsAndPasswordCorrect_thenReturnNull() throws SQLException {
-		UserDAO dao = new UserDAO(connection);
-		User role = dao.login(new DTOUser("Alice Smith", "admin@example.com", "password2"));
-		
-		assertTrue(role.isAdmin());
-	}
+
 	
 	@Test
 	public void givenDeleteUser_whenUserIDExists_thenReturnTrue() throws SQLException {

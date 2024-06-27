@@ -30,10 +30,11 @@ public class InsertMovieServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
 		String title = request.getParameter("title");
-		System.out.println("title " + title);
+		
 		String description = request.getParameter("description");
 		String director = request.getParameter("director");
 		String genre = request.getParameter("genre");
@@ -43,7 +44,8 @@ public class InsertMovieServlet extends HttpServlet {
 
 		String durationStr = request.getParameter("duration");
 		Integer duration = Integer.valueOf(durationStr);
-
+		
+		System.out.println("description " + description);
 		Part filePart = request.getPart("file"); // Recupera <input type="file" name="file">
 	      
 		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
